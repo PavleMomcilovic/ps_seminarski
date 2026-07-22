@@ -4,31 +4,28 @@
  */
 package komunikacija;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author vanja
  */
 public class Primalac {
-     private Socket socket;
+
+    private Socket socket;
 
     public Primalac(Socket socket) {
         this.socket = socket;
     }
-    
-    public Object primi(){
+
+    public Object primi() {
         try {
-             ObjectInputStream in=new ObjectInputStream(socket.getInputStream());
-             return in.readObject(); 
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+            return in.readObject();
         } catch (Exception ex) {
-             ex.printStackTrace();
+            ex.printStackTrace();
         }
-         return null;
+        return null;
     }
 }
