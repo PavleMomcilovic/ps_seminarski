@@ -11,5 +11,13 @@ import java.io.Serializable;
  * @author vanja
  */
 public enum Operacija implements Serializable {
-    LOGIN
+    KREIRAJ_RACUN,
+    PRETRAZI_RACUN,
+    PROMENI_RACUN,
+    KREIRAJ_KUPCA,
+    PRETRAZI_KUPCA,
+    PROMENI_KUPCA,
+    OBRISI_KUPCA,
+    PRIJAVI_PRODAVCA,
+    UBACI_SMENU
 }
