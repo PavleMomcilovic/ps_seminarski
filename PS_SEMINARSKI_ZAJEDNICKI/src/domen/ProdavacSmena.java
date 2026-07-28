@@ -2,6 +2,7 @@ package domen;
 
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProdavacSmena implements ApstraktniDomenskiObjekat {
@@ -54,36 +55,64 @@ public class ProdavacSmena implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "prodavacsmena";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        
+        while (rs.next()) {
+            Long idProdavac = rs.getLong("prodavacsmena.idProdavac");
+            Long idSmena = rs.getLong("prodavacsmena.idSmena");
+            LocalDate datum = rs.getObject("prodavacsmena.datum", LocalDate.class);
+            
+            ProdavacSmena prodavacSmena = new ProdavacSmena(idProdavac, idSmena, datum);
+            lista.add(prodavacSmena);
+        }
+        
+        System.out.println("KLASA PRODAVAC-SMENA: " + lista);
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "datum";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return datum.toString();
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "prodavacsmena.idProdavac=" + idProdavac + ", prodavacsmena.idSmena=" + idSmena;
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ProdavacSmena prodavacSmena = new ProdavacSmena();
+        
+        while (rs.next()) {
+            Long idProdavac = rs.getLong("prodavacsmena.idProdavac");
+            Long idSmena = rs.getLong("prodavacsmena.idSmena");
+            LocalDate datum = rs.getObject("prodavacsmena.datum", LocalDate.class);
+            
+            prodavacSmena = new ProdavacSmena(idProdavac, idSmena, datum);
+        }
+        
+        System.out.println("KLASA PRODAVAC-SMENA: " + prodavacSmena);
+        return prodavacSmena;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "datum=" + datum;
+    }
+
+    @Override
+    public String vratiKoloneZaCitanje() {
+        return "idProdavac,idSmena,datum";
     }
 }

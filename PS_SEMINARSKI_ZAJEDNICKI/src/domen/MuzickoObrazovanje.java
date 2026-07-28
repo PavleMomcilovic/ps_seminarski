@@ -1,6 +1,7 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MuzickoObrazovanje implements ApstraktniDomenskiObjekat {
@@ -44,45 +45,73 @@ public class MuzickoObrazovanje implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "MuzickoObrazovanje{" +
-                "idMuzickoObr=" + idMuzickoObr +
-                ", stepen='" + stepen + '\'' +
-                ", popustPoStepenu=" + popustPoStepenu +
-                '}';
+        return "MuzickoObrazovanje{"
+                + "idMuzickoObr=" + idMuzickoObr
+                + ", stepen='" + stepen + '\''
+                + ", popustPoStepenu=" + popustPoStepenu
+                + '}';
     }
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "muzickoobrazovanje";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Long idMuzickoObr = rs.getLong("muzickoobrazovanje.idMuzikoObr");
+            Stepen stepen = Stepen.valueOf(rs.getString("muzickoobrazovanje.stepen"));
+            float popustPoStepenu = rs.getFloat("muzickoobrazovanje.popustPoStepenu");
+
+            MuzickoObrazovanje muzickoObr = new MuzickoObrazovanje(idMuzickoObr, stepen, popustPoStepenu);
+            lista.add(muzickoObr);
+        }
+
+        System.out.println("KLASA MUZICKO OBRAZOVANJE: " + lista);
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "stepen,popustPoStepenu";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return stepen + "," + popustPoStepenu;
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "muzickoobrazovanje.idMuzickoObr=" + idMuzickoObr;
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        MuzickoObrazovanje muzickoObr = new MuzickoObrazovanje();
+
+        if (rs.next()) {
+            Long idMuzickoObr = rs.getLong("muzickoobrazovanje.idMuzikoObr");
+            Stepen stepen = Stepen.valueOf(rs.getString("muzickoobrazovanje.stepen"));
+            float popustPoStepenu = rs.getFloat("muzickoobrazovanje.popustPoStepenu");
+
+            muzickoObr = new MuzickoObrazovanje(idMuzickoObr, stepen, popustPoStepenu);
+        }
+
+        System.out.println("KLASA MUZICKO OBRAZOVANJE: " + muzickoObr);
+        return muzickoObr;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "stepen=" + stepen + ", popustPoStepenu=" + popustPoStepenu;
+    }
+
+    @Override
+    public String vratiKoloneZaCitanje() {
+        return "idMuzickoObr,stepen,popustPoStepenu";
     }
 }

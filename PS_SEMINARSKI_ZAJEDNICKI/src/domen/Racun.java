@@ -2,6 +2,7 @@ package domen;
 
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Racun implements ApstraktniDomenskiObjekat {
@@ -98,36 +99,73 @@ public class Racun implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "racun";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Long idRacun = rs.getLong("racun.idRacun");
+            LocalDate datumIzdavanja = rs.getObject("racun.datumIzdavanja", LocalDate.class);
+            NacinPlacanja nacinPlacanja = NacinPlacanja.valueOf(rs.getString("racun.nacinPlacanja"));
+            float ukupanIznos = rs.getFloat("racun.ukupanIznos");
+            float popust = rs.getFloat("racun.popust");
+            Long idProdavac = rs.getLong("racun.idProdavac");
+            Long idKupac = rs.getLong("racun.idKupac");
+
+            Racun racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, idProdavac, idKupac);
+            lista.add(racun);
+        }
+
+        System.out.println("KLASA RACUN: " + lista);
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "datumIzdavanja,nacinPlacanja,ukupanIznos,popust,idProdavac,idKupac";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return datumIzdavanja + "," + nacinPlacanja + "," + ukupanIznos + "," + popust + "," + idProdavac + "," + idKupac;
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "racun.idRacun=" + idRacun;
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Racun racun = new Racun();
+        
+        if (rs.next()) {
+            Long idRacun = rs.getLong("racun.idRacun");
+            LocalDate datumIzdavanja = rs.getObject("racun.datumIzdavanja", LocalDate.class);
+            NacinPlacanja nacinPlacanja = NacinPlacanja.valueOf(rs.getString("racun.nacinPlacanja"));
+            float ukupanIznos = rs.getFloat("racun.ukupanIznos");
+            float popust = rs.getFloat("racun.popust");
+            Long idProdavac = rs.getLong("racun.idProdavac");
+            Long idKupac = rs.getLong("racun.idKupac");
+
+            racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, idProdavac, idKupac);
+        }
+
+        System.out.println("KLASA RACUN: " + racun);
+        return racun;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "datumIzdavanja=" + datumIzdavanja + ", nacinPlacanja=" + nacinPlacanja + ", ukupanIznos=" + ukupanIznos + 
+                ", popust=" + popust + ", idProdavac=" + idProdavac + ", idKupac=" + idKupac;
+    }
+
+    @Override
+    public String vratiKoloneZaCitanje() {
+        return "idRacun,datumIzdavanja,nacinPlacanja,ukupanIznos,popust,idProdavac,idKupac";
     }
 }

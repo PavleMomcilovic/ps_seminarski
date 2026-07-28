@@ -1,6 +1,7 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StavkaRacuna implements ApstraktniDomenskiObjekat {
@@ -72,52 +73,84 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
         this.idGitara = idGitara;
     }
 
-    
-
     @Override
     public String toString() {
-        return "StavkaRacuna{" +
-                "idRacun=" + idRacun +
-                ", rb=" + rb +
-                ", cenaStavke=" + cenaStavke +
-                ", kolicinaStavke=" + kolicinaStavke +
-                ", iznosStavke=" + iznosStavke +
-                ", idGitara=" + idGitara +
-                '}';
+        return "StavkaRacuna{"
+                + "idRacun=" + idRacun
+                + ", rb=" + rb
+                + ", cenaStavke=" + cenaStavke
+                + ", kolicinaStavke=" + kolicinaStavke
+                + ", iznosStavke=" + iznosStavke
+                + ", idGitara=" + idGitara
+                + '}';
     }
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "stavkaracuna";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Long idRacun = rs.getLong("stavkaracuna.idRacun");
+            Long rb = rs.getLong("stavkaracuna.rb");
+            float cenaStavke = rs.getFloat("stavkaracuna.cenaStavke");
+            int kolicinaStavke = rs.getInt("stavkaracuna.kolicinaStavke");
+            float iznosStavke = rs.getFloat("stavkaracuna.iznosStavke");
+            Long idGitara = rs.getLong("stavkaracuna.idGitara");
+
+            StavkaRacuna stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, idGitara);
+            lista.add(stavkaRacuna);
+        }
+
+        System.out.println("KLASA STAVKA RACUNA: " + lista);
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "cenaStavke,kolicinaStavke,iznosStavke,idGitara";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return cenaStavke + "," + kolicinaStavke + "," + iznosStavke + "," + idGitara;
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "stavkaracuna.idRacun=" + idRacun + ", stavkaracuna.rb=" + rb;
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        StavkaRacuna stavkaRacuna = new StavkaRacuna();
+
+        if (rs.next()) {
+            Long idRacun = rs.getLong("stavkaracuna.idRacun");
+            Long rb = rs.getLong("stavkaracuna.rb");
+            float cenaStavke = rs.getFloat("stavkaracuna.cenaStavke");
+            int kolicinaStavke = rs.getInt("stavkaracuna.kolicinaStavke");
+            float iznosStavke = rs.getFloat("stavkaracuna.iznosStavke");
+            Long idGitara = rs.getLong("stavkaracuna.idGitara");
+
+            stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, idGitara);
+        }
+
+        System.out.println("KLASA STAVKA RACUNA: " + stavkaRacuna);
+        return stavkaRacuna;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "cenaStavke=" + cenaStavke + ", kolicinaStavke=" + kolicinaStavke + ", iznosStavke=" + iznosStavke + ", idGitara=" + idGitara;
+    }
+
+    @Override
+    public String vratiKoloneZaCitanje() {
+        return "idRacun,rb,cenaStavke,kolicinaStavke,iznosStavke,idGitara";
     }
 }

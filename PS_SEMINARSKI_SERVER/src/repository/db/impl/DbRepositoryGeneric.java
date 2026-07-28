@@ -68,7 +68,7 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
 
     @Override
     public ApstraktniDomenskiObjekat uzmiPoKljucu(ApstraktniDomenskiObjekat param) throws Exception {
-        String upit = "SELECT " + param.vratiKolineZaCitanje() + " FROM " +
+        String upit = "SELECT " + param.vratiKoloneZaCitanje() + " FROM " +
                 param.vratiNazivTabele() + " WHERE " + param.vratiPrimarniKljuc();
         System.out.println(upit);
         Statement st = DbConnectionFactory.getInstance().getConnection().createStatement();

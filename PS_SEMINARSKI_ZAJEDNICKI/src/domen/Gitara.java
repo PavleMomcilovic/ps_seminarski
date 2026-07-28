@@ -1,6 +1,7 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gitara implements ApstraktniDomenskiObjekat {
@@ -64,47 +65,79 @@ public class Gitara implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "Gitara{" +
-                "idGitara=" + idGitara +
-                ", naziv='" + naziv + '\'' +
-                ", cena=" + cena +
-                ", vrsta='" + vrsta + '\'' +
-                ", opis='" + opis + '\'' +
-                '}';
+        return "Gitara{"
+                + "idGitara=" + idGitara
+                + ", naziv='" + naziv + '\''
+                + ", cena=" + cena
+                + ", vrsta='" + vrsta + '\''
+                + ", opis='" + opis + '\''
+                + '}';
     }
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "gitara";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+
+        while (rs.next()) {
+            Long idGitara = rs.getLong("gitara.idGitara");
+            String naziv = rs.getString("gitara.naziv");
+            float cena = rs.getFloat("gitara.cena");
+            String vrsta = rs.getString("gitara.vrsta");
+            String opis = rs.getString("gitara.opis");
+
+            Gitara gitara = new Gitara(idGitara, naziv, cena, vrsta, opis);
+            lista.add(gitara);
+        }
+
+        System.out.println("KLASA GITARA: " + lista);
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "naziv,cena,vrsta,opis";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return naziv + "," + cena + "," + vrsta + "," + opis;
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "gitara.idGitara=" + idGitara;
     }
 
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Gitara gitara = new Gitara();
+
+        if (rs.next()) {
+            Long idGitara = rs.getLong("gitara.idGitara");
+            String naziv = rs.getString("gitara.naziv");
+            float cena = rs.getFloat("gitara.cena");
+            String vrsta = rs.getString("gitara.vrsta");
+            String opis = rs.getString("gitara.opis");
+
+            gitara = new Gitara(idGitara, naziv, cena, vrsta, opis);
+        }
+
+        System.out.println("KLASA GITARA: " + gitara);
+        return gitara;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "naziv=" + naziv + ", cena=" + cena + ", vrsta=" + vrsta + ", opis=" + opis;
+    }
+
+    @Override
+    public String vratiKoloneZaCitanje() {
+        return "idGitara,naziv,cena,vrsta,opis";
     }
 }
