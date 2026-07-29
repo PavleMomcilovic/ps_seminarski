@@ -4,12 +4,14 @@
  */
 package niti;
 
+import domen.Prodavac;
 import java.io.IOException;
 import java.net.Socket;
 import komunikacija.Odgovor;
 import komunikacija.Posiljalac;
 import komunikacija.Primalac;
 import komunikacija.Zahtev;
+import kontroler.Kontroler;
 
 /**
  *
@@ -37,12 +39,18 @@ public class ObradaKlijentskihZahteva extends Thread {
                 
                 switch (zahtev.getOperacija()) {
                     case PRIJAVI_PRODAVCA:
-                        
+                        Prodavac p = (Prodavac) zahtev.getParametar();
+                        p = Kontroler.getInstanca().prijaviProdavca(p);
+                        odgovor.setOdgovor(p);
                         break;
                     default:
-                        throw new AssertionError();
+                        System.out.println("GRESKA, OPERACIJA NE POSTOJI!");
                 }
+                
+                posiljalac.posalji(odgovor);
             } catch (Exception e) {
+                System.out.println("KLASA KONTROLER: GRESKA PRILIKOM OBRADE ZAHTEVA");
+                e.printStackTrace();
             }
         }
     }

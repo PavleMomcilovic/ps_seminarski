@@ -22,11 +22,10 @@ public class PrijaviProdavcaKontroler {
 
     public PrijaviProdavcaKontroler(LoginForma loginForma) {
         this.loginForma = loginForma;
-
+        addActionListeners();
     }
 
     private void addActionListeners() {
-
         loginForma.loginAddActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -38,7 +37,9 @@ public class PrijaviProdavcaKontroler {
                 String password = String.valueOf(loginForma.getTxtPassword().getPassword());
 
                 Komunikacija.getInstanca().konekcija();
+                System.out.println("konektovano");
                 Prodavac ulogovani = Komunikacija.getInstanca().login(username, password);
+                System.out.println("ulogovano");
 
                 if (ulogovani == null) {
                     JOptionPane.showMessageDialog(loginForma, "Prijava na sistem neuspesna!", "GRESKA", JOptionPane.ERROR_MESSAGE);
@@ -50,7 +51,6 @@ public class PrijaviProdavcaKontroler {
                 }
             }
         });
-
     }
 
     public void otvoriFormu() {

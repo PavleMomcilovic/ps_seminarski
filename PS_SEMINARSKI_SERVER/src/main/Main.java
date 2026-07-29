@@ -4,12 +4,15 @@
  */
 package main;
 
+import forme.ServerskaForma;
+
 /**
  *
  * @author pavle
  */
 public class Main {
     public static void main(String[] args) {
-        
+        ServerskaForma serverskaForma = new ServerskaForma();
+        serverskaForma.setVisible(true);
     }
 }

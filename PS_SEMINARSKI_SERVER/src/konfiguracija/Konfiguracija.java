@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author vanja
+ * @author pavle
  */
 public class Konfiguracija {
      private static Konfiguracija instanca;
@@ -21,7 +21,7 @@ public class Konfiguracija {
     private Konfiguracija() {
          try {
              konfiguracija = new Properties(); 
-             konfiguracija.load(new FileInputStream("C:\\Users\\vanja\\Documents\\NetBeansProjects\\0_SEM_SERVER\\config\\config.properties"));
+             konfiguracija.load(new FileInputStream("D:\\pavle\\Documents\\GitHub\\ps_seminarski\\PS_SEMINARSKI_SERVER\\config\\config.properties"));
          } catch (IOException ex) {
              ex.printStackTrace();
              Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,11 +43,9 @@ public class Konfiguracija {
     }
     
     
-    
-    
     public void sacuvajIzmene() {
         try { 
-            konfiguracija.store(new FileOutputStream("C:\\Users\\vanja\\Documents\\NetBeansProjects\\0_SEM_SERVER\\config\\config.properties"), null);
+            konfiguracija.store(new FileOutputStream("C:\\Users\\pavle\\Documents\\NetBeansProjects\\PS_SEMINARSKI_SERVER\\config\\config.properties"), null);
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
