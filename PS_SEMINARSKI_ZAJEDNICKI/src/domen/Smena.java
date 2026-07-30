@@ -114,4 +114,21 @@ public class Smena implements ApstraktniDomenskiObjekat {
     public String vratiKoloneZaCitanje() {
         return "idSmena,pocetakSmene,krajSmene";
     }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idSmena != null) {
+            uslovi.add("smena.idSmena=" + idSmena);
+        }
+        if (pocetakSmene > 0) {
+            uslovi.add("smena.pocetakSmene=" + pocetakSmene);
+        }
+        if (krajSmene > 0) {
+            uslovi.add("smena.krajSmene=" + krajSmene);
+        }
+
+        return String.join(" AND ", uslovi);
+    }
 }

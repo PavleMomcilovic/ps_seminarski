@@ -81,7 +81,7 @@ public class MuzickoObrazovanje implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return stepen + "," + popustPoStepenu;
+        return "'" + stepen + "'," + popustPoStepenu;
     }
 
     @Override
@@ -107,11 +107,28 @@ public class MuzickoObrazovanje implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "stepen=" + stepen + ", popustPoStepenu=" + popustPoStepenu;
+        return "stepen='" + stepen + "', popustPoStepenu=" + popustPoStepenu;
     }
 
     @Override
     public String vratiKoloneZaCitanje() {
         return "idMuzickoObr,stepen,popustPoStepenu";
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idMuzickoObr != null) {
+            uslovi.add("muzickoobrazovanje.idMuzickoObr=" + idMuzickoObr);
+        }
+        if (stepen != null) {
+            uslovi.add("muzickoobrazovanje.stepen='" + stepen + "'");
+        }
+        if (popustPoStepenu > 0) {
+            uslovi.add("muzickoobrazovanje.popustPoStepenu=" + popustPoStepenu);
+        }
+
+        return String.join(" AND ", uslovi);
     }
 }

@@ -29,4 +29,6 @@ public interface ApstraktniDomenskiObjekat extends Serializable {
     public String vratiVrednostiZaIzmenu();
     
     public String vratiKoloneZaCitanje();
+    
+    public String generisiKriterijumPretrazivanja();
 }

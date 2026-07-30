@@ -11,18 +11,18 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
     private float cenaStavke;
     private int kolicinaStavke;
     private float iznosStavke;
-    private Long idGitara;
+    private Gitara gitara;
 
     public StavkaRacuna() {
     }
 
-    public StavkaRacuna(Long idRacun, Long rb, float cenaStavke, int kolicinaStavke, float iznosStavke, Long idGitara) {
+    public StavkaRacuna(Long idRacun, Long rb, float cenaStavke, int kolicinaStavke, float iznosStavke, Gitara gitara) {
         this.idRacun = idRacun;
         this.rb = rb;
         this.cenaStavke = cenaStavke;
         this.kolicinaStavke = kolicinaStavke;
         this.iznosStavke = iznosStavke;
-        this.idGitara = idGitara;
+        this.gitara = gitara;
     }
 
     public Long getIdRacun() {
@@ -65,12 +65,12 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
         this.iznosStavke = iznosStavke;
     }
 
-    public Long getIdGitara() {
-        return idGitara;
+    public Gitara getGitara() {
+        return gitara;
     }
 
-    public void setIdGitara(Long idGitara) {
-        this.idGitara = idGitara;
+    public void setGitara(Gitara gitara) {
+        this.gitara = gitara;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
                 + ", cenaStavke=" + cenaStavke
                 + ", kolicinaStavke=" + kolicinaStavke
                 + ", iznosStavke=" + iznosStavke
-                + ", idGitara=" + idGitara
+                + ", gitara=" + gitara
                 + '}';
     }
 
@@ -102,7 +102,10 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
             float iznosStavke = rs.getFloat("stavkaracuna.iznosStavke");
             Long idGitara = rs.getLong("stavkaracuna.idGitara");
 
-            StavkaRacuna stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, idGitara);
+            Gitara gitara = new Gitara();
+            gitara.setIdGitara(idGitara);
+
+            StavkaRacuna stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, gitara);
             lista.add(stavkaRacuna);
         }
 
@@ -112,17 +115,50 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        return "cenaStavke,kolicinaStavke,iznosStavke,idGitara";
+        return "idRacun,rb,cenaStavke,kolicinaStavke,iznosStavke,idGitara";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return cenaStavke + "," + kolicinaStavke + "," + iznosStavke + "," + idGitara;
+        return idRacun + "," + rb + "," + cenaStavke + "," + kolicinaStavke + ","
+                + iznosStavke + "," + gitara.getIdGitara();
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "stavkaracuna.idRacun=" + idRacun + ", stavkaracuna.rb=" + rb;
+        return "stavkaracuna.idRacun=" + idRacun + " AND stavkaracuna.rb=" + rb;
+    }
+
+    @Override
+    public String vratiVrednostiZaIzmenu() {
+        return "cenaStavke=" + cenaStavke + ", kolicinaStavke=" + kolicinaStavke
+                + ", iznosStavke=" + iznosStavke + ", idGitara=" + gitara.getIdGitara();
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idRacun != null) {
+            uslovi.add("stavkaracuna.idRacun=" + idRacun);
+        }
+        if (rb != null) {
+            uslovi.add("stavkaracuna.rb=" + rb);
+        }
+        if (cenaStavke > 0) {
+            uslovi.add("stavkaracuna.cenaStavke=" + cenaStavke);
+        }
+        if (kolicinaStavke > 0) {
+            uslovi.add("stavkaracuna.kolicinaStavke=" + kolicinaStavke);
+        }
+        if (iznosStavke > 0) {
+            uslovi.add("stavkaracuna.iznosStavke=" + iznosStavke);
+        }
+        if (gitara != null && gitara.getIdGitara() != null) {
+            uslovi.add("stavkaracuna.idGitara=" + gitara.getIdGitara());
+        }
+
+        return String.join(" AND ", uslovi);
     }
 
     @Override
@@ -137,16 +173,14 @@ public class StavkaRacuna implements ApstraktniDomenskiObjekat {
             float iznosStavke = rs.getFloat("stavkaracuna.iznosStavke");
             Long idGitara = rs.getLong("stavkaracuna.idGitara");
 
-            stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, idGitara);
+            Gitara gitara = new Gitara();
+            gitara.setIdGitara(idGitara);
+
+            stavkaRacuna = new StavkaRacuna(idRacun, rb, cenaStavke, kolicinaStavke, iznosStavke, gitara);
         }
 
         System.out.println("KLASA STAVKA RACUNA: " + stavkaRacuna);
         return stavkaRacuna;
-    }
-
-    @Override
-    public String vratiVrednostiZaIzmenu() {
-        return "cenaStavke=" + cenaStavke + ", kolicinaStavke=" + kolicinaStavke + ", iznosStavke=" + iznosStavke + ", idGitara=" + idGitara;
     }
 
     @Override

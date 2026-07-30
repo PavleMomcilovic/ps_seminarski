@@ -16,5 +16,5 @@ public interface Repository<T> {
     void izmeni(T param) throws Exception;
     void obrisi(T param)throws Exception;
     T uzmiPoKljucu(T param) throws Exception;
-    int uzmiGenerisaniKljuc(T param) throws Exception;
+    Long uzmiGenerisaniKljuc(T param) throws Exception;
 }

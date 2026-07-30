@@ -4,8 +4,11 @@
  */
 package kontroler;
 
+import domen.ApstraktniDomenskiObjekat;
 import domen.Prodavac;
-import operacija.prijava.PrijaviProdavcaSO;
+import domen.Racun;
+import operacija.prodavac.PrijaviProdavcaSO;
+import operacija.racuni.KreirajRacunSO;
 
 /**
  *
@@ -29,5 +32,12 @@ public class Kontroler {
         operacija.izvrsi(p, null);
         System.out.println("KLASA KONTROLER: " + operacija.getProdavac());
         return operacija.getProdavac();
+    }
+    
+    public void kreiraj(ApstraktniDomenskiObjekat param) throws Exception {
+        if (param instanceof Racun) {
+            KreirajRacunSO operacija = new KreirajRacunSO();
+            operacija.izvrsi(param, null);
+        }
     }
 }

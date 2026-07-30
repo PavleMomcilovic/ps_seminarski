@@ -23,7 +23,7 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
     public List<ApstraktniDomenskiObjekat> uzmiSve(ApstraktniDomenskiObjekat param, String uslov) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
         String upit = "SELECT * FROM " + param.vratiNazivTabele();
-        if(uslov!=null){ //TODO
+        if(uslov!=null){
             upit+=uslov;
         }
         System.out.println(upit);
@@ -80,7 +80,7 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
     }
 
     @Override
-    public int uzmiGenerisaniKljuc(ApstraktniDomenskiObjekat param) throws Exception {
+    public Long uzmiGenerisaniKljuc(ApstraktniDomenskiObjekat param) throws Exception {
         String upit = "INSERT INTO " + param.vratiNazivTabele()
                 + " (" + param.vratiKoloneZaUbacivanje() + ")"
                 + " VALUES (" + param.vratiVrednostiZaUbacivanje() + ")";
@@ -89,9 +89,9 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
                 .prepareStatement(upit, Statement.RETURN_GENERATED_KEYS);
         ps.executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
-        int generatedId = -1;
+        Long generatedId = -1L;
         if (rs.next()) {
-            generatedId = rs.getInt(1);
+            generatedId = rs.getLong(1);
         }
         rs.close();
         ps.close();

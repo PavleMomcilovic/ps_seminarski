@@ -105,7 +105,7 @@ public class Gitara implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return naziv + "," + cena + "," + vrsta + "," + opis;
+        return "'" + naziv + "'," + cena + ",'" + vrsta + "','" + opis + "'";
     }
 
     @Override
@@ -133,11 +133,34 @@ public class Gitara implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "naziv=" + naziv + ", cena=" + cena + ", vrsta=" + vrsta + ", opis=" + opis;
+        return "naziv='" + naziv + "', cena=" + cena + ", vrsta='" + vrsta + "', opis='" + opis + "'";
     }
 
     @Override
     public String vratiKoloneZaCitanje() {
         return "idGitara,naziv,cena,vrsta,opis";
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idGitara != null) {
+            uslovi.add("gitara.idGitara=" + idGitara);
+        }
+        if (naziv != null && !naziv.isEmpty()) {
+            uslovi.add("gitara.naziv='" + naziv + "'");
+        }
+        if (cena > 0) {
+            uslovi.add("gitara.cena=" + cena);
+        }
+        if (vrsta != null && !vrsta.isEmpty()) {
+            uslovi.add("gitara.vrsta='" + vrsta + "'");
+        }
+        if (opis != null && !opis.isEmpty()) {
+            uslovi.add("gitara.opis='" + opis + "'");
+        }
+
+        return String.join(" AND ", uslovi);
     }
 }

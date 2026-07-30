@@ -14,6 +14,7 @@ public class Racun implements ApstraktniDomenskiObjekat {
     private float popust;
     private Long idProdavac;
     private Long idKupac;
+    private List<StavkaRacuna> stavke = new ArrayList<>();
 
     public Racun() {
     }
@@ -84,17 +85,26 @@ public class Racun implements ApstraktniDomenskiObjekat {
         this.idKupac = idKupac;
     }
 
+    public List<StavkaRacuna> getStavke() {
+        return stavke;
+    }
+
+    public void setStavke(List<StavkaRacuna> stavke) {
+        this.stavke = stavke;
+    }
+
     @Override
     public String toString() {
-        return "Racun{" +
-                "idRacun=" + idRacun +
-                ", datumIzdavanja=" + datumIzdavanja +
-                ", nacinPlacanja='" + nacinPlacanja + '\'' +
-                ", ukupanIznos=" + ukupanIznos +
-                ", popust=" + popust +
-                ", idProdavac=" + idProdavac +
-                ", idKupac=" + idKupac +
-                '}';
+        return "Racun{"
+                + "idRacun=" + idRacun
+                + ", datumIzdavanja=" + datumIzdavanja
+                + ", nacinPlacanja='" + nacinPlacanja + '\''
+                + ", ukupanIznos=" + ukupanIznos
+                + ", popust=" + popust
+                + ", idProdavac=" + idProdavac
+                + ", idKupac=" + idKupac
+                + ", stavke=" + stavke
+                + '}';
     }
 
     @Override
@@ -130,7 +140,7 @@ public class Racun implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return datumIzdavanja + "," + nacinPlacanja + "," + ukupanIznos + "," + popust + "," + idProdavac + "," + idKupac;
+        return "'" + datumIzdavanja + "','" + nacinPlacanja + "'," + ukupanIznos + "," + popust + "," + idProdavac + "," + idKupac;
     }
 
     @Override
@@ -141,7 +151,7 @@ public class Racun implements ApstraktniDomenskiObjekat {
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
         Racun racun = new Racun();
-        
+
         if (rs.next()) {
             Long idRacun = rs.getLong("racun.idRacun");
             LocalDate datumIzdavanja = rs.getObject("racun.datumIzdavanja", LocalDate.class);
@@ -160,12 +170,41 @@ public class Racun implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "datumIzdavanja=" + datumIzdavanja + ", nacinPlacanja=" + nacinPlacanja + ", ukupanIznos=" + ukupanIznos + 
-                ", popust=" + popust + ", idProdavac=" + idProdavac + ", idKupac=" + idKupac;
+        return "datumIzdavanja='" + datumIzdavanja + "', nacinPlacanja='" + nacinPlacanja + "', ukupanIznos=" + ukupanIznos
+                + ", popust=" + popust + ", idProdavac=" + idProdavac + ", idKupac=" + idKupac;
     }
 
     @Override
     public String vratiKoloneZaCitanje() {
         return "idRacun,datumIzdavanja,nacinPlacanja,ukupanIznos,popust,idProdavac,idKupac";
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idRacun != null) {
+            uslovi.add("racun.idRacun=" + idRacun);
+        }
+        if (datumIzdavanja != null) {
+            uslovi.add("racun.datumIzdavanja='" + datumIzdavanja + "'");
+        }
+        if (nacinPlacanja != null) {
+            uslovi.add("racun.nacinPlacanja='" + nacinPlacanja + "'");
+        }
+        if (ukupanIznos > 0) {
+            uslovi.add("racun.ukupanIznos=" + ukupanIznos);
+        }
+        if (popust > 0) {
+            uslovi.add("racun.popust=" + popust);
+        }
+        if (idProdavac != null) {
+            uslovi.add("racun.idProdavac=" + idProdavac);
+        }
+        if (idKupac != null) {
+            uslovi.add("racun.idKupac=" + idKupac);
+        }
+
+        return String.join(" AND ", uslovi);
     }
 }

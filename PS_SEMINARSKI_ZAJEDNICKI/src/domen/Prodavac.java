@@ -65,13 +65,13 @@ public class Prodavac implements ApstraktniDomenskiObjekat {
 
     @Override
     public String toString() {
-        return "Prodavac{" +
-                "idProdavac=" + idProdavac +
-                ", imePrezime='" + imePrezime + '\'' +
-                ", plata=" + plata +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "Prodavac{"
+                + "idProdavac=" + idProdavac
+                + ", imePrezime='" + imePrezime + '\''
+                + ", plata=" + plata
+                + ", username='" + username + '\''
+                + ", password='" + password + '\''
+                + '}';
     }
 
     @Override
@@ -105,7 +105,7 @@ public class Prodavac implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return imePrezime + "," + plata + "," + username + "," + password;
+        return "'" + imePrezime + "'," + plata + ",'" + username + "','" + password + "'";
     }
 
     @Override
@@ -116,7 +116,7 @@ public class Prodavac implements ApstraktniDomenskiObjekat {
     @Override
     public ApstraktniDomenskiObjekat vratiObjekatIzRS(ResultSet rs) throws Exception {
         Prodavac prodavac = new Prodavac();
-        
+
         if (rs.next()) {
             Long idProdavac = rs.getLong("prodavac.idProdavac");
             String imePrezime = rs.getString("prodavac.imePrezime");
@@ -133,11 +133,34 @@ public class Prodavac implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "imePrezime=" + imePrezime + ", plata=" + plata + ", username=" + username + ", password=" + password;
+        return "imePrezime='" + imePrezime + "', plata=" + plata + ", username='" + username + "', password='" + password + "'";
     }
 
     @Override
     public String vratiKoloneZaCitanje() {
         return "idProdavac,imePrezime,plata,username,password";
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idProdavac != null) {
+            uslovi.add("prodavac.idProdavac=" + idProdavac);
+        }
+        if (imePrezime != null && !imePrezime.isEmpty()) {
+            uslovi.add("prodavac.imePrezime='" + imePrezime + "'");
+        }
+        if (plata > 0) {
+            uslovi.add("prodavac.plata=" + plata);
+        }
+        if (username != null && !username.isEmpty()) {
+            uslovi.add("prodavac.username='" + username + "'");
+        }
+        if (password != null && !password.isEmpty()) {
+            uslovi.add("prodavac.password='" + password + "'");
+        }
+
+        return String.join(" AND ", uslovi);
     }
 }

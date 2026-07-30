@@ -8,15 +8,15 @@ public class Kupac implements ApstraktniDomenskiObjekat {
 
     private Long idKupac;
     private String imePrezime;
-    private Long idMuzickoObr;
+    private MuzickoObrazovanje muzickoObr;
 
     public Kupac() {
     }
 
-    public Kupac(Long idKupac, String imePrezime, Long idMuzickoObr) {
+    public Kupac(Long idKupac, String imePrezime, MuzickoObrazovanje muzickoObr) {
         this.idKupac = idKupac;
         this.imePrezime = imePrezime;
-        this.idMuzickoObr = idMuzickoObr;
+        this.muzickoObr = muzickoObr;
     }
 
     public Long getIdKupac() {
@@ -35,21 +35,21 @@ public class Kupac implements ApstraktniDomenskiObjekat {
         this.imePrezime = imePrezime;
     }
 
-    public Long getIdMuzickoObr() {
-        return idMuzickoObr;
+    public MuzickoObrazovanje getMuzickoObr() {
+        return muzickoObr;
     }
 
-    public void setIdMuzickoObr(Long idMuzickoObr) {
-        this.idMuzickoObr = idMuzickoObr;
+    public void setMuzickoObr(MuzickoObrazovanje muzickoObr) {
+        this.muzickoObr = muzickoObr;
     }
 
     @Override
     public String toString() {
-        return "Kupac{" +
-                "idKupac=" + idKupac +
-                ", imePrezime='" + imePrezime + '\'' +
-                ", idMuzickoObr=" + idMuzickoObr +
-                '}';
+        return "Kupac{"
+                + "idKupac=" + idKupac
+                + ", imePrezime='" + imePrezime + '\''
+                + ", idMuzickoObr=" + muzickoObr.getIdMuzickoObr()
+                + '}';
     }
 
     @Override
@@ -60,16 +60,19 @@ public class Kupac implements ApstraktniDomenskiObjekat {
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
-        
+
         while (rs.next()) {
             Long idKupac = rs.getLong("kupac.idKupac");
             String imePrezime = rs.getString("kupac.imePrezime");
             Long idMuzickoObr = rs.getLong("kupac.idMuzickoObr");
-            
-            Kupac kupac = new Kupac(idKupac, imePrezime, idMuzickoObr);
+
+            MuzickoObrazovanje muzickoObr = new MuzickoObrazovanje();
+            muzickoObr.setIdMuzickoObr(idMuzickoObr);
+
+            Kupac kupac = new Kupac(idKupac, imePrezime, muzickoObr);
             lista.add(kupac);
         }
-        
+
         System.out.println("KLASA KUPAC: " + lista);
         return lista;
     }
@@ -81,7 +84,7 @@ public class Kupac implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return imePrezime + ", " + idMuzickoObr;
+        return "'" + imePrezime + "', " + muzickoObr.getIdMuzickoObr();
     }
 
     @Override
@@ -96,21 +99,41 @@ public class Kupac implements ApstraktniDomenskiObjekat {
             Long idKupac = rs.getLong("kupac.idKupac");
             String imePrezime = rs.getString("kupac.imePrezime");
             Long idMuzickoObr = rs.getLong("kupac.idMuzickoObr");
-            
-            kupac = new Kupac(idKupac, imePrezime, idMuzickoObr);
+
+            MuzickoObrazovanje muzickoObr = new MuzickoObrazovanje();
+            muzickoObr.setIdMuzickoObr(idMuzickoObr);
+
+            kupac = new Kupac(idKupac, imePrezime, muzickoObr);
         }
-        
+
         System.out.println("KLASA KUPAC: " + kupac);
         return kupac;
     }
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "imePrezime=" + imePrezime + ", idMuzickoObr=" + idMuzickoObr;
+        return "imePrezime='" + imePrezime + "', idMuzickoObr=" + muzickoObr.getIdMuzickoObr();
     }
 
     @Override
     public String vratiKoloneZaCitanje() {
         return "idKupac,imePrezime,idMuzickoObr";
+    }
+
+    @Override
+    public String generisiKriterijumPretrazivanja() {
+        List<String> uslovi = new ArrayList<>();
+
+        if (idKupac != null) {
+            uslovi.add("kupac.idKupac=" + idKupac);
+        }
+        if (imePrezime != null && !imePrezime.isEmpty()) {
+            uslovi.add("kupac.imePrezime='" + imePrezime + "'");
+        }
+        if (muzickoObr != null && muzickoObr.getIdMuzickoObr() != null) {
+            uslovi.add("kupac.idMuzickoObr=" + muzickoObr.getIdMuzickoObr());
+        }
+
+        return String.join(" AND ", uslovi);
     }
 }
