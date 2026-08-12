@@ -10,11 +10,12 @@ import java.net.Socket;
 
 /**
  *
- * @author vanja
+ * @author pavle
  */
 public class Posiljalac {
 
     private Socket socket;
+    ObjectOutputStream out;
 
     public Posiljalac(Socket socket) {
         this.socket = socket;
@@ -22,14 +23,21 @@ public class Posiljalac {
 
     public void posalji(Object obj) {
         try {
-            ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(obj);
             out.flush();
 
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
     }
 
+    public void zatvori() {
+        if (out != null)
+            try {
+                out.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

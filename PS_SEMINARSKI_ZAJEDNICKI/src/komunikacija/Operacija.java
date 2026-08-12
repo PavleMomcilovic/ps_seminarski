@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author vanja
+ * @author pavle
  */
 public enum Operacija implements Serializable {
     KREIRAJ_RACUN,

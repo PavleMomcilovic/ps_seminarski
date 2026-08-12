@@ -39,6 +39,7 @@ public class ObradaKlijentskihZahteva extends Thread {
                 
                 switch (zahtev.getOperacija()) {
                     case KREIRAJ_RACUN:
+                        
                     case PRETRAZI_RACUN:
                     case PROMENI_RACUN:
                     case KREIRAJ_KUPCA:

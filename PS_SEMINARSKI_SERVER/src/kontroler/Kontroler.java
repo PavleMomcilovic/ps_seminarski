@@ -7,6 +7,7 @@ package kontroler;
 import domen.ApstraktniDomenskiObjekat;
 import domen.Prodavac;
 import domen.Racun;
+import java.util.List;
 import operacija.prodavac.PrijaviProdavcaSO;
 import operacija.racuni.KreirajRacunSO;
 
@@ -39,5 +40,9 @@ public class Kontroler {
             KreirajRacunSO operacija = new KreirajRacunSO();
             operacija.izvrsi(param, null);
         }
+    }
+    
+    public List<ApstraktniDomenskiObjekat> pretrazi(ApstraktniDomenskiObjekat param) {
+        return null;
     }
 }

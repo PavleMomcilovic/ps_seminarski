@@ -5,8 +5,10 @@
 package komunikacija;
 
 import domen.Prodavac;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Properties;
 
 /**
  *
@@ -49,5 +51,55 @@ public class Komunikacija {
         Odgovor odgovor = (Odgovor) primalac.primi();
         p = (Prodavac) odgovor.getOdgovor();
         return p;
+    }
+    
+    public synchronized Object posaljiZahtev(Operacija operacija, Object param) throws Exception {
+        if (socket == null || soket.isClosed()) {
+            throw new Exception("Nema aktivne konekcije sa serverom.");
+        }
+
+        Zahtev zahtev = new Zahtev(operacija, param);
+        posiljalac.posalji(zahtev);
+
+        Odgovor odgovor = (Odgovor) primalac.primi();
+        if (odgovor.getTipOdgovora() == TipOdgovora.GRESKA) {
+            if (odgovor.getIzuzetak() != null) {
+                throw odgovor.getIzuzetak();
+            }
+            throw new Exception("Nepoznata greska sa servera.");
+        }
+        if (odgovor.getTipOdgovora() == TipOdgovora.USPEH) {
+            return odgovor.getRezultat();
+        }
+        Object rezultat = odgovor.getOdgovor();
+        if (rezultat instanceof Exception) {
+            throw (Exception) rezultat;
+        }
+        if (rezultat instanceof String && ((String) rezultat).startsWith("Greska:")) {
+            throw new Exception((String) rezultat);
+        }
+        return rezultat;
+    }
+
+    public void zatvori() {
+        try {
+            if (primalac != null) primalac.zatvori();
+            if (posiljalac != null) posiljalac.zatvori();
+            if (soket != null && !soket.isClosed()) soket.close();
+            System.out.println("Konekcija zatvorena.");
+        } catch (Exception e) {
+            System.out.println("Greska pri zatvaranju: " + e.getMessage());
+        }
+    }
+
+    private Properties ucitajKonfiguraciju() {
+        Properties properties = new Properties();
+        try (FileInputStream fis = new FileInputStream("config/config.properties")) {
+            properties.load(fis);
+        } catch (Exception e) {
+            properties.setProperty("HOST", "localhost");
+            properties.setProperty("PORT", "9000");
+        }
+        return properties;
     }
 }

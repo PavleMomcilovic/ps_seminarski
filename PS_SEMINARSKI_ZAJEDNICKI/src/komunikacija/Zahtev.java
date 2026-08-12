@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author vanja
+ * @author pavle
  */
 public class Zahtev implements Serializable {
     private Operacija operacija;
