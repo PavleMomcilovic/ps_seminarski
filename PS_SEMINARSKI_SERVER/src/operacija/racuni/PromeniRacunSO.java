@@ -4,10 +4,76 @@
  */
 package operacija.racuni;
 
+import domen.Racun;
+import domen.StavkaRacuna;
+import java.util.List;
+import operacija.ApstraktnaGenerickaOperacija;
+
 /**
  *
  * @author pavle
  */
-public class PromeniRacunSO {
-    
+public class PromeniRacunSO extends ApstraktnaGenerickaOperacija {
+
+    @Override
+    protected void preduslovi(Object param) throws Exception {
+        if (param == null || !(param instanceof Racun)) {
+            throw new Exception("Sistem ne moze da promeni racun: Prosledjeni objekat nije tipa Racun");
+        }
+
+        Racun racun = (Racun) param;
+        if (racun.getDatumIzdavanja() == null) {
+            throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima datum izdavanja");
+        }
+        if (racun.getIdKupac() == null || racun.getIdKupac() <= 0) {
+            throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima kupca");
+        }
+        if (racun.getIdProdavac() == null || racun.getIdProdavac() <= 0) {
+            throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima prodavca");
+        }
+        if (racun.getNacinPlacanja() == null) {
+            throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima datum izdavanja");
+        }
+        for (StavkaRacuna stavka : racun.getStavke()) {
+            if (stavka.getCenaStavke() == 0) {
+                throw new Exception("Sistem ne moze da promeni racun: StavkaRacuna mora imati cenu stavke");
+            }
+            if (stavka.getIznosStavke() == 0) {
+                throw new Exception("Sistem ne moze da promeni racun: StavkaRacuna mora imati iznos stavke");
+            }
+            if (stavka.getKolicinaStavke() == 0) {
+                throw new Exception("Sistem ne moze da promeni racun: StavkaRacuna mora imati kolicinu stavke");
+            }
+            if (stavka.getGitara() == null || stavka.getGitara().getIdGitara() <= 0) {
+                throw new Exception("Sistem ne moze da promeni racun: StavkaRacuna mora imati izabranu gitaru");
+            }
+        }
+    }
+
+    @Override
+    protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
+        Racun r = (Racun) param;
+
+        try {
+            broker.izmeni(r);
+
+            String uslov = " WHERE stavkaracuna.idRacun=" + r.getIdRacun();
+            List<StavkaRacuna> stareStavke = broker.uzmiSve(new StavkaRacuna(), uslov);
+            for (StavkaRacuna stavka : stareStavke) {
+                broker.obrisi(stavka);
+            }
+
+            List<StavkaRacuna> noveStavke = r.getStavke();
+            for (StavkaRacuna stavka : noveStavke) {
+                stavka.setIdRacun(r.getIdRacun());
+                broker.dodaj(stavka);
+            }
+
+            System.out.println("Sistem je zapamtio racun");
+        } catch (Exception e) {
+            System.out.println("Sistem ne moze da zapamti racun: " + e.getMessage());
+            throw e;
+        }
+    }
+
 }

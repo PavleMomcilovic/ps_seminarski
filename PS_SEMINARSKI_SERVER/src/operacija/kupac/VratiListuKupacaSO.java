@@ -6,6 +6,7 @@ package operacija.kupac;
 
 import domen.ApstraktniDomenskiObjekat;
 import domen.Kupac;
+import java.util.ArrayList;
 import java.util.List;
 import operacija.ApstraktnaGenerickaOperacija;
 
@@ -13,8 +14,8 @@ import operacija.ApstraktnaGenerickaOperacija;
  *
  * @author pavle
  */
-public class PretraziKupcaSO extends ApstraktnaGenerickaOperacija {
-    private Kupac rezultat;
+public class VratiListuKupacaSO extends ApstraktnaGenerickaOperacija {
+    private List<Kupac> rezultat;
 
     @Override
     protected void preduslovi(Object param) throws Exception {
@@ -29,15 +30,16 @@ public class PretraziKupcaSO extends ApstraktnaGenerickaOperacija {
         List<ApstraktniDomenskiObjekat> lista = broker.uzmiSve(kriterijum, uslov);
         if (lista.isEmpty()) {
             rezultat = null;
-            System.out.println("Sistem ne moze da nadje kupca");
+            return;
         }
-        else {
-            rezultat = (Kupac) lista.get(0);
-            System.out.println("Sistem je nasao kupca");
+        rezultat = new ArrayList<>();
+        for (ApstraktniDomenskiObjekat objekat : lista) {
+            rezultat.add((Kupac) objekat);
         }
+        System.out.println("Sistem je nasao kupce po zadatim kriterijumima!");
     }
 
-    public Kupac getRezultat() {
+    public List<Kupac> getRezultat() {
         return rezultat;
     }
 }

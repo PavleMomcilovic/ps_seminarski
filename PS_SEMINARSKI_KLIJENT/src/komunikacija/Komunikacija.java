@@ -54,7 +54,7 @@ public class Komunikacija {
     }
     
     public synchronized Object posaljiZahtev(Operacija operacija, Object param) throws Exception {
-        if (socket == null || soket.isClosed()) {
+        if (soket == null || soket.isClosed()) {
             throw new Exception("Nema aktivne konekcije sa serverom.");
         }
 
@@ -69,7 +69,7 @@ public class Komunikacija {
             throw new Exception("Nepoznata greska sa servera.");
         }
         if (odgovor.getTipOdgovora() == TipOdgovora.USPEH) {
-            return odgovor.getRezultat();
+            return odgovor.getOdgovor();
         }
         Object rezultat = odgovor.getOdgovor();
         if (rezultat instanceof Exception) {

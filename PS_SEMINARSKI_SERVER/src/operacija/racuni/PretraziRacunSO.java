@@ -22,7 +22,7 @@ public class PretraziRacunSO extends ApstraktnaGenerickaOperacija {
     @Override
     protected void preduslovi(Object param) throws Exception {
         if (!(param instanceof Racun)) {
-            throw new Exception("Sistem ne moze da nadje racune po zadatim kriterijumima: Prosledjen parametar nije tipa Racun");
+            throw new Exception("Sistem ne moze da nadje racun po zadatim kriterijumima: Prosledjen parametar nije tipa Racun");
         }
     }
 
@@ -33,6 +33,7 @@ public class PretraziRacunSO extends ApstraktnaGenerickaOperacija {
         List<ApstraktniDomenskiObjekat> lista = broker.uzmiSve(kriterijum, uslov);
         if (lista.isEmpty()) {
             rezultat = null;
+            System.out.println("Sistem ne moze da nadje racun");
             return;
         }
         rezultat = (Racun) lista.get(0);
