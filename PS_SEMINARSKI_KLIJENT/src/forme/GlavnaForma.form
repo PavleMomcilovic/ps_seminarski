@@ -25,7 +25,13 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace pref="105" max="32767" attributes="0"/>
-              <Component id="btnKreirajRacun" min="-2" pref="195" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="btnPretraziKupca" alignment="0" pref="195" max="32767" attributes="0"/>
+                  <Component id="btnKreirajKupca" alignment="0" pref="195" max="32767" attributes="0"/>
+                  <Component id="btnPretraziRacun" pref="195" max="32767" attributes="0"/>
+                  <Component id="btnKreirajRacun" pref="195" max="32767" attributes="0"/>
+                  <Component id="btnUbaciSmenu" alignment="0" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -35,7 +41,15 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="btnKreirajRacun" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="248" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnPretraziRacun" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="btnKreirajKupca" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="btnPretraziKupca" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="btnUbaciSmenu" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,6 +58,26 @@
     <Component class="javax.swing.JButton" name="btnKreirajRacun">
       <Properties>
         <Property name="text" type="java.lang.String" value="Kreiraj racun"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPretraziRacun">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pretrazi racun"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnKreirajKupca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Kreiraj kupca"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPretraziKupca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Pretrazi kupca"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUbaciSmenu">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ubaci smenu"/>
       </Properties>
     </Component>
   </SubComponents>

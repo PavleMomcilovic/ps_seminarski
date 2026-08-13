@@ -29,10 +29,22 @@ public class GlavnaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         btnKreirajRacun = new javax.swing.JButton();
+        btnPretraziRacun = new javax.swing.JButton();
+        btnKreirajKupca = new javax.swing.JButton();
+        btnPretraziKupca = new javax.swing.JButton();
+        btnUbaciSmenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnKreirajRacun.setText("Kreiraj racun");
+
+        btnPretraziRacun.setText("Pretrazi racun");
+
+        btnKreirajKupca.setText("Kreiraj kupca");
+
+        btnPretraziKupca.setText("Pretrazi kupca");
+
+        btnUbaciSmenu.setText("Ubaci smenu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -40,7 +52,12 @@ public class GlavnaForma extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(105, Short.MAX_VALUE)
-                .addComponent(btnKreirajRacun, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPretraziKupca, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(btnKreirajKupca, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(btnPretraziRacun, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(btnKreirajRacun, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                    .addComponent(btnUbaciSmenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
@@ -48,7 +65,15 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(btnKreirajRacun)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPretraziRacun)
+                .addGap(34, 34, 34)
+                .addComponent(btnKreirajKupca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnPretraziKupca)
+                .addGap(37, 37, 37)
+                .addComponent(btnUbaciSmenu)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -56,6 +81,10 @@ public class GlavnaForma extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnKreirajKupca;
     private javax.swing.JButton btnKreirajRacun;
+    private javax.swing.JButton btnPretraziKupca;
+    private javax.swing.JButton btnPretraziRacun;
+    private javax.swing.JButton btnUbaciSmenu;
     // End of variables declaration//GEN-END:variables
 }
