@@ -1,21 +1,29 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package forme;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
  * @author pavle
  */
-public class KreirajRacunForma extends javax.swing.JFrame {
+public class KreirajRacunForma extends javax.swing.JDialog {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(KreirajRacunForma.class.getName());
 
     /**
-     * Creates new form RacunForma
+     * Creates new form KreirajRacunForma
      */
-    public KreirajRacunForma() {
+    public KreirajRacunForma(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -28,47 +36,366 @@ public class KreirajRacunForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        cmbProdavac = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        cmbKupac = new javax.swing.JComboBox<>();
+        panelStavke = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        cmbGitara = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        txtCenaStavke = new javax.swing.JTextField();
+        txtKolicinaStavke = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txtIznosStavke = new javax.swing.JTextField();
+        btnDodajStavku = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblStavkeRacuna = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        txtDatumIzdavanja = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cmbNacinPlacanja = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtPopust = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtUkupanIznos = new javax.swing.JTextField();
+        btnKreirajRacun = new javax.swing.JButton();
+        btnNazad = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel1.setText("Prodavac:");
+
+        cmbProdavac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Kupac:");
+
+        cmbKupac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        panelStavke.setBorder(javax.swing.BorderFactory.createTitledBorder("Stavke racuna"));
+        panelStavke.setToolTipText("");
+        panelStavke.setName(""); // NOI18N
+
+        jLabel7.setText("Gitara:");
+
+        cmbGitara.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel8.setText("Cena stavke:");
+
+        jLabel9.setText("Kolicina stavke:");
+
+        jLabel10.setText("Iznos stavke:");
+
+        btnDodajStavku.setText("Dodaj stavku");
+
+        tblStavkeRacuna.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblStavkeRacuna);
+
+        javax.swing.GroupLayout panelStavkeLayout = new javax.swing.GroupLayout(panelStavke);
+        panelStavke.setLayout(panelStavkeLayout);
+        panelStavkeLayout.setHorizontalGroup(
+            panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelStavkeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelStavkeLayout.createSequentialGroup()
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbGitara, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtCenaStavke)
+                            .addComponent(txtKolicinaStavke)
+                            .addComponent(txtIznosStavke, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDodajStavku)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelStavkeLayout.setVerticalGroup(
+            panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelStavkeLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(cmbGitara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCenaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtKolicinaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtIznosStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDodajStavku))
+                .addContainerGap())
+        );
+
+        jLabel3.setText("Datum izdavanja:");
+
+        jLabel4.setText("Nacin placanja:");
+
+        cmbNacinPlacanja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setText("Popust:");
+
+        jLabel6.setText("Ukupan iznos:");
+
+        btnKreirajRacun.setText("Kreiraj racun");
+
+        btnNazad.setText("Nazad");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelStavke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbProdavac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbKupac, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUkupanIznos)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtDatumIzdavanja)
+                                    .addComponent(cmbNacinPlacanja, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNazad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnKreirajRacun)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbProdavac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbKupac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbNacinPlacanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(panelStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnKreirajRacun)
+                    .addComponent(btnNazad))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
+
+        panelStavke.getAccessibleContext().setAccessibleName("Stavke racuna");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new KreirajRacunForma().setVisible(true));
+    public JButton getBtnDodajStavku() {
+        return btnDodajStavku;
     }
 
+    public void setBtnDodajStavku(JButton btnDodajStavku) {
+        this.btnDodajStavku = btnDodajStavku;
+    }
+
+    public JButton getBtnKreirajRacun() {
+        return btnKreirajRacun;
+    }
+
+    public void setBtnKreirajRacun(JButton btnKreirajRacun) {
+        this.btnKreirajRacun = btnKreirajRacun;
+    }
+
+    public JButton getBtnNazad() {
+        return btnNazad;
+    }
+
+    public void setBtnNazad(JButton btnNazad) {
+        this.btnNazad = btnNazad;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JPanel getPanelStavke() {
+        return panelStavke;
+    }
+
+    public void setPanelStavke(JPanel panelStavke) {
+        this.panelStavke = panelStavke;
+    }
+
+    public JTextField getTxtCenaStavke() {
+        return txtCenaStavke;
+    }
+
+    public void setTxtCenaStavke(JTextField txtCenaStavke) {
+        this.txtCenaStavke = txtCenaStavke;
+    }
+
+    public JTextField getTxtDatumIzdavanja() {
+        return txtDatumIzdavanja;
+    }
+
+    public void setTxtDatumIzdavanja(JTextField txtDatumIzdavanja) {
+        this.txtDatumIzdavanja = txtDatumIzdavanja;
+    }
+
+    public JTextField getTxtIznosStavke() {
+        return txtIznosStavke;
+    }
+
+    public void setTxtIznosStavke(JTextField txtIznosStavke) {
+        this.txtIznosStavke = txtIznosStavke;
+    }
+
+    public JTextField getTxtKolicinaStavke() {
+        return txtKolicinaStavke;
+    }
+
+    public void setTxtKolicinaStavke(JTextField txtKolicinaStavke) {
+        this.txtKolicinaStavke = txtKolicinaStavke;
+    }
+
+    public JTextField getTxtPopust() {
+        return txtPopust;
+    }
+
+    public void setTxtPopust(JTextField txtPopust) {
+        this.txtPopust = txtPopust;
+    }
+
+    public JTextField getTxtUkupanIznos() {
+        return txtUkupanIznos;
+    }
+
+    public void setTxtUkupanIznos(JTextField txtUkupanIznos) {
+        this.txtUkupanIznos = txtUkupanIznos;
+    }
+
+    public JComboBox<Object> getCmbGitara() {
+        return cmbGitara;
+    }
+
+    public void setCmbGitara(JComboBox<Object> cmbGitara) {
+        this.cmbGitara = cmbGitara;
+    }
+
+    public JComboBox<Object> getCmbKupac() {
+        return cmbKupac;
+    }
+
+    public void setCmbKupac(JComboBox<Object> cmbKupac) {
+        this.cmbKupac = cmbKupac;
+    }
+
+    public JComboBox<Object> getCmbNacinPlacanja() {
+        return cmbNacinPlacanja;
+    }
+
+    public void setCmbNacinPlacanja(JComboBox<Object> cmbNacinPlacanja) {
+        this.cmbNacinPlacanja = cmbNacinPlacanja;
+    }
+
+    public JComboBox<Object> getCmbProdavac() {
+        return cmbProdavac;
+    }
+
+    public void setCmbProdavac(JComboBox<Object> cmbProdavac) {
+        this.cmbProdavac = cmbProdavac;
+    }
+
+    public JTable getTblStavkeRacuna() {
+        return tblStavkeRacuna;
+    }
+
+    public void setTblStavkeRacuna(JTable tblStavkeRacuna) {
+        this.tblStavkeRacuna = tblStavkeRacuna;
+    }
+    
+    
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDodajStavku;
+    private javax.swing.JButton btnKreirajRacun;
+    private javax.swing.JButton btnNazad;
+    private javax.swing.JComboBox<Object> cmbGitara;
+    private javax.swing.JComboBox<Object> cmbKupac;
+    private javax.swing.JComboBox<Object> cmbNacinPlacanja;
+    private javax.swing.JComboBox<Object> cmbProdavac;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel panelStavke;
+    private javax.swing.JTable tblStavkeRacuna;
+    private javax.swing.JTextField txtCenaStavke;
+    private javax.swing.JTextField txtDatumIzdavanja;
+    private javax.swing.JTextField txtIznosStavke;
+    private javax.swing.JTextField txtKolicinaStavke;
+    private javax.swing.JTextField txtPopust;
+    private javax.swing.JTextField txtUkupanIznos;
     // End of variables declaration//GEN-END:variables
 }

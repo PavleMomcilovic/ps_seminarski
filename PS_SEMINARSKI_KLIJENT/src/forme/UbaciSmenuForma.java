@@ -8,14 +8,14 @@ package forme;
  *
  * @author pavle
  */
-public class PrikaziKupcaForma extends javax.swing.JDialog {
+public class UbaciSmenuForma extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PrikaziKupcaForma.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UbaciSmenuForma.class.getName());
 
     /**
-     * Creates new form PrikaziKupcaForma
+     * Creates new form UbaciSmenuForma
      */
-    public PrikaziKupcaForma(java.awt.Frame parent, boolean modal) {
+    public UbaciSmenuForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -70,7 +70,7 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                PrikaziKupcaForma dialog = new PrikaziKupcaForma(new javax.swing.JFrame(), true);
+                UbaciSmenuForma dialog = new UbaciSmenuForma(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

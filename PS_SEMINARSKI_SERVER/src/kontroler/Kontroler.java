@@ -5,17 +5,22 @@
 package kontroler;
 
 import domen.ApstraktniDomenskiObjekat;
+import domen.Gitara;
 import domen.Kupac;
+import domen.MuzickoObrazovanje;
 import domen.Prodavac;
 import domen.Racun;
 import domen.Smena;
 import java.util.List;
+import operacija.gitara.VratiListuGitaraSO;
 import operacija.kupac.KreirajKupcaSO;
 import operacija.kupac.ObrisiKupcaSO;
 import operacija.kupac.PretraziKupcaSO;
 import operacija.kupac.PromeniKupcaSO;
 import operacija.kupac.VratiListuKupacaSO;
+import operacija.muzickoobr.VratiListuMuzickoObrSO;
 import operacija.prodavac.PrijaviProdavcaSO;
+import operacija.prodavac.VratiListuProdavacaSO;
 import operacija.racuni.KreirajRacunSO;
 import operacija.racuni.PretraziRacunSO;
 import operacija.racuni.PromeniRacunSO;
@@ -104,9 +109,23 @@ public class Kontroler {
         if (param instanceof Racun) {
             VratiListuRacunaSO operacija = new VratiListuRacunaSO();
             operacija.izvrsi(param, null);
+            return operacija.getRezultat();
         } else if (param instanceof Kupac) {
             VratiListuKupacaSO operacija = new VratiListuKupacaSO();
             operacija.izvrsi(param, null);
+            return operacija.getRezultat();
+        } else if (param instanceof Prodavac) {
+            VratiListuProdavacaSO operacija = new VratiListuProdavacaSO();
+            operacija.izvrsi(param, null);
+            return operacija.getRezultat();
+        } else if (param instanceof Gitara) {
+            VratiListuGitaraSO operacija = new VratiListuGitaraSO();
+            operacija.izvrsi(param, null);
+            return operacija.getRezultat();
+        } else if (param instanceof MuzickoObrazovanje) {
+            VratiListuMuzickoObrSO operacija = new VratiListuMuzickoObrSO();
+            operacija.izvrsi(param, null);
+            return operacija.getRezultat();
         }
         throw new Exception("Nepodrzan tip entiteta za vracanje liste: " + param.getClass().getSimpleName());
     }

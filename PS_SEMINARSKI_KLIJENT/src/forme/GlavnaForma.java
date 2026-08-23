@@ -4,6 +4,8 @@
  */
 package forme;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author pavle
@@ -79,6 +81,46 @@ public class GlavnaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JButton getBtnKreirajKupca() {
+        return btnKreirajKupca;
+    }
+
+    public void setBtnKreirajKupca(JButton btnKreirajKupca) {
+        this.btnKreirajKupca = btnKreirajKupca;
+    }
+
+    public JButton getBtnKreirajRacun() {
+        return btnKreirajRacun;
+    }
+
+    public void setBtnKreirajRacun(JButton btnKreirajRacun) {
+        this.btnKreirajRacun = btnKreirajRacun;
+    }
+
+    public JButton getBtnPretraziKupca() {
+        return btnPretraziKupca;
+    }
+
+    public void setBtnPretraziKupca(JButton btnPretraziKupca) {
+        this.btnPretraziKupca = btnPretraziKupca;
+    }
+
+    public JButton getBtnPretraziRacun() {
+        return btnPretraziRacun;
+    }
+
+    public void setBtnPretraziRacun(JButton btnPretraziRacun) {
+        this.btnPretraziRacun = btnPretraziRacun;
+    }
+
+    public JButton getBtnUbaciSmenu() {
+        return btnUbaciSmenu;
+    }
+
+    public void setBtnUbaciSmenu(JButton btnUbaciSmenu) {
+        this.btnUbaciSmenu = btnUbaciSmenu;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreirajKupca;
