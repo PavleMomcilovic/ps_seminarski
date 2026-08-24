@@ -9,13 +9,13 @@ public class Gitara implements ApstraktniDomenskiObjekat {
     private Long idGitara;
     private String naziv;
     private float cena;
-    private String vrsta;
+    private VrstaGitare vrsta;
     private String opis;
 
     public Gitara() {
     }
 
-    public Gitara(Long idGitara, String naziv, float cena, String vrsta, String opis) {
+    public Gitara(Long idGitara, String naziv, float cena, VrstaGitare vrsta, String opis) {
         this.idGitara = idGitara;
         this.naziv = naziv;
         this.cena = cena;
@@ -47,11 +47,11 @@ public class Gitara implements ApstraktniDomenskiObjekat {
         this.cena = cena;
     }
 
-    public String getVrsta() {
+    public VrstaGitare getVrsta() {
         return vrsta;
     }
 
-    public void setVrsta(String vrsta) {
+    public void setVrsta(VrstaGitare vrsta) {
         this.vrsta = vrsta;
     }
 
@@ -87,7 +87,7 @@ public class Gitara implements ApstraktniDomenskiObjekat {
             Long idGitara = rs.getLong("gitara.idGitara");
             String naziv = rs.getString("gitara.naziv");
             float cena = rs.getFloat("gitara.cena");
-            String vrsta = rs.getString("gitara.vrsta");
+            VrstaGitare vrsta = VrstaGitare.valueOf(rs.getString("gitara.vrsta"));
             String opis = rs.getString("gitara.opis");
 
             Gitara gitara = new Gitara(idGitara, naziv, cena, vrsta, opis);
@@ -121,7 +121,7 @@ public class Gitara implements ApstraktniDomenskiObjekat {
             Long idGitara = rs.getLong("gitara.idGitara");
             String naziv = rs.getString("gitara.naziv");
             float cena = rs.getFloat("gitara.cena");
-            String vrsta = rs.getString("gitara.vrsta");
+            VrstaGitare vrsta = VrstaGitare.valueOf(rs.getString("gitara.vrsta"));
             String opis = rs.getString("gitara.opis");
 
             gitara = new Gitara(idGitara, naziv, cena, vrsta, opis);
@@ -154,7 +154,7 @@ public class Gitara implements ApstraktniDomenskiObjekat {
         if (cena > 0) {
             uslovi.add("gitara.cena=" + cena);
         }
-        if (vrsta != null && !vrsta.isEmpty()) {
+        if (vrsta != null) {
             uslovi.add("gitara.vrsta='" + vrsta + "'");
         }
         if (opis != null && !opis.isEmpty()) {

@@ -62,7 +62,7 @@ public class MuzickoObrazovanje implements ApstraktniDomenskiObjekat {
         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
 
         while (rs.next()) {
-            Long idMuzickoObr = rs.getLong("muzickoobrazovanje.idMuzikoObr");
+            Long idMuzickoObr = rs.getLong("muzickoobrazovanje.idMuzickoObr");
             Stepen stepen = Stepen.valueOf(rs.getString("muzickoobrazovanje.stepen"));
             float popustPoStepenu = rs.getFloat("muzickoobrazovanje.popustPoStepenu");
 

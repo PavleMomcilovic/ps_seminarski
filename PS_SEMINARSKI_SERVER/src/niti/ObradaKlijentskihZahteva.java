@@ -6,8 +6,10 @@ package niti;
 
 import domen.Gitara;
 import domen.Kupac;
+import domen.MuzickoObrazovanje;
 import domen.Prodavac;
 import domen.Racun;
+import domen.Smena;
 import java.io.IOException;
 import java.net.Socket;
 import komunikacija.Odgovor;
@@ -60,28 +62,41 @@ public class ObradaKlijentskihZahteva extends Thread {
 
         switch (zahtev.getOperacija()) {
             case KREIRAJ_RACUN: {
-                Racun racun = (Racun) zahtev.getParametar();
-                Kontroler.getInstanca().kreiraj(racun);
+                Racun r = (Racun) zahtev.getParametar();
+                Kontroler.getInstanca().kreiraj(r);
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(racun);
+                odgovor.setOdgovor(r);
                 break;
             }
             case PRETRAZI_PRODAVCA: {
-                Prodavac kriterijum = (Prodavac) zahtev.getParametar();
+                Prodavac p = (Prodavac) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(p));
                 break;
             }
             case PRETRAZI_KUPCA: {
-                Kupac kriterijum = (Kupac) zahtev.getParametar();
+                Kupac k = (Kupac) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(k));
                 break;
             }
             case PRETRAZI_GITARU: {
-                Gitara kriterijum = (Gitara) zahtev.getParametar();
+                Gitara g = (Gitara) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(g));
+                break;
+            }
+            case PRETRAZI_MUZICKO_OBRAZOVANJE: {
+                MuzickoObrazovanje mo = (MuzickoObrazovanje) zahtev.getParametar();
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(mo));
+                break;
+            }
+            case KREIRAJ_KUPCA: {
+                Kupac k = (Kupac) zahtev.getParametar();
+                Kontroler.getInstanca().kreiraj(k);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(k);
                 break;
             }
             case PRIJAVI_PRODAVCA: {
@@ -91,12 +106,27 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(p);
                 break;
             }
-            case PRETRAZI_RACUN:
+            case PRETRAZI_RACUN: {
+                Racun kriterijum = (Racun) zahtev.getParametar();
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
+                break;
+            }
+            case OBRISI_KUPCA: {
+                Kupac kupac = (Kupac) zahtev.getParametar();
+                Kontroler.getInstanca().obrisi(kupac);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                break;
+            }
+            case UBACI_SMENU: {
+                Smena smena = (Smena) zahtev.getParametar();
+                Kontroler.getInstanca().ubaci(smena);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(smena);
+                break;
+            }
             case PROMENI_RACUN:
-            case KREIRAJ_KUPCA:
             case PROMENI_KUPCA:
-            case OBRISI_KUPCA:
-            case UBACI_SMENU:
             default:
                 throw new Exception("Operacija " + zahtev.getOperacija() + " jos nije implementirana na serveru.");
         }

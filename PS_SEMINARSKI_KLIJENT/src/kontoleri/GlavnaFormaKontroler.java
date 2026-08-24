@@ -12,6 +12,7 @@ import forme.PrikaziKupcaForma;
 import forme.UbaciSmenuForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,6 +41,7 @@ public class GlavnaFormaKontroler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PrikaziRacunForma forma = new PrikaziRacunForma(glavnaForma, false);
+                new RacunKontroler(forma);
                 forma.setVisible(true);
             }
         });
@@ -48,6 +50,7 @@ public class GlavnaFormaKontroler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 KreirajKupcaForma forma = new KreirajKupcaForma(glavnaForma, true);
+                new KreirajKupcaKontroler(forma);
                 forma.setVisible(true);
             }
         });
@@ -56,6 +59,7 @@ public class GlavnaFormaKontroler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 PrikaziKupcaForma forma = new PrikaziKupcaForma(glavnaForma, false);
+                new KupacKontroler(forma);
                 forma.setVisible(true);
             }
         });
@@ -64,6 +68,7 @@ public class GlavnaFormaKontroler {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UbaciSmenuForma forma = new UbaciSmenuForma(glavnaForma, true);
+                new UbaciSmenuKontroler(forma);
                 forma.setVisible(true);
             }
         });

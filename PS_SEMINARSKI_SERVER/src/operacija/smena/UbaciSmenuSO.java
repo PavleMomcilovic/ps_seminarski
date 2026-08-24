@@ -19,8 +19,6 @@ public class UbaciSmenuSO extends ApstraktnaGenerickaOperacija {
             throw new Exception("Sistem ne moze da zapamti smenu: Prosledjeni objekat nije tipa Smena");
         
         Smena smena = (Smena) param;
-        if (smena.getIdSmena() <= 0)
-            throw new Exception("Sistem ne moze da zapamti smenu: Smena mora imati identifikator");
         if (smena.getPocetakSmene() <= 0)
             throw new Exception("Sistem ne moze da zapamti smenu: Smena mora imati pocetak");
         if (smena.getKrajSmene() <= 0)
@@ -31,5 +29,4 @@ public class UbaciSmenuSO extends ApstraktnaGenerickaOperacija {
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         broker.dodaj((Smena) param);
     }
-    
 }

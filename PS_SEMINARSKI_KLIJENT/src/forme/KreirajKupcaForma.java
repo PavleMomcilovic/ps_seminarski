@@ -110,11 +110,11 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
         this.btnNazad = btnNazad;
     }
 
-    public JComboBox<String> getCmbMuzickoObrazovanje() {
+    public JComboBox<Object> getCmbMuzickoObrazovanje() {
         return cmbMuzickoObrazovanje;
     }
 
-    public void setCmbMuzickoObrazovanje(JComboBox<String> cmbMuzickoObrazovanje) {
+    public void setCmbMuzickoObrazovanje(JComboBox<Object> cmbMuzickoObrazovanje) {
         this.cmbMuzickoObrazovanje = cmbMuzickoObrazovanje;
     }
 
@@ -130,7 +130,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreirajKupca;
     private javax.swing.JButton btnNazad;
-    private javax.swing.JComboBox<String> cmbMuzickoObrazovanje;
+    private javax.swing.JComboBox<Object> cmbMuzickoObrazovanje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtImePrezime;

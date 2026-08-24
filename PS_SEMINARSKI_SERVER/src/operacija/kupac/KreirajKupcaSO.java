@@ -19,9 +19,7 @@ public class KreirajKupcaSO extends ApstraktnaGenerickaOperacija {
             throw new Exception("Sistem ne moze da kreira kupca: Prosledjeni objekat nije tipa Kupac");
         
         Kupac kupac = (Kupac) param;
-        if (kupac.getIdKupac() <= 0)
-            throw new Exception("Sistem ne moze da kreira kupca: Kupac mora imati identifikator");
-        if (kupac.getImePrezime().isEmpty() || kupac.getImePrezime() == null)
+        if (kupac.getImePrezime() == null || kupac.getImePrezime().isEmpty())
             throw new Exception("Sistem ne moze da kreira kupca: Kupac mora imati ime i prezime");
         if (kupac.getMuzickoObr() == null || kupac.getMuzickoObr().getIdMuzickoObr() <= 0)
             throw new Exception("Sistem ne moze da kreira kupca: Kupac mora imati Muzicko Obrazovanje");

@@ -25,7 +25,6 @@ import komunikacija.Operacija;
  *
  * @author pavle
  */
-
 public class KreirajRacunKontroler {
 
     private final KreirajRacunForma forma;
@@ -63,6 +62,8 @@ public class KreirajRacunKontroler {
         ucitajProdavce();
         ucitajKupce();
         ucitajGitare();
+
+        JOptionPane.showMessageDialog(forma, "Sistem je kreirao racun!", "USPEH", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void ucitajProdavce() {
