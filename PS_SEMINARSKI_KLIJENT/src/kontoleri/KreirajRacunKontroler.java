@@ -255,8 +255,8 @@ public class KreirajRacunKontroler {
         racun.setNacinPlacanja(izabraniNacinPlacanja);
         racun.setUkupanIznos(ukupanIznos);
         racun.setPopust(popust);
-        racun.setIdProdavac(izabraniProdavac.getIdProdavac());
-        racun.setIdKupac(izabraniKupac.getIdKupac());
+        racun.setProdavac(izabraniProdavac);
+        racun.setKupac(izabraniKupac);
         racun.setStavke(modelTabele.getLista());
 
         boolean uspesno = posaljiRacunNaServer(racun);
@@ -271,7 +271,7 @@ public class KreirajRacunKontroler {
 
     private List<Prodavac> pribaviProdavce() {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_PRODAVCA, new Prodavac());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_PRODAVAC, new Prodavac());
             List<Prodavac> lista = new ArrayList<>();
             for (Object o : (List<?>) rezultat) {
                 lista.add((Prodavac) o);
@@ -286,7 +286,7 @@ public class KreirajRacunKontroler {
 
     private List<Kupac> pribaviKupce() {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_KUPCA, new Kupac());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_KUPAC, new Kupac());
             List<Kupac> lista = new ArrayList<>();
             for (Object o : (List<?>) rezultat) {
                 lista.add((Kupac) o);
@@ -301,7 +301,7 @@ public class KreirajRacunKontroler {
 
     private List<Gitara> pribaviGitare() {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_GITARU, new Gitara());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_GITARA, new Gitara());
             List<Gitara> lista = new ArrayList<>();
             for (Object o : (List<?>) rezultat) {
                 lista.add((Gitara) o);

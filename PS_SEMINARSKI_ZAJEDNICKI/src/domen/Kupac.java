@@ -48,7 +48,7 @@ public class Kupac implements ApstraktniDomenskiObjekat {
         return "Kupac{"
                 + "idKupac=" + idKupac
                 + ", imePrezime='" + imePrezime + '\''
-                + ", idMuzickoObr=" + muzickoObr.getIdMuzickoObr()
+                + ", idMuzickoObr=" + (muzickoObr != null ? muzickoObr.getIdMuzickoObr() : null)
                 + '}';
     }
 

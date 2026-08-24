@@ -95,7 +95,7 @@ public class KreirajKupcaKontroler {
 
     private List<MuzickoObrazovanje> pribaviMuzickaObrazovanja() {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_MUZICKO_OBRAZOVANJE, new MuzickoObrazovanje());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_MUZICKO_OBRAZOVANJE, new MuzickoObrazovanje());
             List<MuzickoObrazovanje> lista = new ArrayList<>();
             for (Object o : (List<?>) rezultat) {
                 lista.add((MuzickoObrazovanje) o);

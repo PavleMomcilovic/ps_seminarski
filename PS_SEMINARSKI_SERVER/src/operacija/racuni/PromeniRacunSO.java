@@ -25,10 +25,10 @@ public class PromeniRacunSO extends ApstraktnaGenerickaOperacija {
         if (racun.getDatumIzdavanja() == null) {
             throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima datum izdavanja");
         }
-        if (racun.getIdKupac() == null || racun.getIdKupac() <= 0) {
+        if (racun.getKupac() == null || racun.getKupac().getIdKupac() == null || racun.getKupac().getIdKupac() <= 0) {
             throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima kupca");
         }
-        if (racun.getIdProdavac() == null || racun.getIdProdavac() <= 0) {
+        if (racun.getProdavac() == null || racun.getProdavac().getIdProdavac() == null || racun.getProdavac().getIdProdavac() <= 0) {
             throw new Exception("Sistem ne moze da promeni racun: Racun mora da ima prodavca");
         }
         if (racun.getNacinPlacanja() == null) {

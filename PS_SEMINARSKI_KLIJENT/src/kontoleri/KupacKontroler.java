@@ -5,12 +5,15 @@
 package kontoleri;
 
 import domen.Kupac;
+import domen.MuzickoObrazovanje;
 import forme.PrikaziKupcaForma;
 import forme.model.ModelTabeleKupac;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 import komunikacija.Operacija;
@@ -85,16 +88,50 @@ public class KupacKontroler {
 
     private List<Kupac> pribaviKupce() {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_KUPCA, new Kupac());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_KUPAC, new Kupac());
             List<Kupac> lista = new ArrayList<>();
             if (rezultat != null) {
                 for (Object o : (List<?>) rezultat) {
                     lista.add((Kupac) o);
                 }
             }
+            dodajMuzickaObrazovanja(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da prikaze kupce: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu kupaca: " + ex.getMessage(),
+                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
+    }
+
+    private void dodajMuzickaObrazovanja(List<Kupac> kupci) {
+        List<MuzickoObrazovanje> muzickaObrazovanja = pribaviMuzickaObrazovanja();
+        Map<Long, MuzickoObrazovanje> poId = new HashMap<>();
+        
+        for (MuzickoObrazovanje mo : muzickaObrazovanja) {
+            poId.put(mo.getIdMuzickoObr(), mo);
+        }
+
+        for (Kupac kupac : kupci) {
+            if (kupac.getMuzickoObr() != null) {
+                MuzickoObrazovanje puno = poId.get(kupac.getMuzickoObr().getIdMuzickoObr());
+                if (puno != null) {
+                    kupac.setMuzickoObr(puno);
+                }
+            }
+        }
+    }
+
+    private List<MuzickoObrazovanje> pribaviMuzickaObrazovanja() {
+        try {
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_MUZICKO_OBRAZOVANJE, new MuzickoObrazovanje());
+            List<MuzickoObrazovanje> lista = new ArrayList<>();
+            for (Object o : (List<?>) rezultat) {
+                lista.add((MuzickoObrazovanje) o);
+            }
+            return lista;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu muzickih obrazovanja: " + ex.getMessage(),
                     "GRESKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }

@@ -68,25 +68,25 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(r);
                 break;
             }
-            case PRETRAZI_PRODAVCA: {
+            case VRATI_LISTU_PRODAVAC: {
                 Prodavac p = (Prodavac) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(p));
                 break;
             }
-            case PRETRAZI_KUPCA: {
+            case VRATI_LISTU_KUPAC: {
                 Kupac k = (Kupac) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(k));
                 break;
             }
-            case PRETRAZI_GITARU: {
+            case VRATI_LISTU_GITARA: {
                 Gitara g = (Gitara) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(g));
                 break;
             }
-            case PRETRAZI_MUZICKO_OBRAZOVANJE: {
+            case VRATI_LISTU_MUZICKO_OBRAZOVANJE: {
                 MuzickoObrazovanje mo = (MuzickoObrazovanje) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(mo));
@@ -106,7 +106,7 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(p);
                 break;
             }
-            case PRETRAZI_RACUN: {
+            case VRATI_LISTU_RACUN: {
                 Racun kriterijum = (Racun) zahtev.getParametar();
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));

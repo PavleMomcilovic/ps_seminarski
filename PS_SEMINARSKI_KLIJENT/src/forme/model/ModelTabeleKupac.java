@@ -41,7 +41,7 @@ public class ModelTabeleKupac extends AbstractTableModel {
             case 1:
                 return k.getImePrezime();
             case 2:
-                return k.getMuzickoObr();
+                return k.getMuzickoObr().getStepen();
             default:
                 return "N/A";
         }

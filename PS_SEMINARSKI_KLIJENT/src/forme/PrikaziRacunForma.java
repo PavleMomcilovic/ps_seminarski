@@ -5,7 +5,9 @@
 package forme;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -36,6 +38,19 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         tblRacun = new javax.swing.JTable();
         btnPromeniRacun = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
+        cmbProdavac = new javax.swing.JComboBox<>();
+        txtUkupanIznos = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cmbKupac = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        txtDatumIzdavanja = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cmbNacinPlacanja = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        txtPopust = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnPretraziRacun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -56,6 +71,26 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
 
         btnNazad.setText("Nazad");
 
+        cmbProdavac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Kupac:");
+
+        cmbKupac.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Datum izdavanja:");
+
+        jLabel4.setText("Nacin placanja:");
+
+        cmbNacinPlacanja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel5.setText("Popust:");
+
+        jLabel1.setText("Prodavac:");
+
+        jLabel6.setText("Ukupan iznos:");
+
+        btnPretraziRacun.setText("Pretrazi racune");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -63,23 +98,69 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNazad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPromeniRacun)))
+                        .addComponent(btnPromeniRacun))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbProdavac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbKupac, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUkupanIznos)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtDatumIzdavanja)
+                                .addComponent(cmbNacinPlacanja, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnPretraziRacun)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbProdavac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDatumIzdavanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbKupac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(cmbNacinPlacanja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(btnPretraziRacun)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPromeniRacun)
                     .addComponent(btnNazad))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -109,11 +190,81 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         this.tblRacun = tblRacun;
     }
 
+    public JButton getBtnPretraziRacun() {
+        return btnPretraziRacun;
+    }
+
+    public void setBtnPretraziRacun(JButton btnPretraziRacun) {
+        this.btnPretraziRacun = btnPretraziRacun;
+    }
+
+    public JComboBox<Object> getCmbKupac() {
+        return cmbKupac;
+    }
+
+    public void setCmbKupac(JComboBox<Object> cmbKupac) {
+        this.cmbKupac = cmbKupac;
+    }
+
+    public JComboBox<Object> getCmbNacinPlacanja() {
+        return cmbNacinPlacanja;
+    }
+
+    public void setCmbNacinPlacanja(JComboBox<Object> cmbNacinPlacanja) {
+        this.cmbNacinPlacanja = cmbNacinPlacanja;
+    }
+
+    public JComboBox<Object> getCmbProdavac() {
+        return cmbProdavac;
+    }
+
+    public void setCmbProdavac(JComboBox<Object> cmbProdavac) {
+        this.cmbProdavac = cmbProdavac;
+    }
+
+    public JTextField getTxtDatumIzdavanja() {
+        return txtDatumIzdavanja;
+    }
+
+    public void setTxtDatumIzdavanja(JTextField txtDatumIzdavanja) {
+        this.txtDatumIzdavanja = txtDatumIzdavanja;
+    }
+
+    public JTextField getTxtPopust() {
+        return txtPopust;
+    }
+
+    public void setTxtPopust(JTextField txtPopust) {
+        this.txtPopust = txtPopust;
+    }
+
+    public JTextField getTxtUkupanIznos() {
+        return txtUkupanIznos;
+    }
+
+    public void setTxtUkupanIznos(JTextField txtUkupanIznos) {
+        this.txtUkupanIznos = txtUkupanIznos;
+    }
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
+    private javax.swing.JButton btnPretraziRacun;
     private javax.swing.JButton btnPromeniRacun;
+    private javax.swing.JComboBox<Object> cmbKupac;
+    private javax.swing.JComboBox<Object> cmbNacinPlacanja;
+    private javax.swing.JComboBox<Object> cmbProdavac;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRacun;
+    private javax.swing.JTextField txtDatumIzdavanja;
+    private javax.swing.JTextField txtPopust;
+    private javax.swing.JTextField txtUkupanIznos;
     // End of variables declaration//GEN-END:variables
 }

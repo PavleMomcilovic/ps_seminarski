@@ -12,21 +12,21 @@ public class Racun implements ApstraktniDomenskiObjekat {
     private NacinPlacanja nacinPlacanja;
     private float ukupanIznos;
     private float popust;
-    private Long idProdavac;
-    private Long idKupac;
+    private Prodavac prodavac;
+    private Kupac kupac;
     private List<StavkaRacuna> stavke = new ArrayList<>();
 
     public Racun() {
     }
 
-    public Racun(Long idRacun, LocalDate datumIzdavanja, NacinPlacanja nacinPlacanja, float ukupanIznos, float popust, Long idProdavac, Long idKupac) {
+    public Racun(Long idRacun, LocalDate datumIzdavanja, NacinPlacanja nacinPlacanja, float ukupanIznos, float popust, Prodavac prodavac, Kupac kupac) {
         this.idRacun = idRacun;
         this.datumIzdavanja = datumIzdavanja;
         this.nacinPlacanja = nacinPlacanja;
         this.ukupanIznos = ukupanIznos;
         this.popust = popust;
-        this.idProdavac = idProdavac;
-        this.idKupac = idKupac;
+        this.prodavac = prodavac;
+        this.kupac = kupac;
     }
 
     public Long getIdRacun() {
@@ -69,20 +69,20 @@ public class Racun implements ApstraktniDomenskiObjekat {
         this.popust = popust;
     }
 
-    public Long getIdProdavac() {
-        return idProdavac;
+    public Prodavac getProdavac() {
+        return prodavac;
     }
 
-    public void setIdProdavac(Long idProdavac) {
-        this.idProdavac = idProdavac;
+    public void setProdavac(Prodavac prodavac) {
+        this.prodavac = prodavac;
     }
 
-    public Long getIdKupac() {
-        return idKupac;
+    public Kupac getKupac() {
+        return kupac;
     }
 
-    public void setIdKupac(Long idKupac) {
-        this.idKupac = idKupac;
+    public void setKupac(Kupac kupac) {
+        this.kupac = kupac;
     }
 
     public List<StavkaRacuna> getStavke() {
@@ -101,8 +101,8 @@ public class Racun implements ApstraktniDomenskiObjekat {
                 + ", nacinPlacanja='" + nacinPlacanja + '\''
                 + ", ukupanIznos=" + ukupanIznos
                 + ", popust=" + popust
-                + ", idProdavac=" + idProdavac
-                + ", idKupac=" + idKupac
+                + ", prodavac=" + prodavac
+                + ", kupac=" + kupac
                 + ", stavke=" + stavke
                 + '}';
     }
@@ -125,7 +125,13 @@ public class Racun implements ApstraktniDomenskiObjekat {
             Long idProdavac = rs.getLong("racun.idProdavac");
             Long idKupac = rs.getLong("racun.idKupac");
 
-            Racun racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, idProdavac, idKupac);
+            Prodavac prodavac = new Prodavac();
+            prodavac.setIdProdavac(idProdavac);
+
+            Kupac kupac = new Kupac();
+            kupac.setIdKupac(idKupac);
+
+            Racun racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, prodavac, kupac);
             lista.add(racun);
         }
 
@@ -140,7 +146,7 @@ public class Racun implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        return "'" + datumIzdavanja + "','" + nacinPlacanja + "'," + ukupanIznos + "," + popust + "," + idProdavac + "," + idKupac;
+        return "'" + datumIzdavanja + "','" + nacinPlacanja + "'," + ukupanIznos + "," + popust + "," + prodavac.getIdProdavac() + "," + kupac.getIdKupac();
     }
 
     @Override
@@ -161,7 +167,13 @@ public class Racun implements ApstraktniDomenskiObjekat {
             Long idProdavac = rs.getLong("racun.idProdavac");
             Long idKupac = rs.getLong("racun.idKupac");
 
-            racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, idProdavac, idKupac);
+            Prodavac prodavac = new Prodavac();
+            prodavac.setIdProdavac(idProdavac);
+
+            Kupac kupac = new Kupac();
+            kupac.setIdKupac(idKupac);
+
+            racun = new Racun(idRacun, datumIzdavanja, nacinPlacanja, ukupanIznos, popust, prodavac, kupac);
         }
 
         System.out.println("KLASA RACUN: " + racun);
@@ -171,7 +183,7 @@ public class Racun implements ApstraktniDomenskiObjekat {
     @Override
     public String vratiVrednostiZaIzmenu() {
         return "datumIzdavanja='" + datumIzdavanja + "', nacinPlacanja='" + nacinPlacanja + "', ukupanIznos=" + ukupanIznos
-                + ", popust=" + popust + ", idProdavac=" + idProdavac + ", idKupac=" + idKupac;
+                + ", popust=" + popust + ", idProdavac=" + prodavac.getIdProdavac() + ", idKupac=" + kupac.getIdKupac();
     }
 
     @Override
@@ -198,11 +210,11 @@ public class Racun implements ApstraktniDomenskiObjekat {
         if (popust > 0) {
             uslovi.add("racun.popust=" + popust);
         }
-        if (idProdavac != null) {
-            uslovi.add("racun.idProdavac=" + idProdavac);
+        if (prodavac != null && prodavac.getIdProdavac() != null) {
+            uslovi.add("racun.idProdavac=" + prodavac.getIdProdavac());
         }
-        if (idKupac != null) {
-            uslovi.add("racun.idKupac=" + idKupac);
+        if (kupac != null && kupac.getIdKupac() != null) {
+            uslovi.add("racun.idKupac=" + kupac.getIdKupac());
         }
 
         return String.join(" AND ", uslovi);

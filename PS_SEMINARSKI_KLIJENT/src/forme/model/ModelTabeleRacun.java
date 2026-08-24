@@ -51,9 +51,9 @@ public class ModelTabeleRacun extends AbstractTableModel {
             case 4:
                 return r.getPopust();
             case 5:
-                return r.getIdProdavac();
+                return r.getProdavac().getImePrezime();
             case 6:
-                return r.getIdKupac();
+                return r.getKupac().getImePrezime();
             default:
                 return "N/A";
         }
