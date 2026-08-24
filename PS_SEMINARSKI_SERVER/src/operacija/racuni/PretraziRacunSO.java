@@ -30,6 +30,9 @@ public class PretraziRacunSO extends ApstraktnaGenerickaOperacija {
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         Racun kriterijum = (Racun) param;
         String uslov = kriterijum.generisiKriterijumPretrazivanja();
+        if (!uslov.isEmpty()) {
+            uslov = " WHERE " + uslov;
+        }
         List<ApstraktniDomenskiObjekat> lista = broker.uzmiSve(kriterijum, uslov);
         if (lista.isEmpty()) {
             rezultat = null;
@@ -44,13 +47,14 @@ public class PretraziRacunSO extends ApstraktnaGenerickaOperacija {
     private void ucitajStavke(Racun racun) throws Exception {
         StavkaRacuna kriterijum = new StavkaRacuna();
         kriterijum.setIdRacun(racun.getIdRacun());
-        String uslov = kriterijum.generisiKriterijumPretrazivanja();
+        String uslov = " WHERE " + kriterijum.generisiKriterijumPretrazivanja();
         List<ApstraktniDomenskiObjekat> stavke = broker.uzmiSve(kriterijum, uslov);
-        
+
         List<StavkaRacuna> lista = new ArrayList<>();
         for (ApstraktniDomenskiObjekat stavka : stavke) {
             lista.add((StavkaRacuna) stavka);
         }
+        racun.setStavke(lista);
     }
 
     public Racun getRezultat() {

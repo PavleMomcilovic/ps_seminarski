@@ -112,6 +112,18 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
                 break;
             }
+            case PRETRAZI_RACUN: {
+                Racun kriterijum = (Racun) zahtev.getParametar();
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(Kontroler.getInstanca().pretrazi(kriterijum));
+                break;
+            }
+            case PRETRAZI_KUPCA: {
+                Kupac kriterijum = (Kupac) zahtev.getParametar();
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(Kontroler.getInstanca().pretrazi(kriterijum));
+                break;
+            }
             case OBRISI_KUPCA: {
                 Kupac kupac = (Kupac) zahtev.getParametar();
                 Kontroler.getInstanca().obrisi(kupac);

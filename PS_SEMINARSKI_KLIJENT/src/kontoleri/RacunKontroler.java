@@ -5,13 +5,17 @@
 package kontoleri;
 
 import domen.Kupac;
+import domen.NacinPlacanja;
 import domen.Prodavac;
 import domen.Racun;
 import forme.PrikaziRacunForma;
 import forme.model.ModelTabeleRacun;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +41,146 @@ public class RacunKontroler {
         modelTabele = new ModelTabeleRacun(new ArrayList<>());
         forma.getTblRacun().setModel(modelTabele);
 
+        ucitajProdavceZaPretragu();
+        ucitajKupceZaPretragu();
+        ucitajNacineZaPretragu();
+
         ucitajRacune();
     }
 
+    private void ucitajProdavceZaPretragu() {
+        List<Prodavac> prodavci = pribaviProdavce();
+        List<Object> stavke = new ArrayList<>();
+        stavke.add(null);
+        stavke.addAll(prodavci);
+
+        forma.getCmbProdavac().setModel(new javax.swing.DefaultComboBoxModel<>(stavke.toArray()));
+        forma.getCmbProdavac().setRenderer(new javax.swing.DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
+                    int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                setText(value instanceof Prodavac ? ((Prodavac) value).getImePrezime() : "Svi prodavci");
+                return this;
+            }
+        });
+    }
+
+    private void ucitajKupceZaPretragu() {
+        List<Kupac> kupci = pribaviKupce();
+        List<Object> stavke = new ArrayList<>();
+        stavke.add(null);
+        stavke.addAll(kupci);
+
+        forma.getCmbKupac().setModel(new javax.swing.DefaultComboBoxModel<>(stavke.toArray()));
+        forma.getCmbKupac().setRenderer(new javax.swing.DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
+                    int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                setText(value instanceof Kupac ? ((Kupac) value).getImePrezime() : "Svi kupci");
+                return this;
+            }
+        });
+    }
+
+    private void ucitajNacineZaPretragu() {
+        List<Object> stavke = new ArrayList<>();
+        stavke.add(null);
+        stavke.addAll(Arrays.asList(NacinPlacanja.values()));
+
+        forma.getCmbNacinPlacanja().setModel(new javax.swing.DefaultComboBoxModel<>(stavke.toArray()));
+        forma.getCmbNacinPlacanja().setRenderer(new javax.swing.DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
+                    int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                setText(value != null ? value.toString() : "Svi nacini placanja");
+                return this;
+            }
+        });
+    }
+
     private void ucitajRacune() {
-        modelTabele.setLista(pribaviRacune());
+        modelTabele.setLista(pribaviRacune(new Racun()));
+    }
+
+    private void pretraziRacune() {
+        Racun kriterijum = new Racun();
+
+        Prodavac izabraniProdavac = (Prodavac) forma.getCmbProdavac().getSelectedItem();
+        if (izabraniProdavac != null) {
+            kriterijum.setProdavac(izabraniProdavac);
+        }
+
+        Kupac izabraniKupac = (Kupac) forma.getCmbKupac().getSelectedItem();
+        if (izabraniKupac != null) {
+            kriterijum.setKupac(izabraniKupac);
+        }
+
+        NacinPlacanja izabraniNacinPlacanja = (NacinPlacanja) forma.getCmbNacinPlacanja().getSelectedItem();
+        if (izabraniNacinPlacanja != null) {
+            kriterijum.setNacinPlacanja(izabraniNacinPlacanja);
+        }
+
+        String datum = forma.getTxtDatumIzdavanja().getText().trim();
+        if (!datum.isEmpty()) {
+            try {
+                kriterijum.setDatumIzdavanja(LocalDate.parse(datum));
+            } catch (DateTimeParseException ex) {
+                JOptionPane.showMessageDialog(forma, "Datum izdavanja mora biti u formatu GGGG-MM-DD.",
+                        "GRESKA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        String popust = forma.getTxtPopust().getText().trim();
+        if (!popust.isEmpty()) {
+            try {
+                kriterijum.setPopust(Float.parseFloat(popust));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(forma, "Popust mora biti broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        String ukupanIznos = forma.getTxtUkupanIznos().getText().trim();
+        if (!ukupanIznos.isEmpty()) {
+            try {
+                kriterijum.setUkupanIznos(Float.parseFloat(ukupanIznos));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(forma, "Ukupan iznos mora biti broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        modelTabele.setLista(pretraziRacun(kriterijum));
+    }
+
+    private List<Racun> pretraziRacun(Racun kriterijum) {
+        try {
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_RACUN, kriterijum);
+            List<Racun> lista = new ArrayList<>();
+            if (rezultat != null) {
+                lista.add((Racun) rezultat);
+            }
+            dodajKupceProdavce(lista);
+            return lista;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Sistem ne moze da pretrazi racune: " + ex.getMessage(),
+                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
     }
 
     private void addActionListeners() {
+        forma.getBtnPretraziRacun().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pretraziRacune();
+            }
+        });
+
         forma.getBtnNazad().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -53,9 +189,9 @@ public class RacunKontroler {
         });
     }
 
-    private List<Racun> pribaviRacune() {
+    private List<Racun> pribaviRacune(Racun kriterijum) {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_RACUN, new Racun());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_RACUN, kriterijum);
             List<Racun> lista = new ArrayList<>();
             if (rezultat != null) {
                 for (Object o : (List<?>) rezultat) {

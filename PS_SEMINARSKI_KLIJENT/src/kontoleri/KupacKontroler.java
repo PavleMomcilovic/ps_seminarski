@@ -37,14 +37,73 @@ public class KupacKontroler {
         modelTabele.setLista(new ArrayList<>());
         forma.getTblKupac().setModel(modelTabele);
 
+        ucitajMuzickaObrazovanjaZaPretragu();
+
         ucitajKupce();
     }
 
+    private void ucitajMuzickaObrazovanjaZaPretragu() {
+        List<MuzickoObrazovanje> muzickaObrazovanja = pribaviMuzickaObrazovanja();
+        List<Object> stavke = new ArrayList<>();
+        stavke.add(null);
+        stavke.addAll(muzickaObrazovanja);
+
+        forma.getCmbMuzickoObrazovanje().setModel(new javax.swing.DefaultComboBoxModel<>(stavke.toArray()));
+        forma.getCmbMuzickoObrazovanje().setRenderer(new javax.swing.DefaultListCellRenderer() {
+            @Override
+            public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
+                    int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                setText(value instanceof MuzickoObrazovanje ? ((MuzickoObrazovanje) value).getStepen().toString() : "Sva muzicka obrazovanja");
+                return this;
+            }
+        });
+    }
+
     private void ucitajKupce() {
-        modelTabele.setLista(pribaviKupce());
+        modelTabele.setLista(pribaviKupce(new Kupac()));
+    }
+
+    private void pretraziKupce() {
+        Kupac kriterijum = new Kupac();
+
+        String imePrezime = forma.getTxtImePrezime().getText().trim();
+        if (!imePrezime.isEmpty()) {
+            kriterijum.setImePrezime(imePrezime);
+        }
+
+        MuzickoObrazovanje izabranoMuzickoObr = (MuzickoObrazovanje) forma.getCmbMuzickoObrazovanje().getSelectedItem();
+        if (izabranoMuzickoObr != null) {
+            kriterijum.setMuzickoObr(izabranoMuzickoObr);
+        }
+
+        modelTabele.setLista(pretraziKupac(kriterijum));
+    }
+
+    private List<Kupac> pretraziKupac(Kupac kriterijum) {
+        try {
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_KUPCA, kriterijum);
+            List<Kupac> lista = new ArrayList<>();
+            if (rezultat != null) {
+                lista.add((Kupac) rezultat);
+            }
+            dodajMuzickaObrazovanja(lista);
+            return lista;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Sistem ne moze da pretrazi kupce: " + ex.getMessage(),
+                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
     }
 
     private void addActionListeners() {
+        forma.getBtnPretraziKupca().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pretraziKupce();
+            }
+        });
+
         forma.getBtnObrisiKupca().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,9 +145,9 @@ public class KupacKontroler {
         }
     }
 
-    private List<Kupac> pribaviKupce() {
+    private List<Kupac> pribaviKupce(Kupac kriterijum) {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_KUPAC, new Kupac());
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_KUPAC, kriterijum);
             List<Kupac> lista = new ArrayList<>();
             if (rezultat != null) {
                 for (Object o : (List<?>) rezultat) {

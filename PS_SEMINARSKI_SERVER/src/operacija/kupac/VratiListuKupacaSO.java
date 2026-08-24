@@ -27,6 +27,9 @@ public class VratiListuKupacaSO extends ApstraktnaGenerickaOperacija {
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
         Kupac kriterijum = (Kupac) param;
         String uslov = kriterijum.generisiKriterijumPretrazivanja();
+        if (!uslov.isEmpty()) {
+            uslov = " WHERE " + uslov;
+        }
         List<ApstraktniDomenskiObjekat> lista = broker.uzmiSve(kriterijum, uslov);
         if (lista.isEmpty()) {
             rezultat = null;

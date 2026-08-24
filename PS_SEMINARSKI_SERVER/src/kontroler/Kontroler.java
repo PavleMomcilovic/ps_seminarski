@@ -77,9 +77,11 @@ public class Kontroler {
         if (param instanceof Racun) {
             PretraziRacunSO operacija = new PretraziRacunSO();
             operacija.izvrsi(param, null);
+            return operacija.getRezultat();
         } else if (param instanceof Kupac) {
             PretraziKupcaSO operacija = new PretraziKupcaSO();
             operacija.izvrsi(param, null);
+            return operacija.getRezultat();
         }
         throw new Exception("Nepodrzan tip entiteta za pretragu: " + param.getClass().getSimpleName());
     }
