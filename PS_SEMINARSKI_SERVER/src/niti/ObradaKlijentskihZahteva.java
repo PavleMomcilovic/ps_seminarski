@@ -10,6 +10,7 @@ import domen.MuzickoObrazovanje;
 import domen.Prodavac;
 import domen.Racun;
 import domen.Smena;
+import domen.StavkaRacuna;
 import java.io.IOException;
 import java.net.Socket;
 import komunikacija.Odgovor;
@@ -137,8 +138,46 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(smena);
                 break;
             }
-            case PROMENI_RACUN:
-            case PROMENI_KUPCA:
+            case PROMENI_RACUN: {
+                Racun r = (Racun) zahtev.getParametar();
+                Kontroler.getInstanca().promeni(r);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(r);
+                break;
+            }
+            case UBACI_STAVKU_RACUNA: {
+                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
+                Kontroler.getInstanca().ubaci(stavka);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(stavka);
+                break;
+            }
+            case OBRISI_STAVKU_RACUNA: {
+                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
+                Kontroler.getInstanca().obrisi(stavka);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                break;
+            }
+            case PROMENI_STAVKU_RACUNA: {
+                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
+                Kontroler.getInstanca().promeni(stavka);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(stavka);
+                break;
+            }
+            case VRATI_LISTU_STAVKI_RACUNA: {
+                StavkaRacuna kriterijum = (StavkaRacuna) zahtev.getParametar();
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
+                break;
+            }
+            case PROMENI_KUPCA: {
+                Kupac k = (Kupac) zahtev.getParametar();
+                Kontroler.getInstanca().promeni(k);
+                odgovor.setTipOdgovora(TipOdgovora.USPEH);
+                odgovor.setOdgovor(k);
+                break;
+            }
             default:
                 throw new Exception("Operacija " + zahtev.getOperacija() + " jos nije implementirana na serveru.");
         }

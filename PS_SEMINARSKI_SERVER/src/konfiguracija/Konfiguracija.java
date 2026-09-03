@@ -16,12 +16,14 @@ import java.util.logging.Logger;
  * @author pavle
  */
 public class Konfiguracija {
+     private static final String PUTANJA_DO_KONFIGURACIJE = "C:\\Users\\Pavle\\OneDrive - Fakultet organizacionih nauka\\Documents\\GitHub\\ps_seminarski\\PS_SEMINARSKI_SERVER\\config\\config.properties";
+
      private static Konfiguracija instanca;
       private Properties konfiguracija;
     private Konfiguracija() {
          try {
-             konfiguracija = new Properties(); 
-             konfiguracija.load(new FileInputStream("D:\\pavle\\Documents\\GitHub\\ps_seminarski\\PS_SEMINARSKI_SERVER\\config\\config.properties"));
+             konfiguracija = new Properties();
+             konfiguracija.load(new FileInputStream(PUTANJA_DO_KONFIGURACIJE));
          } catch (IOException ex) {
              ex.printStackTrace();
              Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);
@@ -44,8 +46,8 @@ public class Konfiguracija {
     
     
     public void sacuvajIzmene() {
-        try { 
-            konfiguracija.store(new FileOutputStream("C:\\Users\\pavle\\Documents\\NetBeansProjects\\PS_SEMINARSKI_SERVER\\config\\config.properties"), null);
+        try {
+            konfiguracija.store(new FileOutputStream(PUTANJA_DO_KONFIGURACIJE), null);
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(Konfiguracija.class.getName()).log(Level.SEVERE, null, ex);

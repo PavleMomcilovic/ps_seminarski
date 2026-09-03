@@ -6,6 +6,7 @@ package kontoleri;
 
 import domen.Kupac;
 import domen.MuzickoObrazovanje;
+import forme.FormaMod;
 import forme.KreirajKupcaForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,14 +22,22 @@ import komunikacija.Operacija;
  */
 public class KreirajKupcaKontroler {
     private final KreirajKupcaForma forma;
+    private final FormaMod mod;
+    private Kupac kupacZaIzmenu;
     private List<MuzickoObrazovanje> muzickaObrazovanja;
 
     public KreirajKupcaKontroler(KreirajKupcaForma forma) {
-        this.forma = forma;
-        kreirajKupca();
+        this(forma, FormaMod.KREIRAJ, null);
     }
 
-    private void kreirajKupca() {
+    public KreirajKupcaKontroler(KreirajKupcaForma forma, FormaMod mod, Kupac kupacZaIzmenu) {
+        this.forma = forma;
+        this.mod = mod;
+        this.kupacZaIzmenu = kupacZaIzmenu;
+        ucitajPocetneVrednosti();
+    }
+
+    private void ucitajPocetneVrednosti() {
         muzickaObrazovanja = pribaviMuzickaObrazovanja();
         if (muzickaObrazovanja == null) {
             return;
@@ -50,7 +59,25 @@ public class KreirajKupcaKontroler {
 
         addActionListeners();
 
-        JOptionPane.showMessageDialog(forma, "Sistem je kreirao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+        if (mod == FormaMod.PROMENI) {
+            forma.getBtnKreirajKupca().setText("Potvrdi promene");
+            popuniPoljaZaIzmenu();
+        } else {
+            JOptionPane.showMessageDialog(forma, "Sistem je kreirao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void popuniPoljaZaIzmenu() {
+        forma.getTxtImePrezime().setText(kupacZaIzmenu.getImePrezime());
+
+        if (kupacZaIzmenu.getMuzickoObr() != null) {
+            for (MuzickoObrazovanje mo : muzickaObrazovanja) {
+                if (mo.getIdMuzickoObr().equals(kupacZaIzmenu.getMuzickoObr().getIdMuzickoObr())) {
+                    forma.getCmbMuzickoObrazovanje().setSelectedItem(mo);
+                    break;
+                }
+            }
+        }
     }
 
     private void addActionListeners() {
@@ -79,17 +106,21 @@ public class KreirajKupcaKontroler {
             return;
         }
 
-        Kupac kupac = new Kupac();
+        Kupac kupac = mod == FormaMod.PROMENI ? kupacZaIzmenu : new Kupac();
         kupac.setImePrezime(imePrezime);
         kupac.setMuzickoObr(izabranoMuzickoObr);
 
-        boolean uspesno = posaljiKupcaNaServer(kupac);
+        boolean uspesno = mod == FormaMod.PROMENI ? posaljiIzmenuNaServer(kupac) : posaljiKupcaNaServer(kupac);
 
         if (uspesno) {
-            JOptionPane.showMessageDialog(forma, "Sistem je zapamtio kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(forma,
+                    mod == FormaMod.PROMENI ? "Sistem je izmenio kupca." : "Sistem je zapamtio kupca.",
+                    "USPEH", JOptionPane.INFORMATION_MESSAGE);
             forma.dispose();
         } else {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti kupca.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma,
+                    mod == FormaMod.PROMENI ? "Sistem ne moze da izmeni kupca." : "Sistem ne moze da zapamti kupca.",
+                    "GRESKA", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -114,6 +145,17 @@ public class KreirajKupcaKontroler {
             return true;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti kupca: " + ex.getMessage(),
+                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    }
+
+    private boolean posaljiIzmenuNaServer(Kupac kupac) {
+        try {
+            Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_KUPCA, kupac);
+            return true;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Sistem ne moze da izmeni kupca: " + ex.getMessage(),
                     "GRESKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }

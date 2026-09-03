@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import konfiguracija.Konfiguracija;
 import niti.ObradaKlijentskihZahteva;
 
 /**
@@ -29,7 +30,7 @@ public class Server extends Thread {
     @Override
     public void run() {
         try {
-            serverSoket = new ServerSocket(9000);
+            serverSoket = new ServerSocket(pribaviPort());
             while (!kraj) {
                 Socket s = serverSoket.accept();
                 System.out.println("Klijent je povezan");
@@ -53,7 +54,9 @@ public class Server extends Thread {
             for (ObradaKlijentskihZahteva k : klijenti) {
                 k.prekini();
             }
-            serverSoket.close();
+            if (serverSoket != null) {
+                serverSoket.close();
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,5 +65,14 @@ public class Server extends Thread {
 
     public boolean isKraj() {
         return kraj;
+    }
+
+    private int pribaviPort() {
+        try {
+            return Integer.parseInt(Konfiguracija.getInstanca().getProperty("port"));
+        } catch (NumberFormatException ex) {
+            System.out.println("Neispravan port u konfiguraciji, koristi se podrazumevani port 9000.");
+            return 9000;
+        }
     }
 }

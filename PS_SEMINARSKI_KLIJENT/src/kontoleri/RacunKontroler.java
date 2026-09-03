@@ -8,6 +8,8 @@ import domen.Kupac;
 import domen.NacinPlacanja;
 import domen.Prodavac;
 import domen.Racun;
+import forme.FormaMod;
+import forme.KreirajRacunForma;
 import forme.PrikaziRacunForma;
 import forme.model.ModelTabeleRacun;
 import java.awt.event.ActionEvent;
@@ -181,12 +183,35 @@ public class RacunKontroler {
             }
         });
 
+        forma.getBtnPromeniRacun().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                promeniIzabraniRacun();
+            }
+        });
+
         forma.getBtnNazad().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 forma.dispose();
             }
         });
+    }
+
+    private void promeniIzabraniRacun() {
+        int redIndeks = forma.getTblRacun().getSelectedRow();
+        if (redIndeks < 0) {
+            JOptionPane.showMessageDialog(forma, "Morate izabrati racun za promenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Racun izabraniRacun = modelTabele.getLista().get(redIndeks);
+
+        KreirajRacunForma kreirajRacunForma = new KreirajRacunForma((java.awt.Frame) forma.getOwner(), true);
+        new KreirajRacunKontroler(kreirajRacunForma, FormaMod.PROMENI, izabraniRacun);
+        kreirajRacunForma.setVisible(true);
+
+        ucitajRacune();
     }
 
     private List<Racun> pribaviRacune(Racun kriterijum) {

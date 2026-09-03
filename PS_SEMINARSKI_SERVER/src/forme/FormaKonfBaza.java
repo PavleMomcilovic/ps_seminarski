@@ -41,8 +41,6 @@ public class FormaKonfBaza extends javax.swing.JDialog {
         txtUrl = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
-        txtPort = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         btnSacuvaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -52,8 +50,6 @@ public class FormaKonfBaza extends javax.swing.JDialog {
         jLabel2.setText("USERNAME:");
 
         jLabel3.setText("PASSWORD:");
-
-        jLabel4.setText("PORT:");
 
         btnSacuvaj.setText("Sacuvaj");
         btnSacuvaj.addActionListener(this::btnSacuvajActionPerformed);
@@ -74,13 +70,9 @@ public class FormaKonfBaza extends javax.swing.JDialog {
                             .addComponent(txtUrl)
                             .addComponent(txtUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                        .addComponent(jLabel3)
                         .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPort)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE)))
+                        .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 291, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSacuvaj)))
@@ -101,13 +93,9 @@ public class FormaKonfBaza extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnSacuvaj)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,9 +108,9 @@ public class FormaKonfBaza extends javax.swing.JDialog {
 
     private void popuniPolja() {
         Konfiguracija konfiguracija = Konfiguracija.getInstanca();
-        txtUrl.setText(konfiguracija.getProperty("URL"));
-        txtUsername.setText(konfiguracija.getProperty("USERNAME"));
-        txtPassword.setText(konfiguracija.getProperty("PASSWORD"));
+        txtUrl.setText(konfiguracija.getProperty("url"));
+        txtUsername.setText(konfiguracija.getProperty("username"));
+        txtPassword.setText(konfiguracija.getProperty("password"));
     }
 
     private void sacuvaj() {
@@ -165,9 +153,7 @@ public class FormaKonfBaza extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField txtPassword;
-    private javax.swing.JTextField txtPort;
     private javax.swing.JTextField txtUrl;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

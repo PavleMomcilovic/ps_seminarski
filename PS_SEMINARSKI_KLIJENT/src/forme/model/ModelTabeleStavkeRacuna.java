@@ -68,6 +68,16 @@ public class ModelTabeleStavkeRacuna extends AbstractTableModel {
         fireTableRowsInserted(lista.size() - 1, lista.size() - 1);
     }
 
+    public void removeStavka(int index) {
+        lista.remove(index);
+        fireTableRowsDeleted(index, index);
+    }
+
+    public void updateStavka(int index, StavkaRacuna stavka) {
+        lista.set(index, stavka);
+        fireTableRowsUpdated(index, index);
+    }
+
     public float izracunajUkupanIznosStavki() {
         float suma = 0f;
         for (StavkaRacuna stavka : lista) {

@@ -6,6 +6,8 @@ package kontoleri;
 
 import domen.Kupac;
 import domen.MuzickoObrazovanje;
+import forme.FormaMod;
+import forme.KreirajKupcaForma;
 import forme.PrikaziKupcaForma;
 import forme.model.ModelTabeleKupac;
 import java.awt.event.ActionEvent;
@@ -111,6 +113,13 @@ public class KupacKontroler {
             }
         });
 
+        forma.getBtnPromeniKupca().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                promeniIzabranogKupca();
+            }
+        });
+
         forma.getBtnNazad().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -143,6 +152,22 @@ public class KupacKontroler {
             JOptionPane.showMessageDialog(forma, "Sistem ne moze da obrise kupca: " + ex.getMessage(),
                     "GRESKA", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void promeniIzabranogKupca() {
+        int redIndeks = forma.getTblKupac().getSelectedRow();
+        if (redIndeks < 0) {
+            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za promenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Kupac izabraniKupac = modelTabele.getLista().get(redIndeks);
+
+        KreirajKupcaForma kreirajKupcaForma = new KreirajKupcaForma((java.awt.Frame) forma.getOwner(), true);
+        new KreirajKupcaKontroler(kreirajKupcaForma, FormaMod.PROMENI, izabraniKupac);
+        kreirajKupcaForma.setVisible(true);
+
+        ucitajKupce();
     }
 
     private List<Kupac> pribaviKupce(Kupac kriterijum) {

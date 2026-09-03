@@ -52,6 +52,8 @@ public class KreirajRacunForma extends javax.swing.JDialog {
         btnDodajStavku = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblStavkeRacuna = new javax.swing.JTable();
+        btnObrisiStavku = new javax.swing.JButton();
+        btnPromeniStavku = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtDatumIzdavanja = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -102,6 +104,10 @@ public class KreirajRacunForma extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblStavkeRacuna);
 
+        btnObrisiStavku.setText("Obrisi stavku");
+
+        btnPromeniStavku.setText("Promeni stavku");
+
         javax.swing.GroupLayout panelStavkeLayout = new javax.swing.GroupLayout(panelStavke);
         panelStavke.setLayout(panelStavkeLayout);
         panelStavkeLayout.setHorizontalGroup(
@@ -123,7 +129,10 @@ public class KreirajRacunForma extends javax.swing.JDialog {
                             .addComponent(txtKolicinaStavke)
                             .addComponent(txtIznosStavke, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDodajStavku)))
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPromeniStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnObrisiStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDodajStavku, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelStavkeLayout.setVerticalGroup(
@@ -132,18 +141,25 @@ public class KreirajRacunForma extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(cmbGitara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCenaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtKolicinaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(18, 18, 18)
+                .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelStavkeLayout.createSequentialGroup()
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(cmbGitara, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCenaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtKolicinaStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addGap(18, 18, 18))
+                    .addGroup(panelStavkeLayout.createSequentialGroup()
+                        .addComponent(btnPromeniStavku)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnObrisiStavku)
+                        .addGap(6, 6, 6)))
                 .addGroup(panelStavkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(txtIznosStavke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -233,8 +249,6 @@ public class KreirajRacunForma extends javax.swing.JDialog {
                     .addComponent(btnNazad))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
-
-        panelStavke.getAccessibleContext().setAccessibleName("Stavke racuna");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -366,6 +380,22 @@ public class KreirajRacunForma extends javax.swing.JDialog {
     public void setTblStavkeRacuna(JTable tblStavkeRacuna) {
         this.tblStavkeRacuna = tblStavkeRacuna;
     }
+
+    public JButton getBtnObrisiStavku() {
+        return btnObrisiStavku;
+    }
+
+    public void setBtnObrisiStavku(JButton btnObrisiStavku) {
+        this.btnObrisiStavku = btnObrisiStavku;
+    }
+
+    public JButton getBtnPromeniStavku() {
+        return btnPromeniStavku;
+    }
+
+    public void setBtnPromeniStavku(JButton btnPromeniStavku) {
+        this.btnPromeniStavku = btnPromeniStavku;
+    }
     
     
     
@@ -374,6 +404,8 @@ public class KreirajRacunForma extends javax.swing.JDialog {
     private javax.swing.JButton btnDodajStavku;
     private javax.swing.JButton btnKreirajRacun;
     private javax.swing.JButton btnNazad;
+    private javax.swing.JButton btnObrisiStavku;
+    private javax.swing.JButton btnPromeniStavku;
     private javax.swing.JComboBox<Object> cmbGitara;
     private javax.swing.JComboBox<Object> cmbKupac;
     private javax.swing.JComboBox<Object> cmbNacinPlacanja;

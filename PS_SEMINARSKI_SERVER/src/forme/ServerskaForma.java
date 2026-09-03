@@ -20,7 +20,8 @@ public class ServerskaForma extends javax.swing.JFrame {
      * Creates new form ServerskaForma
      */
     private Server server;
-    
+    private boolean pokrenut = false;
+
     public ServerskaForma() {
         initComponents();
         setLocationRelativeTo(null);
@@ -50,6 +51,7 @@ public class ServerskaForma extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         menuKonfiguracija = new javax.swing.JMenu();
         konfiguracijaBaze = new javax.swing.JMenuItem();
+        konfiguracijaPorta = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,10 @@ public class ServerskaForma extends javax.swing.JFrame {
         konfiguracijaBaze.setText("Konfiguracija Baze");
         konfiguracijaBaze.addActionListener(this::konfiguracijaBazeActionPerformed);
         menuKonfiguracija.add(konfiguracijaBaze);
+
+        konfiguracijaPorta.setText("Konfiguracija Porta");
+        konfiguracijaPorta.addActionListener(this::konfiguracijaPortaActionPerformed);
+        menuKonfiguracija.add(konfiguracijaPorta);
 
         jMenuBar1.add(menuKonfiguracija);
 
@@ -115,6 +121,8 @@ public class ServerskaForma extends javax.swing.JFrame {
         btnPokreni.setEnabled(false);
         btnZaustavi.setEnabled(true);
         konfiguracijaBaze.setEnabled(false);
+        konfiguracijaPorta.setEnabled(false);
+        pokrenut = true;
         lblStatus.setText("Server se pokrece...");
 
         Thread thread = new Thread(() -> {
@@ -122,10 +130,12 @@ public class ServerskaForma extends javax.swing.JFrame {
                 server.run();
             } finally {
                 javax.swing.SwingUtilities.invokeLater(() -> {
+                    pokrenut = false;
                     osveziStatus();
                     btnPokreni.setEnabled(true);
                     btnZaustavi.setEnabled(false);
                     konfiguracijaBaze.setEnabled(true);
+                    konfiguracijaPorta.setEnabled(true);
                 });
             }
         }, "Server-Main-Thread");
@@ -136,15 +146,27 @@ public class ServerskaForma extends javax.swing.JFrame {
 
     private void btnZaustaviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZaustaviActionPerformed
         server.zaustaviServer();
+        pokrenut = false;
         btnPokreni.setEnabled(true);
         btnZaustavi.setEnabled(false);
         server = new Server();
         konfiguracijaBaze.setEnabled(true);
+        konfiguracijaPorta.setEnabled(true);
         osveziStatus();
     }//GEN-LAST:event_btnZaustaviActionPerformed
 
+    private void konfiguracijaPortaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_konfiguracijaPortaActionPerformed
+        FormaKonfPort forma = new FormaKonfPort();
+        forma.setLocationRelativeTo(this);
+        forma.setVisible(true);
+        if (server.isKraj()) {
+            server = new Server();
+        }
+        osveziStatus();
+    }//GEN-LAST:event_konfiguracijaPortaActionPerformed
+
     private void osveziStatus() {
-        if (server != null && !server.isKraj()) {
+        if (pokrenut) {
             lblStatus.setText("Server je pokrenut.");
         } else {
             lblStatus.setText("Server nije pokrenut.");
@@ -156,6 +178,7 @@ public class ServerskaForma extends javax.swing.JFrame {
     private javax.swing.JButton btnZaustavi;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem konfiguracijaBaze;
+    private javax.swing.JMenuItem konfiguracijaPorta;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JMenu menuKonfiguracija;
     // End of variables declaration//GEN-END:variables
