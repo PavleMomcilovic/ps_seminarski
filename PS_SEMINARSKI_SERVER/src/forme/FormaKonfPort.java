@@ -20,7 +20,7 @@ public class FormaKonfPort extends javax.swing.JDialog {
      */
     public FormaKonfPort() {
         initComponents();
-        setTitle("Konfiguracija baze");
+        setTitle("Konfiguracija porta");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         popuniPort();
@@ -58,8 +58,8 @@ public class FormaKonfPort extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1)
+                        .addGap(53, 53, 53)
                         .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnSacuvaj, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
