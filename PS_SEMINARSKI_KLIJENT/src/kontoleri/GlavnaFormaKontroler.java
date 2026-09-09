@@ -12,6 +12,7 @@ import forme.PrikaziKupcaForma;
 import forme.UbaciSmenuForma;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -75,6 +76,7 @@ public class GlavnaFormaKontroler {
     }
 
     public void otvoriFormu() {
+        glavnaForma.setExtendedState(JFrame.MAXIMIZED_BOTH);
         glavnaForma.setVisible(true);
     }
 }

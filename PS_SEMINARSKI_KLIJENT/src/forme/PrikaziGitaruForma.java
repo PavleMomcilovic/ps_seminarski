@@ -23,6 +23,7 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
     public PrikaziGitaruForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -44,6 +45,7 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
         tblGitara = new javax.swing.JTable();
         btnNazad = new javax.swing.JButton();
         btnIzaberi = new javax.swing.JButton();
+        btnPretraziGitare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -54,6 +56,8 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
         jLabel3.setText("Vrsta:");
 
         cmbVrsta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        btnPretraziGitare.setText("Pretraži gitare");
 
         tblGitara.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,6 +97,9 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cmbVrsta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnPretraziGitare))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -117,6 +124,8 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
                     .addComponent(cmbVrsta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
+                .addComponent(btnPretraziGitare)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -136,6 +145,14 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
         this.btnIzaberi = btnIzaberi;
     }
 
+    public JButton getBtnPretraziGitare() {
+        return btnPretraziGitare;
+    }
+
+    public void setBtnPretraziGitare(JButton btnPretraziGitare) {
+        this.btnPretraziGitare = btnPretraziGitare;
+    }
+
     public JButton getBtnNazad() {
         return btnNazad;
     }
@@ -144,11 +161,11 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
         this.btnNazad = btnNazad;
     }
 
-    public JComboBox<String> getCmbVrsta() {
+    public JComboBox<Object> getCmbVrsta() {
         return cmbVrsta;
     }
 
-    public void setCmbVrsta(JComboBox<String> cmbVrsta) {
+    public void setCmbVrsta(JComboBox<Object> cmbVrsta) {
         this.cmbVrsta = cmbVrsta;
     }
 
@@ -180,7 +197,8 @@ public class PrikaziGitaruForma extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzaberi;
     private javax.swing.JButton btnNazad;
-    private javax.swing.JComboBox<String> cmbVrsta;
+    private javax.swing.JButton btnPretraziGitare;
+    private javax.swing.JComboBox<Object> cmbVrsta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

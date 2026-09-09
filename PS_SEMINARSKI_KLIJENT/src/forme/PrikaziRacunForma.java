@@ -23,6 +23,7 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
     public PrikaziRacunForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +37,6 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRacun = new javax.swing.JTable();
-        btnPromeniRacun = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
         cmbProdavac = new javax.swing.JComboBox<>();
         txtUkupanIznos = new javax.swing.JTextField();
@@ -67,9 +67,6 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(tblRacun);
-
-        btnPromeniRacun.setText("Promeni izabrani račun");
-        btnPromeniRacun.addActionListener(this::btnPromeniRacunActionPerformed);
 
         btnNazad.setText("Nazad");
 
@@ -130,9 +127,7 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNazad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnPrikaziRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPromeniRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnPrikaziRacun)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,11 +157,9 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
                 .addComponent(btnPretraziRacun)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(btnPrikaziRacun)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPromeniRacun)
+                    .addComponent(btnPrikaziRacun)
                     .addComponent(btnNazad))
                 .addContainerGap())
         );
@@ -174,24 +167,12 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPromeniRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniRacunActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPromeniRacunActionPerformed
-
     public JButton getBtnNazad() {
         return btnNazad;
     }
 
     public void setBtnNazad(JButton btnNazad) {
         this.btnNazad = btnNazad;
-    }
-
-    public JButton getBtnPromeniRacun() {
-        return btnPromeniRacun;
-    }
-
-    public void setBtnPromeniRacun(JButton btnPromeniRacun) {
-        this.btnPromeniRacun = btnPromeniRacun;
     }
 
     public JTable getTblRacun() {
@@ -266,13 +247,11 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         this.btnPrikaziRacun = btnPrikaziRacun;
     }
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
     private javax.swing.JButton btnPretraziRacun;
     private javax.swing.JButton btnPrikaziRacun;
-    private javax.swing.JButton btnPromeniRacun;
     private javax.swing.JComboBox<Object> cmbKupac;
     private javax.swing.JComboBox<Object> cmbNacinPlacanja;
     private javax.swing.JComboBox<Object> cmbProdavac;

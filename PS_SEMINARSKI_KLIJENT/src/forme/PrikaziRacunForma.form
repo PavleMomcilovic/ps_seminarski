@@ -61,10 +61,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnNazad" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnPrikaziRacun" max="32767" attributes="0"/>
-                          <Component id="btnPromeniRacun" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnPrikaziRacun" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -102,11 +99,9 @@
               <Component id="btnPretraziRacun" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-              <EmptySpace pref="22" max="32767" attributes="0"/>
-              <Component id="btnPrikaziRacun" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnPromeniRacun" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPrikaziRacun" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNazad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -136,14 +131,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnPromeniRacun">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Promeni izabrani ra&#x10d;un"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromeniRacunActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="btnNazad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nazad"/>
@@ -195,7 +182,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Način plaćanja:"/>
+        <Property name="text" type="java.lang.String" value="Na&#x10d;in pla&#x107;anja:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbNacinPlacanja">
@@ -232,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretraži račune"/>
+        <Property name="text" type="java.lang.String" value="Pretra&#x17e;i ra&#x10d;une"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrikaziRacun">

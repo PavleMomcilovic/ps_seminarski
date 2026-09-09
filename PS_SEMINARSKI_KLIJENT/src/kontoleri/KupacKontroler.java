@@ -26,10 +26,17 @@ import komunikacija.Operacija;
  */
 public class KupacKontroler {
     private final PrikaziKupcaForma forma;
+    private final FormaMod mod;
     private ModelTabeleKupac modelTabele;
+    private Kupac izabraniKupac;
 
     public KupacKontroler(PrikaziKupcaForma forma) {
+        this(forma, FormaMod.PROMENI);
+    }
+
+    public KupacKontroler(PrikaziKupcaForma forma, FormaMod mod) {
         this.forma = forma;
+        this.mod = mod;
         ucitajPocetneVrednosti();
         addActionListeners();
     }
@@ -42,6 +49,10 @@ public class KupacKontroler {
         ucitajMuzickaObrazovanjaZaPretragu();
 
         ucitajKupce();
+
+        if (mod == FormaMod.IZABERI) {
+            forma.getBtnPrikaziKupca().setText("Izaberi kupca");
+        }
     }
 
     private void ucitajMuzickaObrazovanjaZaPretragu() {
@@ -79,22 +90,27 @@ public class KupacKontroler {
             kriterijum.setMuzickoObr(izabranoMuzickoObr);
         }
 
-        modelTabele.setLista(pretraziKupac(kriterijum));
-    }
-
-    private List<Kupac> pretraziKupac(Kupac kriterijum) {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_KUPCA, kriterijum);
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_KUPAC, kriterijum);
             List<Kupac> lista = new ArrayList<>();
             if (rezultat != null) {
-                lista.add((Kupac) rezultat);
+                for (Object o : (List<?>) rezultat) {
+                    lista.add((Kupac) o);
+                }
             }
             dodajMuzickaObrazovanja(lista);
-            return lista;
+            modelTabele.setLista(lista);
+
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe kupce po zadatim kriterijumima.",
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(forma, "Sistem je našao kupce po zadatim kriterijumima",
+                        "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da pretraži kupce: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe kupce po zadatim kriterijumima: " + ex.getMessage(),
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
-            return new ArrayList<>();
         }
     }
 
@@ -106,17 +122,14 @@ public class KupacKontroler {
             }
         });
 
-        forma.getBtnObrisiKupca().addActionListener(new ActionListener() {
+        forma.getBtnPrikaziKupca().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                obrisiIzabranogKupca();
-            }
-        });
-
-        forma.getBtnPromeniKupca().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                promeniIzabranogKupca();
+                if (mod == FormaMod.IZABERI) {
+                    izaberiKupca();
+                } else {
+                    otvoriIzabranogKupcaZaIzmenu();
+                }
             }
         });
 
@@ -128,36 +141,10 @@ public class KupacKontroler {
         });
     }
 
-    private void obrisiIzabranogKupca() {
+    private void otvoriIzabranogKupcaZaIzmenu() {
         int redIndeks = forma.getTblKupac().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za brisanje.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Kupac kupac = modelTabele.getLista().get(redIndeks);
-
-        int potvrda = JOptionPane.showConfirmDialog(forma,
-                "Da li želite da obrišete kupca " + kupac.getImePrezime() + "?",
-                "POTVRDA BRISANJA", JOptionPane.YES_NO_OPTION);
-        if (potvrda != JOptionPane.YES_OPTION) {
-            return;
-        }
-
-        try {
-            Komunikacija.getInstanca().posaljiZahtev(Operacija.OBRISI_KUPCA, kupac);
-            JOptionPane.showMessageDialog(forma, "Sistem je obrisao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
-            ucitajKupce();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše kupca: " + ex.getMessage(),
-                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private void promeniIzabranogKupca() {
-        int redIndeks = forma.getTblKupac().getSelectedRow();
-        if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za promenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -168,6 +155,21 @@ public class KupacKontroler {
         kreirajKupcaForma.setVisible(true);
 
         ucitajKupce();
+    }
+
+    private void izaberiKupca() {
+        int redIndeks = forma.getTblKupac().getSelectedRow();
+        if (redIndeks < 0) {
+            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        izabraniKupac = modelTabele.getLista().get(redIndeks);
+        forma.dispose();
+    }
+
+    public Kupac getIzabraniKupac() {
+        return izabraniKupac;
     }
 
     private List<Kupac> pribaviKupce(Kupac kriterijum) {

@@ -22,6 +22,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
     public KreirajKupcaForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -38,6 +39,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         cmbMuzickoObrazovanje = new javax.swing.JComboBox<>();
         btnKreirajKupca = new javax.swing.JButton();
+        btnObrisiKupca = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -49,6 +51,8 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
         cmbMuzickoObrazovanje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnKreirajKupca.setText("Kreiraj kupca");
+
+        btnObrisiKupca.setText("Obriši kupca");
 
         btnNazad.setText("Nazad");
 
@@ -70,6 +74,8 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNazad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnObrisiKupca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnKreirajKupca)))
                 .addContainerGap())
         );
@@ -87,6 +93,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnKreirajKupca)
+                    .addComponent(btnObrisiKupca)
                     .addComponent(btnNazad))
                 .addContainerGap())
         );
@@ -110,6 +117,14 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
         this.btnNazad = btnNazad;
     }
 
+    public JButton getBtnObrisiKupca() {
+        return btnObrisiKupca;
+    }
+
+    public void setBtnObrisiKupca(JButton btnObrisiKupca) {
+        this.btnObrisiKupca = btnObrisiKupca;
+    }
+
     public JComboBox<Object> getCmbMuzickoObrazovanje() {
         return cmbMuzickoObrazovanje;
     }
@@ -129,6 +144,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnKreirajKupca;
+    private javax.swing.JButton btnObrisiKupca;
     private javax.swing.JButton btnNazad;
     private javax.swing.JComboBox<Object> cmbMuzickoObrazovanje;
     private javax.swing.JLabel jLabel1;

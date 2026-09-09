@@ -156,22 +156,27 @@ public class RacunKontroler {
             }
         }
 
-        modelTabele.setLista(pretraziRacun(kriterijum));
-    }
-
-    private List<Racun> pretraziRacun(Racun kriterijum) {
         try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_RACUN, kriterijum);
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_RACUN, kriterijum);
             List<Racun> lista = new ArrayList<>();
             if (rezultat != null) {
-                lista.add((Racun) rezultat);
+                for (Object o : (List<?>) rezultat) {
+                    lista.add((Racun) o);
+                }
             }
             dodajKupceProdavce(lista);
-            return lista;
+            modelTabele.setLista(lista);
+
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račune po zadatim kriterijumima.",
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(forma, "Sistem je našao račune po zadatim kriterijumima",
+                        "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da pretraži račune: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račune po zadatim kriterijumima: " + ex.getMessage(),
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
-            return new ArrayList<>();
         }
     }
 
@@ -183,10 +188,10 @@ public class RacunKontroler {
             }
         });
 
-        forma.getBtnPromeniRacun().addActionListener(new ActionListener() {
+        forma.getBtnPrikaziRacun().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                promeniIzabraniRacun();
+                otvoriIzabraniRacunZaIzmenu();
             }
         });
 
@@ -198,10 +203,10 @@ public class RacunKontroler {
         });
     }
 
-    private void promeniIzabraniRacun() {
+    private void otvoriIzabraniRacunZaIzmenu() {
         int redIndeks = forma.getTblRacun().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati račun za promenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati račun.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

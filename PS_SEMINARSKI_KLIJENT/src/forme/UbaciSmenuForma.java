@@ -21,6 +21,7 @@ public class UbaciSmenuForma extends javax.swing.JDialog {
     public UbaciSmenuForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

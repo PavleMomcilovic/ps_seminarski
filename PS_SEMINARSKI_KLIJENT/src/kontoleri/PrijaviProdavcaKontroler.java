@@ -38,7 +38,7 @@ public class PrijaviProdavcaKontroler {
 
                 if (username.isBlank()) {
                     JOptionPane.showMessageDialog(loginForma,
-                            "Username ne sme biti prazan.",
+                            "Korisničko ime ne sme biti prazno.",
                             "GREŠKA",
                             JOptionPane.ERROR_MESSAGE);
                     return;
@@ -46,7 +46,7 @@ public class PrijaviProdavcaKontroler {
                 
                 if (password.isBlank()) {
                     JOptionPane.showMessageDialog(loginForma,
-                            "Šifra ne sme biti prazan.",
+                            "Šifra ne sme biti prazna.",
                             "GREŠKA",
                             JOptionPane.ERROR_MESSAGE);
                     return;

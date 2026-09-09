@@ -6,18 +6,23 @@ package kontoleri;
 
 import domen.Gitara;
 import domen.Kupac;
+import domen.MuzickoObrazovanje;
 import domen.NacinPlacanja;
 import domen.Prodavac;
 import domen.Racun;
 import domen.StavkaRacuna;
 import forme.FormaMod;
 import forme.KreirajRacunForma;
+import forme.PrikaziGitaruForma;
+import forme.PrikaziKupcaForma;
 import forme.model.ModelTabeleStavkeRacuna;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -94,7 +99,7 @@ public class KreirajRacunKontroler {
                 JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira račun: " + ex.getMessage(),
                         "GREŠKA", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(forma, "Sistem je kreirao račun.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem je kreirao račun", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -104,14 +109,15 @@ public class KreirajRacunKontroler {
             kriterijum.setIdRacun(racun.getIdRacun());
             Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_RACUN, kriterijum);
             if (rezultat == null) {
-                JOptionPane.showMessageDialog(forma, "Sistem ne može da pronađe račun za izmenu.",
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račun.",
                         "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 onemoguciIzmenu();
                 return;
             }
             racun = (Racun) rezultat;
+            JOptionPane.showMessageDialog(forma, "Sistem je našao račun", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da pronađe račun za izmenu: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račun: " + ex.getMessage(),
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             onemoguciIzmenu();
             return;
@@ -187,6 +193,7 @@ public class KreirajRacunKontroler {
 
     private void ucitajKupce() {
         kupci = pribaviKupce();
+        dodajMuzickaObrazovanja(kupci);
         forma.getCmbKupac().setModel(new javax.swing.DefaultComboBoxModel<>(kupci.toArray()));
         forma.getCmbKupac().setRenderer(new javax.swing.DefaultListCellRenderer() {
             @Override
@@ -295,6 +302,54 @@ public class KreirajRacunKontroler {
                 obrisiRacun();
             }
         });
+
+        forma.getBtnIzaberiKupca().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                izaberiKupca();
+            }
+        });
+
+        forma.getBtnIzaberiGitaru().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                izaberiGitaru();
+            }
+        });
+    }
+
+    private void izaberiKupca() {
+        PrikaziKupcaForma pretragaForma = new PrikaziKupcaForma((java.awt.Frame) forma.getOwner(), true);
+        KupacKontroler kontroler = new KupacKontroler(pretragaForma, FormaMod.IZABERI);
+        pretragaForma.setVisible(true);
+
+        Kupac izabraniKupac = kontroler.getIzabraniKupac();
+        if (izabraniKupac == null) {
+            return;
+        }
+
+        for (Kupac k : kupci) {
+            if (k.getIdKupac().equals(izabraniKupac.getIdKupac())) {
+                forma.getCmbKupac().setSelectedItem(k);
+                break;
+            }
+        }
+    }
+
+    private void izaberiGitaru() {
+        PrikaziGitaruForma pretragaForma = new PrikaziGitaruForma((java.awt.Frame) forma.getOwner(), true);
+        GitaraKontroler kontroler = new GitaraKontroler(pretragaForma);
+        pretragaForma.setVisible(true);
+
+        Gitara izabranaGitara = kontroler.getIzabranaGitara();
+        if (izabranaGitara == null) {
+            return;
+        }
+
+        Gitara postojecaGitara = pronadjiGitaru(izabranaGitara.getIdGitara());
+        if (postojecaGitara != null) {
+            forma.getCmbGitara().setSelectedItem(postojecaGitara);
+        }
     }
 
     private void obrisiRacun() {
@@ -513,17 +568,9 @@ public class KreirajRacunKontroler {
         racun.setKupac(izabraniKupac);
         racun.setStavke(modelTabele.getLista());
 
-        boolean uspesno = posaljiRacunNaServer(racun);
-
-        if (uspesno) {
-            JOptionPane.showMessageDialog(forma,
-                    mod == FormaMod.PROMENI ? "Sistem je izmenio račun." : "Sistem je zapamtio račun.",
-                    "USPEH", JOptionPane.INFORMATION_MESSAGE);
+        if (posaljiRacunNaServer(racun)) {
+            JOptionPane.showMessageDialog(forma, "Sistem je zapamtio račun.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
             forma.dispose();
-        } else {
-            JOptionPane.showMessageDialog(forma,
-                    mod == FormaMod.PROMENI ? "Sistem ne može da izmeni račun." : "Sistem ne može da zapamti račun.",
-                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -567,6 +614,39 @@ public class KreirajRacunKontroler {
             return lista;
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja gitara: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            return new ArrayList<>();
+        }
+    }
+
+    private void dodajMuzickaObrazovanja(List<Kupac> kupci) {
+        List<MuzickoObrazovanje> muzickaObrazovanja = pribaviMuzickaObrazovanja();
+        Map<Long, MuzickoObrazovanje> poId = new HashMap<>();
+
+        for (MuzickoObrazovanje mo : muzickaObrazovanja) {
+            poId.put(mo.getIdMuzickoObr(), mo);
+        }
+
+        for (Kupac kupac : kupci) {
+            if (kupac.getMuzickoObr() != null) {
+                MuzickoObrazovanje puno = poId.get(kupac.getMuzickoObr().getIdMuzickoObr());
+                if (puno != null) {
+                    kupac.setMuzickoObr(puno);
+                }
+            }
+        }
+    }
+
+    private List<MuzickoObrazovanje> pribaviMuzickaObrazovanja() {
+        try {
+            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.VRATI_LISTU_MUZICKO_OBRAZOVANJE, new MuzickoObrazovanje());
+            List<MuzickoObrazovanje> lista = new ArrayList<>();
+            for (Object o : (List<?>) rezultat) {
+                lista.add((MuzickoObrazovanje) o);
+            }
+            return lista;
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja muzičkih obrazovanja: " + ex.getMessage(),
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }

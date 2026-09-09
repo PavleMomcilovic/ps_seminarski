@@ -23,6 +23,7 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
     public PrikaziKupcaForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,8 +37,6 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKupac = new javax.swing.JTable();
-        btnPromeniKupca = new javax.swing.JButton();
-        btnObrisiKupca = new javax.swing.JButton();
         btnNazad = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         txtImePrezime = new javax.swing.JTextField();
@@ -60,10 +59,6 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
             }
         ));
         jScrollPane1.setViewportView(tblKupac);
-
-        btnPromeniKupca.setText("Promeni izabranog kupca");
-
-        btnObrisiKupca.setText("Obriši izabranog kupca");
 
         btnNazad.setText("Nazad");
 
@@ -97,15 +92,11 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(btnNazad)
-                                .addGap(138, 138, 138)
-                                .addComponent(btnPromeniKupca))
-                            .addComponent(btnPretraziKupca, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnPrikaziKupca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnObrisiKupca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))))
+                        .addComponent(btnPretraziKupca))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNazad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPrikaziKupca)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -123,13 +114,9 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
                 .addComponent(btnPretraziKupca)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(btnPrikaziKupca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnObrisiKupca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPromeniKupca)
+                    .addComponent(btnPrikaziKupca)
                     .addComponent(btnNazad))
                 .addContainerGap())
         );
@@ -143,22 +130,6 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
 
     public void setBtnNazad(JButton btnNazad) {
         this.btnNazad = btnNazad;
-    }
-
-    public JButton getBtnObrisiKupca() {
-        return btnObrisiKupca;
-    }
-
-    public void setBtnObrisiKupca(JButton btnObrisiKupca) {
-        this.btnObrisiKupca = btnObrisiKupca;
-    }
-
-    public JButton getBtnPromeniKupca() {
-        return btnPromeniKupca;
-    }
-
-    public void setBtnPromeniKupca(JButton btnPromeniKupca) {
-        this.btnPromeniKupca = btnPromeniKupca;
     }
 
     public JTable getTblKupac() {
@@ -202,13 +173,10 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
     }
 
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
-    private javax.swing.JButton btnObrisiKupca;
     private javax.swing.JButton btnPretraziKupca;
     private javax.swing.JButton btnPrikaziKupca;
-    private javax.swing.JButton btnPromeniKupca;
     private javax.swing.JComboBox<Object> cmbMuzickoObrazovanje;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
