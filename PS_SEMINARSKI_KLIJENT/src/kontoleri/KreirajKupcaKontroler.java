@@ -21,6 +21,7 @@ import komunikacija.Operacija;
  * @author pavle
  */
 public class KreirajKupcaKontroler {
+
     private final KreirajKupcaForma forma;
     private final FormaMod mod;
     private Kupac kupacZaIzmenu;
@@ -63,6 +64,12 @@ public class KreirajKupcaKontroler {
             forma.getBtnKreirajKupca().setText("Potvrdi promene");
             popuniPoljaZaIzmenu();
         } else {
+            try {
+                kupacZaIzmenu = (Kupac) Komunikacija.getInstanca().posaljiZahtev(Operacija.KREIRAJ_KUPCA, new Kupac());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira kupca: " + ex.getMessage(),
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            }
             JOptionPane.showMessageDialog(forma, "Sistem je kreirao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -91,7 +98,7 @@ public class KreirajKupcaKontroler {
         forma.getBtnNazad().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                forma.dispose();
+                obrisiKupca();
             }
         });
     }
@@ -101,12 +108,12 @@ public class KreirajKupcaKontroler {
         MuzickoObrazovanje izabranoMuzickoObr = (MuzickoObrazovanje) forma.getCmbMuzickoObrazovanje().getSelectedItem();
 
         if (imePrezime.isEmpty() || izabranoMuzickoObr == null) {
-            JOptionPane.showMessageDialog(forma, "Morate uneti ime i prezime i izabrati muzicko obrazovanje.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate uneti ime i prezime i izabrati muzičko obrazovanje.",
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        Kupac kupac = mod == FormaMod.PROMENI ? kupacZaIzmenu : new Kupac();
+        Kupac kupac = kupacZaIzmenu;
         kupac.setImePrezime(imePrezime);
         kupac.setMuzickoObr(izabranoMuzickoObr);
 
@@ -119,8 +126,29 @@ public class KreirajKupcaKontroler {
             forma.dispose();
         } else {
             JOptionPane.showMessageDialog(forma,
-                    mod == FormaMod.PROMENI ? "Sistem ne moze da izmeni kupca." : "Sistem ne moze da zapamti kupca.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    mod == FormaMod.PROMENI ? "Sistem ne može da izmeni kupca." : "Sistem ne može da zapamti kupca.",
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void obrisiKupca() {
+        if (mod == FormaMod.PROMENI) {
+            forma.dispose();
+        } else if (mod == FormaMod.KREIRAJ) {
+            int potvrda = JOptionPane.showConfirmDialog(forma,
+                    "Da li želite da obrišete kupca?",
+                    "POTVRDA BRISANJA", JOptionPane.YES_NO_OPTION);
+            if (potvrda != JOptionPane.YES_OPTION) {
+                return;
+            }
+            try {
+                Komunikacija.getInstanca().posaljiZahtev(Operacija.OBRISI_KUPCA, kupacZaIzmenu);
+                JOptionPane.showMessageDialog(forma, "Sistem je obrisao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                forma.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše kupca: " + ex.getMessage(),
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -133,19 +161,19 @@ public class KreirajKupcaKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da kreira kupca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira kupca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return null;
         }
     }
 
     private boolean posaljiKupcaNaServer(Kupac kupac) {
         try {
-            Komunikacija.getInstanca().posaljiZahtev(Operacija.KREIRAJ_KUPCA, kupac);
+            Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_KUPCA, kupac);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti kupca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti kupca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
@@ -155,8 +183,8 @@ public class KreirajKupcaKontroler {
             Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_KUPCA, kupac);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da izmeni kupca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da izmeni kupca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }

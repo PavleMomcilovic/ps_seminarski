@@ -56,7 +56,7 @@ public class KupacKontroler {
             public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
                     int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                setText(value instanceof MuzickoObrazovanje ? ((MuzickoObrazovanje) value).getStepen().toString() : "Sva muzicka obrazovanja");
+                setText(value instanceof MuzickoObrazovanje ? ((MuzickoObrazovanje) value).getStepen().toString() : "Sva muzička obrazovanja");
                 return this;
             }
         });
@@ -92,8 +92,8 @@ public class KupacKontroler {
             dodajMuzickaObrazovanja(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da pretrazi kupce: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da pretraži kupce: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -131,14 +131,14 @@ public class KupacKontroler {
     private void obrisiIzabranogKupca() {
         int redIndeks = forma.getTblKupac().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za brisanje.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za brisanje.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         Kupac kupac = modelTabele.getLista().get(redIndeks);
 
         int potvrda = JOptionPane.showConfirmDialog(forma,
-                "Da li zelite da obrisete kupca " + kupac.getImePrezime() + "?",
+                "Da li želite da obrišete kupca " + kupac.getImePrezime() + "?",
                 "POTVRDA BRISANJA", JOptionPane.YES_NO_OPTION);
         if (potvrda != JOptionPane.YES_OPTION) {
             return;
@@ -149,15 +149,15 @@ public class KupacKontroler {
             JOptionPane.showMessageDialog(forma, "Sistem je obrisao kupca.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
             ucitajKupce();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da obrise kupca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše kupca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void promeniIzabranogKupca() {
         int redIndeks = forma.getTblKupac().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za promenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati kupca za promenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -182,8 +182,8 @@ public class KupacKontroler {
             dodajMuzickaObrazovanja(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu kupaca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -215,8 +215,8 @@ public class KupacKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu muzickih obrazovanja: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu muzičkih obrazovanja: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }

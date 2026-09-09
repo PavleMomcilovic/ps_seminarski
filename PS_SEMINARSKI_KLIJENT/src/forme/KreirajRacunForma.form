@@ -28,14 +28,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="panelStavke" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="cmbProdavac" max="32767" attributes="0"/>
-                          <Component id="cmbKupac" min="-2" pref="164" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="cmbProdavac" max="32767" attributes="0"/>
+                                  <Component id="cmbKupac" min="-2" pref="164" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="btnIzaberiKupca" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -88,6 +93,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtPopust" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnIzaberiKupca" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -101,7 +107,7 @@
                   <Component id="btnKreirajRacun" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNazad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="9" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -151,7 +157,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Stavke racuna"/>
+            <TitledBorder title="Stavke računa"/>
           </Border>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
@@ -163,31 +169,39 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="524" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="cmbGitara" max="32767" attributes="0"/>
-                              <Component id="txtCenaStavke" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtKolicinaStavke" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtIznosStavke" min="-2" pref="161" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="524" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="cmbGitara" max="32767" attributes="0"/>
+                                      <Component id="txtCenaStavke" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtKolicinaStavke" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtIznosStavke" min="-2" pref="161" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="btnIzaberiGitaru" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="btnPromeniStavku" max="32767" attributes="0"/>
                               <Component id="btnObrisiStavku" alignment="0" max="32767" attributes="0"/>
-                              <Component id="btnDodajStavku" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnDodajStavku" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -198,12 +212,14 @@
                   <Component id="jScrollPane1" pref="290" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="cmbGitara" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btnIzaberiGitaru" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="txtCenaStavke" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -214,18 +230,18 @@
                               <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtIznosStavke" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="btnPromeniStavku" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="btnObrisiStavku" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="btnDodajStavku" min="-2" max="-2" attributes="0"/>
                       </Group>
-                  </Group>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtIznosStavke" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnDodajStavku" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -264,7 +280,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel9">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Kolicina stavke:"/>
+            <Property name="text" type="java.lang.String" value="Količina stavke:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel10">
@@ -302,12 +318,17 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnObrisiStavku">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Obrisi stavku"/>
+            <Property name="text" type="java.lang.String" value="Obriši stavku"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnPromeniStavku">
           <Properties>
             <Property name="text" type="java.lang.String" value="Promeni stavku"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnIzaberiGitaru">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Izaberi gitaru"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -321,7 +342,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nacin placanja:"/>
+        <Property name="text" type="java.lang.String" value="Način plaćanja:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbNacinPlacanja">
@@ -355,12 +376,17 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnKreirajRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kreiraj racun"/>
+        <Property name="text" type="java.lang.String" value="Kreiraj račun"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNazad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nazad"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnIzaberiKupca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Izaberi kupca"/>
       </Properties>
     </Component>
   </SubComponents>

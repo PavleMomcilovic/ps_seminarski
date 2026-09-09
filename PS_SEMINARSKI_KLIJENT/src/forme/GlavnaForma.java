@@ -38,13 +38,13 @@ public class GlavnaForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnKreirajRacun.setText("Kreiraj racun");
+        btnKreirajRacun.setText("Kreiraj račun");
 
-        btnPretraziRacun.setText("Pretrazi racun");
+        btnPretraziRacun.setText("Pretraži račun");
 
         btnKreirajKupca.setText("Kreiraj kupca");
 
-        btnPretraziKupca.setText("Pretrazi kupca");
+        btnPretraziKupca.setText("Pretraži kupca");
 
         btnUbaciSmenu.setText("Ubaci smenu");
 

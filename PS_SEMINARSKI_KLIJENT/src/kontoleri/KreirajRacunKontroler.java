@@ -80,12 +80,21 @@ public class KreirajRacunKontroler {
             modelTabele = new ModelTabeleStavkeRacuna(new ArrayList<>());
             forma.getTblStavkeRacuna().setModel(modelTabele);
 
-            if (!kreirajRacunNaServeru()) {
-                forma.getBtnDodajStavku().setEnabled(false);
-                forma.getBtnObrisiStavku().setEnabled(false);
-                forma.getBtnPromeniStavku().setEnabled(false);
-                forma.getBtnKreirajRacun().setEnabled(false);
+            Racun noviRacun = new Racun();
+            noviRacun.setDatumIzdavanja(LocalDate.now());
+            noviRacun.setNacinPlacanja((NacinPlacanja) forma.getCmbNacinPlacanja().getSelectedItem());
+            noviRacun.setUkupanIznos(0f);
+            noviRacun.setPopust(0f);
+            noviRacun.setProdavac((Prodavac) forma.getCmbProdavac().getSelectedItem());
+            noviRacun.setKupac((Kupac) forma.getCmbKupac().getSelectedItem());
+
+            try {
+                racun = (Racun) Komunikacija.getInstanca().posaljiZahtev(Operacija.KREIRAJ_RACUN, noviRacun);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira račun: " + ex.getMessage(),
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
             }
+            JOptionPane.showMessageDialog(forma, "Sistem je kreirao račun.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -95,15 +104,15 @@ public class KreirajRacunKontroler {
             kriterijum.setIdRacun(racun.getIdRacun());
             Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PRETRAZI_RACUN, kriterijum);
             if (rezultat == null) {
-                JOptionPane.showMessageDialog(forma, "Sistem ne moze da pronadje racun za izmenu.",
-                        "GRESKA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da pronađe račun za izmenu.",
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 onemoguciIzmenu();
                 return;
             }
             racun = (Racun) rezultat;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da pronadje racun za izmenu: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da pronađe račun za izmenu: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             onemoguciIzmenu();
             return;
         }
@@ -283,9 +292,32 @@ public class KreirajRacunKontroler {
         forma.getBtnNazad().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                forma.dispose();
+                obrisiRacun();
             }
         });
+    }
+
+    private void obrisiRacun() {
+        if (mod == FormaMod.PROMENI || racun == null) {
+            forma.dispose();
+            return;
+        }
+
+        int potvrda = JOptionPane.showConfirmDialog(forma,
+                "Da li želite da obrišete račun?",
+                "POTVRDA BRISANJA", JOptionPane.YES_NO_OPTION);
+        if (potvrda != JOptionPane.YES_OPTION) {
+            return;
+        }
+
+        try {
+            Komunikacija.getInstanca().posaljiZahtev(Operacija.OBRISI_RACUN, racun);
+            JOptionPane.showMessageDialog(forma, "Sistem je obrisao račun.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            forma.dispose();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše račun: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void azurirajIznosStavke() {
@@ -328,13 +360,13 @@ public class KreirajRacunKontroler {
 
     private void dodajStavku() {
         if (racun == null) {
-            JOptionPane.showMessageDialog(forma, "Racun nije zapocet na serveru.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Račun nije započet na serveru.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         Gitara izabranaGitara = (Gitara) forma.getCmbGitara().getSelectedItem();
         if (izabranaGitara == null) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati gitaru.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati gitaru.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -342,12 +374,12 @@ public class KreirajRacunKontroler {
         try {
             kolicinaStavke = Integer.parseInt(forma.getTxtKolicinaStavke().getText().trim());
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(forma, "Kolicina stavke mora biti ceo broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Količina stavke mora biti ceo broj.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (kolicinaStavke < 1) {
-            JOptionPane.showMessageDialog(forma, "Kolicina mora biti najmanje 1.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Količina mora biti najmanje 1.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -356,72 +388,42 @@ public class KreirajRacunKontroler {
 
         StavkaRacuna stavka = new StavkaRacuna();
         stavka.setIdRacun(racun.getIdRacun());
+        stavka.setRb(sledeciRedniBroj());
         stavka.setGitara(izabranaGitara);
         stavka.setCenaStavke(cenaStavke);
         stavka.setKolicinaStavke(kolicinaStavke);
         stavka.setIznosStavke(iznosStavke);
 
-        if (mod == FormaMod.PROMENI) {
-            stavka.setRb(sledeciRedniBroj());
-            modelTabele.addStavka(stavka);
+        modelTabele.addStavka(stavka);
 
-            forma.getTxtKolicinaStavke().setText("");
-            forma.getTxtIznosStavke().setText("");
+        forma.getTxtKolicinaStavke().setText("");
+        forma.getTxtIznosStavke().setText("");
 
-            azurirajUkupanIznos();
-            return;
-        }
-
-        try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.UBACI_STAVKU_RACUNA, stavka);
-            modelTabele.addStavka((StavkaRacuna) rezultat);
-
-            forma.getTxtKolicinaStavke().setText("");
-            forma.getTxtIznosStavke().setText("");
-
-            azurirajUkupanIznos();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da ubaci stavku racuna: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
-        }
+        azurirajUkupanIznos();
     }
 
     private void obrisiStavku() {
         int redIndeks = forma.getTblStavkeRacuna().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati stavku za brisanje.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati stavku za brisanje.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        StavkaRacuna stavka = modelTabele.getLista().get(redIndeks);
-
         int potvrda = JOptionPane.showConfirmDialog(forma,
-                "Da li zelite da obrisete izabranu stavku?",
+                "Da li želite da obrišete izabranu stavku?",
                 "POTVRDA BRISANJA", JOptionPane.YES_NO_OPTION);
         if (potvrda != JOptionPane.YES_OPTION) {
             return;
         }
 
-        if (mod == FormaMod.PROMENI) {
-            modelTabele.removeStavka(redIndeks);
-            azurirajUkupanIznos();
-            return;
-        }
-
-        try {
-            Komunikacija.getInstanca().posaljiZahtev(Operacija.OBRISI_STAVKU_RACUNA, stavka);
-            modelTabele.removeStavka(redIndeks);
-            azurirajUkupanIznos();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da obrise stavku racuna: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
-        }
+        modelTabele.removeStavka(redIndeks);
+        azurirajUkupanIznos();
     }
 
     private void promeniStavku() {
         int redIndeks = forma.getTblStavkeRacuna().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati stavku za promenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati stavku za promenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -429,7 +431,7 @@ public class KreirajRacunKontroler {
 
         Gitara izabranaGitara = (Gitara) forma.getCmbGitara().getSelectedItem();
         if (izabranaGitara == null) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati gitaru.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati gitaru.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -437,12 +439,12 @@ public class KreirajRacunKontroler {
         try {
             kolicinaStavke = Integer.parseInt(forma.getTxtKolicinaStavke().getText().trim());
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(forma, "Kolicina stavke mora biti ceo broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Količina stavke mora biti ceo broj.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (kolicinaStavke < 1) {
-            JOptionPane.showMessageDialog(forma, "Kolicina mora biti najmanje 1.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Količina mora biti najmanje 1.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -457,28 +459,12 @@ public class KreirajRacunKontroler {
         izmenjenaStavka.setKolicinaStavke(kolicinaStavke);
         izmenjenaStavka.setIznosStavke(iznosStavke);
 
-        if (mod == FormaMod.PROMENI) {
-            modelTabele.updateStavka(redIndeks, izmenjenaStavka);
+        modelTabele.updateStavka(redIndeks, izmenjenaStavka);
 
-            forma.getTxtKolicinaStavke().setText("");
-            forma.getTxtIznosStavke().setText("");
+        forma.getTxtKolicinaStavke().setText("");
+        forma.getTxtIznosStavke().setText("");
 
-            azurirajUkupanIznos();
-            return;
-        }
-
-        try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_STAVKU_RACUNA, izmenjenaStavka);
-            modelTabele.updateStavka(redIndeks, (StavkaRacuna) rezultat);
-
-            forma.getTxtKolicinaStavke().setText("");
-            forma.getTxtIznosStavke().setText("");
-
-            azurirajUkupanIznos();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da promeni stavku racuna: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
-        }
+        azurirajUkupanIznos();
     }
 
     private void azurirajUkupanIznos() {
@@ -494,7 +480,7 @@ public class KreirajRacunKontroler {
 
     private void kreirajRacun() {
         if (racun == null) {
-            JOptionPane.showMessageDialog(forma, "Racun nije zapocet na serveru.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Račun nije započet na serveru.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -503,14 +489,14 @@ public class KreirajRacunKontroler {
         NacinPlacanja izabraniNacinPlacanja = (NacinPlacanja) forma.getCmbNacinPlacanja().getSelectedItem();
 
         if (izabraniProdavac == null || izabraniKupac == null || izabraniNacinPlacanja == null) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati prodavca, kupca i nacin placanja.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati prodavca, kupca i način plaćanja.",
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (modelTabele.getLista().isEmpty()) {
-            JOptionPane.showMessageDialog(forma, "Racun mora imati bar jednu stavku.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Račun mora imati bar jednu stavku.",
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -531,13 +517,13 @@ public class KreirajRacunKontroler {
 
         if (uspesno) {
             JOptionPane.showMessageDialog(forma,
-                    mod == FormaMod.PROMENI ? "Sistem je izmenio racun." : "Sistem je zapamtio racun.",
+                    mod == FormaMod.PROMENI ? "Sistem je izmenio račun." : "Sistem je zapamtio račun.",
                     "USPEH", JOptionPane.INFORMATION_MESSAGE);
             forma.dispose();
         } else {
             JOptionPane.showMessageDialog(forma,
-                    mod == FormaMod.PROMENI ? "Sistem ne moze da izmeni racun." : "Sistem ne moze da zapamti racun.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    mod == FormaMod.PROMENI ? "Sistem ne može da izmeni račun." : "Sistem ne može da zapamti račun.",
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -550,8 +536,8 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greska prilikom ucitavanja prodavaca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja prodavaca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -565,8 +551,8 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greska prilikom ucitavanja kupaca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja kupaca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -580,40 +566,9 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greska prilikom ucitavanja gitara: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja gitara: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
-        }
-    }
-
-    private boolean kreirajRacunNaServeru() {
-        Prodavac prodavac = (Prodavac) forma.getCmbProdavac().getSelectedItem();
-        Kupac kupac = (Kupac) forma.getCmbKupac().getSelectedItem();
-        NacinPlacanja nacinPlacanja = (NacinPlacanja) forma.getCmbNacinPlacanja().getSelectedItem();
-
-        if (prodavac == null || kupac == null || nacinPlacanja == null) {
-            JOptionPane.showMessageDialog(forma,
-                    "Sistem ne moze da zapocne kreiranje racuna: nedostaje prodavac, kupac ili nacin placanja.",
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        Racun noviRacun = new Racun();
-        noviRacun.setDatumIzdavanja(LocalDate.now());
-        noviRacun.setNacinPlacanja(nacinPlacanja);
-        noviRacun.setUkupanIznos(0f);
-        noviRacun.setPopust(0f);
-        noviRacun.setProdavac(prodavac);
-        noviRacun.setKupac(kupac);
-
-        try {
-            Object rezultat = Komunikacija.getInstanca().posaljiZahtev(Operacija.KREIRAJ_RACUN, noviRacun);
-            racun = (rezultat instanceof Racun) ? (Racun) rezultat : noviRacun;
-            return true;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapocne kreiranje racuna: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
-            return false;
         }
     }
 
@@ -622,8 +577,8 @@ public class KreirajRacunKontroler {
             Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_RACUN, racun);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti racun: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti račun: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }

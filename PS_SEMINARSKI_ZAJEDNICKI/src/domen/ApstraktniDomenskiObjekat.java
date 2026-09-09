@@ -29,6 +29,10 @@ public interface ApstraktniDomenskiObjekat extends Serializable {
     public String vratiVrednostiZaIzmenu();
     
     public String vratiKoloneZaCitanje();
-    
+
     public String generisiKriterijumPretrazivanja();
+
+    default String vratiPrazanObjekatZaUbacivanje() {
+        throw new UnsupportedOperationException("vratiPrazanObjekatZaUbacivanje nije implementirano za " + getClass().getSimpleName());
+    }
 }

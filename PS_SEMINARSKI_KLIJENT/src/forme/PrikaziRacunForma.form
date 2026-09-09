@@ -27,11 +27,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="btnNazad" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnPromeniRacun" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -62,6 +57,14 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="btnPretraziRacun" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnNazad" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnPrikaziRacun" max="32767" attributes="0"/>
+                          <Component id="btnPromeniRacun" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -95,11 +98,13 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtUkupanIznos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="19" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnPretraziRacun" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Component id="btnPrikaziRacun" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnPromeniRacun" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNazad" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,8 +138,11 @@
     </Container>
     <Component class="javax.swing.JButton" name="btnPromeniRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Promeni izabrani racun"/>
+        <Property name="text" type="java.lang.String" value="Promeni izabrani ra&#x10d;un"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPromeniRacunActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnNazad">
       <Properties>
@@ -187,7 +195,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nacin placanja:"/>
+        <Property name="text" type="java.lang.String" value="Način plaćanja:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbNacinPlacanja">
@@ -224,7 +232,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretrazi racune"/>
+        <Property name="text" type="java.lang.String" value="Pretraži račune"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPrikaziRacun">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prika&#x17e;i izabrani ra&#x10d;un"/>
       </Properties>
     </Component>
   </SubComponents>

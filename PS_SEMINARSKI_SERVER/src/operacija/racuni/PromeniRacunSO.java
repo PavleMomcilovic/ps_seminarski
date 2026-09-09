@@ -7,6 +7,7 @@ package operacija.racuni;
 import domen.Racun;
 import domen.StavkaRacuna;
 import java.util.List;
+import java.util.Objects;
 import operacija.ApstraktnaGenerickaOperacija;
 
 /**
@@ -56,18 +57,7 @@ public class PromeniRacunSO extends ApstraktnaGenerickaOperacija {
 
         try {
             broker.izmeni(r);
-
-            String uslov = " WHERE stavkaracuna.idRacun=" + r.getIdRacun();
-            List<StavkaRacuna> stareStavke = broker.uzmiSve(new StavkaRacuna(), uslov);
-            for (StavkaRacuna stavka : stareStavke) {
-                broker.obrisi(stavka);
-            }
-
-            List<StavkaRacuna> noveStavke = r.getStavke();
-            for (StavkaRacuna stavka : noveStavke) {
-                stavka.setIdRacun(r.getIdRacun());
-                broker.dodaj(stavka);
-            }
+            azurirajStavke(r);
 
             System.out.println("Sistem je zapamtio racun");
         } catch (Exception e) {
@@ -76,4 +66,43 @@ public class PromeniRacunSO extends ApstraktnaGenerickaOperacija {
         }
     }
 
+    private void azurirajStavke(Racun r) throws Exception {
+        String uslov = " WHERE stavkaracuna.idRacun=" + r.getIdRacun();
+        List<StavkaRacuna> postojeceStavke = broker.uzmiSve(new StavkaRacuna(), uslov);
+        List<StavkaRacuna> noveStavke = r.getStavke();
+
+        for (StavkaRacuna postojeca : postojeceStavke) {
+            if (pronadjiPoRb(noveStavke, postojeca.getRb()) == null) {
+                broker.obrisi(postojeca);
+            }
+        }
+
+        for (StavkaRacuna nova : noveStavke) {
+            nova.setIdRacun(r.getIdRacun());
+            StavkaRacuna postojeca = pronadjiPoRb(postojeceStavke, nova.getRb());
+            if (postojeca == null) {
+                broker.dodaj(nova);
+            } else if (!isteVrednosti(postojeca, nova)) {
+                broker.izmeni(nova);
+            }
+        }
+    }
+
+    private StavkaRacuna pronadjiPoRb(List<StavkaRacuna> stavke, Long rb) {
+        for (StavkaRacuna stavka : stavke) {
+            if (stavka.getRb() != null && stavka.getRb().equals(rb)) {
+                return stavka;
+            }
+        }
+        return null;
+    }
+
+    private boolean isteVrednosti(StavkaRacuna a, StavkaRacuna b) {
+        Long idGitareA = a.getGitara() != null ? a.getGitara().getIdGitara() : null;
+        Long idGitareB = b.getGitara() != null ? b.getGitara().getIdGitara() : null;
+        return a.getCenaStavke() == b.getCenaStavke()
+                && a.getKolicinaStavke() == b.getKolicinaStavke()
+                && a.getIznosStavke() == b.getIznosStavke()
+                && Objects.equals(idGitareA, idGitareB);
+    }
 }

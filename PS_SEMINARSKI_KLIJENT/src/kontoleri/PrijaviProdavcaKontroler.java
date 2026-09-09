@@ -34,7 +34,23 @@ public class PrijaviProdavcaKontroler {
 
             private void prijava(ActionEvent e) {
                 String username = loginForma.getTxtUsername().getText().trim();
-                String password = String.valueOf(loginForma.getTxtPassword().getPassword());
+                String password = String.valueOf(loginForma.getTxtPassword().getPassword()).trim();
+
+                if (username.isBlank()) {
+                    JOptionPane.showMessageDialog(loginForma,
+                            "Username ne sme biti prazan.",
+                            "GREŠKA",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                
+                if (password.isBlank()) {
+                    JOptionPane.showMessageDialog(loginForma,
+                            "Šifra ne sme biti prazan.",
+                            "GREŠKA",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 Komunikacija.getInstanca().konekcija();
                 System.out.println("konektovano");
@@ -42,12 +58,17 @@ public class PrijaviProdavcaKontroler {
                 System.out.println("ulogovano");
 
                 if (ulogovani == null) {
-                    JOptionPane.showMessageDialog(loginForma, "Prijava na sistem neuspesna!", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(loginForma, "Korisničko ime i šifra nisu ispravni.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 } else {
                     Koordinator.getInstanca().setUlogovani(ulogovani);
-                    JOptionPane.showMessageDialog(loginForma, "Prijava na sistem uspesna!", "USPEH", JOptionPane.INFORMATION_MESSAGE);
-                    Koordinator.getInstanca().otvoriGlavnuFormu();
-                    loginForma.dispose();
+                    JOptionPane.showMessageDialog(loginForma, "Korisničko ime i šifra su ispravni", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                    try {
+                        Koordinator.getInstanca().otvoriGlavnuFormu();
+                        loginForma.dispose();
+                    } catch (Exception ex) {
+                           JOptionPane.showMessageDialog(loginForma, "Ne može da se otvori glavna forma i meni.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+
+                    }
                 }
             }
         });

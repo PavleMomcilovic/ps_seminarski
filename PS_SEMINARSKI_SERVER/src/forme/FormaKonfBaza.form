@@ -96,11 +96,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsername">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPassword">
+    <Component class="javax.swing.JPasswordField" name="txtPassword">
     </Component>
     <Component class="javax.swing.JButton" name="btnSacuvaj">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Sacuvaj"/>
+        <Property name="text" type="java.lang.String" value="Sačuvaj"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSacuvajActionPerformed"/>

@@ -10,7 +10,6 @@ import domen.MuzickoObrazovanje;
 import domen.Prodavac;
 import domen.Racun;
 import domen.Smena;
-import domen.StavkaRacuna;
 import java.io.IOException;
 import java.net.Socket;
 import komunikacija.Odgovor;
@@ -42,6 +41,10 @@ public class ObradaKlijentskihZahteva extends Thread {
         while (!kraj) {
             try {
                 Zahtev zahtev = (Zahtev) primalac.primi();
+                if (zahtev == null) {
+                    prekini();
+                    break;
+                }
                 Odgovor odgovor;
                 try {
                     odgovor = obradiZahtev(zahtev);
@@ -94,7 +97,7 @@ public class ObradaKlijentskihZahteva extends Thread {
                 break;
             }
             case KREIRAJ_KUPCA: {
-                Kupac k = (Kupac) zahtev.getParametar();
+                Kupac k = new Kupac();
                 Kontroler.getInstanca().kreiraj(k);
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
                 odgovor.setOdgovor(k);
@@ -145,30 +148,10 @@ public class ObradaKlijentskihZahteva extends Thread {
                 odgovor.setOdgovor(r);
                 break;
             }
-            case UBACI_STAVKU_RACUNA: {
-                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
-                Kontroler.getInstanca().ubaci(stavka);
+            case OBRISI_RACUN: {
+                Racun r = (Racun) zahtev.getParametar();
+                Kontroler.getInstanca().obrisi(r);
                 odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(stavka);
-                break;
-            }
-            case OBRISI_STAVKU_RACUNA: {
-                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
-                Kontroler.getInstanca().obrisi(stavka);
-                odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                break;
-            }
-            case PROMENI_STAVKU_RACUNA: {
-                StavkaRacuna stavka = (StavkaRacuna) zahtev.getParametar();
-                Kontroler.getInstanca().promeni(stavka);
-                odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(stavka);
-                break;
-            }
-            case VRATI_LISTU_STAVKI_RACUNA: {
-                StavkaRacuna kriterijum = (StavkaRacuna) zahtev.getParametar();
-                odgovor.setTipOdgovora(TipOdgovora.USPEH);
-                odgovor.setOdgovor(Kontroler.getInstanca().vratiListu(kriterijum));
                 break;
             }
             case PROMENI_KUPCA: {

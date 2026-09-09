@@ -83,7 +83,7 @@ public class DbRepositoryGeneric implements DbRepository<ApstraktniDomenskiObjek
     public Long uzmiGenerisaniKljuc(ApstraktniDomenskiObjekat param) throws Exception {
         String upit = "INSERT INTO " + param.vratiNazivTabele()
                 + " (" + param.vratiKoloneZaUbacivanje() + ")"
-                + " VALUES (" + param.vratiVrednostiZaUbacivanje() + ")";
+                + " VALUES (" + param.vratiPrazanObjekatZaUbacivanje()+ ")";
         PreparedStatement ps = DbConnectionFactory.getInstance()
                 .getConnection()
                 .prepareStatement(upit, Statement.RETURN_GENERATED_KEYS);

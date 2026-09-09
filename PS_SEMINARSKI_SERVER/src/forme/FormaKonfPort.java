@@ -43,7 +43,7 @@ public class FormaKonfPort extends javax.swing.JDialog {
 
         jLabel1.setText("PORT:");
 
-        btnSacuvaj.setText("Sacuvaj");
+        btnSacuvaj.setText("Sačuvaj");
         btnSacuvaj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSacuvajActionPerformed(evt);
@@ -90,22 +90,31 @@ public class FormaKonfPort extends javax.swing.JDialog {
     
     private void sacuvaj() {
         int port;
+        String tekst = txtPort.getText().trim();
+
+        if (tekst.isBlank()) {
+            JOptionPane.showMessageDialog(this,
+                    "Port ne sme biti prazan.",
+                    "GREŠKA",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         try {
-            port = Integer.parseInt(txtPort.getText().trim());
+            port = Integer.parseInt(tekst);
         }
         catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this,
-                    "Greska, port mora da bude broj: " + e.getMessage(),
-                    "GRESKA",
+                    "Greška, port mora da bude broj: " + e.getMessage(),
+                    "GREŠKA",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (port < 0 || port > 65535) {
             JOptionPane.showMessageDialog(this,
-                    "Greska, port nije u dobrom opsegu",
-                    "GRESKA",
+                    "Greška, port nije u dobrom opsegu",
+                    "GREŠKA",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -115,14 +124,14 @@ public class FormaKonfPort extends javax.swing.JDialog {
             konfiguracija.setProperty("port", port+"");
             konfiguracija.sacuvajIzmene();
             JOptionPane.showMessageDialog(this,
-                    "Port je uspesno sacuvan.",
+                    "Port je uspešno sačuvan.",
                     "POTVRDA",
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Greska pri cuvanju porta: " + e.getMessage(),
-                    "GRESKA",
+                    "Greška pri čuvanju porta: " + e.getMessage(),
+                    "GREŠKA",
                     JOptionPane.ERROR_MESSAGE);
         }
     }

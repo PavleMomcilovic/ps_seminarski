@@ -44,7 +44,7 @@ public class KreirajKupcaForma extends javax.swing.JDialog {
 
         jLabel1.setText("Ime i prezime:");
 
-        jLabel2.setText("Muzicko obrazovanje:");
+        jLabel2.setText("Muzičko obrazovanje:");
 
         cmbMuzickoObrazovanje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 

@@ -17,7 +17,7 @@ public class ObrisiKupcaSO extends ApstraktnaGenerickaOperacija {
     protected void preduslovi(Object param) throws Exception {
         if (!(param instanceof Kupac))
             throw new Exception("Sistem ne moze da nadje kupce po zadatim kriterijumima: Prosledjeni objekat nije tipa Kupac");
-        if (((Kupac) param).getIdKupac() <= 0)
+        if (((Kupac) param).getIdKupac() == null || ((Kupac) param).getIdKupac() <= 0)
             throw new Exception("Sistem ne moze da nadje kupce po zadatim kriterijumima: Kupac mora imati identifikator");
     }
 

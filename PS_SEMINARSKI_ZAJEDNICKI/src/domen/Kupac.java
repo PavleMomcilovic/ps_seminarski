@@ -136,4 +136,9 @@ public class Kupac implements ApstraktniDomenskiObjekat {
 
         return String.join(" AND ", uslovi);
     }
+
+    @Override
+    public String vratiPrazanObjekatZaUbacivanje() {
+        return "NULL,NULL";
+    }
 }

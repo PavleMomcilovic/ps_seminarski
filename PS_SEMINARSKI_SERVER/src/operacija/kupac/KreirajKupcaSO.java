@@ -17,17 +17,13 @@ public class KreirajKupcaSO extends ApstraktnaGenerickaOperacija {
     protected void preduslovi(Object param) throws Exception {
         if (!(param instanceof Kupac))
             throw new Exception("Sistem ne moze da kreira kupca: Prosledjeni objekat nije tipa Kupac");
-        
-        Kupac kupac = (Kupac) param;
-        if (kupac.getImePrezime() == null || kupac.getImePrezime().isEmpty())
-            throw new Exception("Sistem ne moze da kreira kupca: Kupac mora imati ime i prezime");
-        if (kupac.getMuzickoObr() == null || kupac.getMuzickoObr().getIdMuzickoObr() <= 0)
-            throw new Exception("Sistem ne moze da kreira kupca: Kupac mora imati Muzicko Obrazovanje");
     }
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        broker.dodaj((Kupac) param);
+        Kupac k = (Kupac) param;
+        Long idKupac = broker.uzmiGenerisaniKljuc(k);
+        k.setIdKupac(idKupac);
     }
     
 }

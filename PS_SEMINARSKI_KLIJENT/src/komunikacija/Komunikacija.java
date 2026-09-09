@@ -66,7 +66,7 @@ public class Komunikacija {
             if (odgovor.getIzuzetak() != null) {
                 throw odgovor.getIzuzetak();
             }
-            throw new Exception("Nepoznata greska sa servera.");
+            throw new Exception("Nepoznata greška sa servera.");
         }
         if (odgovor.getTipOdgovora() == TipOdgovora.USPEH) {
             return odgovor.getOdgovor();
@@ -75,7 +75,7 @@ public class Komunikacija {
         if (rezultat instanceof Exception) {
             throw (Exception) rezultat;
         }
-        if (rezultat instanceof String && ((String) rezultat).startsWith("Greska:")) {
+        if (rezultat instanceof String && ((String) rezultat).startsWith("Greška:")) {
             throw new Exception((String) rezultat);
         }
         return rezultat;
@@ -88,7 +88,7 @@ public class Komunikacija {
             if (soket != null && !soket.isClosed()) soket.close();
             System.out.println("Konekcija zatvorena.");
         } catch (Exception e) {
-            System.out.println("Greska pri zatvaranju: " + e.getMessage());
+            System.out.println("Greška pri zatvaranju: " + e.getMessage());
         }
     }
 

@@ -44,6 +44,7 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         cmbMuzickoObrazovanje = new javax.swing.JComboBox<>();
         btnPretraziKupca = new javax.swing.JButton();
+        btnPrikaziKupca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -62,17 +63,19 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
 
         btnPromeniKupca.setText("Promeni izabranog kupca");
 
-        btnObrisiKupca.setText("Obrisi izabranog kupca");
+        btnObrisiKupca.setText("Obriši izabranog kupca");
 
         btnNazad.setText("Nazad");
 
         jLabel1.setText("Ime i prezime:");
 
-        jLabel2.setText("Muzicko obrazovanje:");
+        jLabel2.setText("Muzičko obrazovanje:");
 
         cmbMuzickoObrazovanje.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        btnPretraziKupca.setText("Pretrazi kupce");
+        btnPretraziKupca.setText("Pretraži kupce");
+
+        btnPrikaziKupca.setText("Prikaži izabranog kupca");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,6 +92,9 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addGap(53, 53, 53)
                         .addComponent(txtImePrezime))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,9 +102,10 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
                                 .addComponent(btnNazad)
                                 .addGap(138, 138, 138)
                                 .addComponent(btnPromeniKupca))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnPretraziKupca, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnObrisiKupca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnPrikaziKupca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnObrisiKupca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -114,9 +121,11 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
                     .addComponent(cmbMuzickoObrazovanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnPretraziKupca)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(btnPrikaziKupca)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnObrisiKupca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -184,12 +193,21 @@ public class PrikaziKupcaForma extends javax.swing.JDialog {
         this.txtImePrezime = txtImePrezime;
     }
 
+    public JButton getBtnPrikaziKupca() {
+        return btnPrikaziKupca;
+    }
+
+    public void setBtnPrikaziKupca(JButton btnPrikaziKupca) {
+        this.btnPrikaziKupca = btnPrikaziKupca;
+    }
+
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
     private javax.swing.JButton btnObrisiKupca;
     private javax.swing.JButton btnPretraziKupca;
+    private javax.swing.JButton btnPrikaziKupca;
     private javax.swing.JButton btnPromeniKupca;
     private javax.swing.JComboBox<Object> cmbMuzickoObrazovanje;
     private javax.swing.JLabel jLabel1;

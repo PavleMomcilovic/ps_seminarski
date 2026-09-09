@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTabeleKupac extends AbstractTableModel {
     private List<Kupac> lista;
-    private final String[] kolone = {"ID", "Ime i prezime", "Muzicko obrazovanje"};
+    private final String[] kolone = {"ID", "Ime i prezime", "Muzičko obrazovanje"};
 
     @Override
     public int getRowCount() {

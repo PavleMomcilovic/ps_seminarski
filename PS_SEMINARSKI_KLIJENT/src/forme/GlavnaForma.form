@@ -57,12 +57,12 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnKreirajRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Kreiraj racun"/>
+        <Property name="text" type="java.lang.String" value="Kreiraj račun"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziRacun">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretrazi racun"/>
+        <Property name="text" type="java.lang.String" value="Pretraži račun"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnKreirajKupca">
@@ -72,7 +72,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziKupca">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretrazi kupca"/>
+        <Property name="text" type="java.lang.String" value="Pretraži kupca"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnUbaciSmenu">

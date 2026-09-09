@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTabeleStavkeRacuna extends AbstractTableModel {
     private List<StavkaRacuna> lista;
-    private final String[] kolone = {"RB", "Gitara", "Cena stavke", "Kolicina stavke", "Iznos stavke"};
+    private final String[] kolone = {"RB", "Gitara", "Cena stavke", "Količina stavke", "Iznos stavke"};
 
     public ModelTabeleStavkeRacuna(List<StavkaRacuna> lista) {
         this.lista = lista;

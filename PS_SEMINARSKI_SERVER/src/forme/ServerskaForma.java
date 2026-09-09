@@ -123,7 +123,7 @@ public class ServerskaForma extends javax.swing.JFrame {
         konfiguracijaBaze.setEnabled(false);
         konfiguracijaPorta.setEnabled(false);
         pokrenut = true;
-        lblStatus.setText("Server se pokrece...");
+        lblStatus.setText("Server se pokreće...");
 
         Thread thread = new Thread(() -> {
             try {

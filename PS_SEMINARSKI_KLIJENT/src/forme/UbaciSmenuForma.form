@@ -73,7 +73,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pocetak smene:"/>
+        <Property name="text" type="java.lang.String" value="Početak smene:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

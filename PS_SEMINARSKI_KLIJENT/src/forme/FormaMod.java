@@ -9,5 +9,5 @@ package forme;
  * @author pavle
  */
 public enum FormaMod {
-    KREIRAJ, PROMENI
+    KREIRAJ, PROMENI, IZABERI
 }

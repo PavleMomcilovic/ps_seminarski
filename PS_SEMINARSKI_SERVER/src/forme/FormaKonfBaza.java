@@ -40,7 +40,7 @@ public class FormaKonfBaza extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         txtUrl = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JPasswordField();
         btnSacuvaj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -51,7 +51,7 @@ public class FormaKonfBaza extends javax.swing.JDialog {
 
         jLabel3.setText("PASSWORD:");
 
-        btnSacuvaj.setText("Sacuvaj");
+        btnSacuvaj.setText("Sačuvaj");
         btnSacuvaj.addActionListener(this::btnSacuvajActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -116,12 +116,20 @@ public class FormaKonfBaza extends javax.swing.JDialog {
     private void sacuvaj() {
         String url = txtUrl.getText().trim();
         String username = txtUsername.getText().trim();
-        String password = txtPassword.getText().trim();
+        String password = new String(txtPassword.getPassword()).trim();
 
         if (url.isBlank()) {
             JOptionPane.showMessageDialog(this,
                     "URL baze ne sme biti prazan.",
-                    "GRESKA",
+                    "GREŠKA",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.isBlank()) {
+            JOptionPane.showMessageDialog(this,
+                    "Username ne sme biti prazan.",
+                    "GREŠKA",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -133,14 +141,14 @@ public class FormaKonfBaza extends javax.swing.JDialog {
             konfiguracija.setProperty("password", password);
             konfiguracija.sacuvajIzmene();
             JOptionPane.showMessageDialog(this,
-                    "Parametri baze su uspesno sacuvani.",
+                    "Parametri baze su uspešno sačuvani.",
                     "POTVRDA",
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Greska pri cuvanju parametara baze: " + e.getMessage(),
-                    "GRESKA",
+                    "Greška pri čuvanju parametara baze: " + e.getMessage(),
+                    "GREŠKA",
                     JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -153,7 +161,7 @@ public class FormaKonfBaza extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUrl;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables

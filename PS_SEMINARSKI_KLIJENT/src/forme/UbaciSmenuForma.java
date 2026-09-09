@@ -41,7 +41,7 @@ public class UbaciSmenuForma extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Pocetak smene:");
+        jLabel1.setText("Početak smene:");
 
         jLabel2.setText("Kraj smene:");
 

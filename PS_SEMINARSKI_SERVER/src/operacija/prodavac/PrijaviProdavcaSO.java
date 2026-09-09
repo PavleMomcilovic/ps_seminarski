@@ -24,7 +24,8 @@ public class PrijaviProdavcaSO extends ApstraktnaGenerickaOperacija {
 
     @Override
     protected void izvrsiOperaciju(Object param, String kljuc) throws Exception {
-        List<Prodavac> sviProdavaci = broker.uzmiSve(param, kljuc);
+        String uslov = " WHERE username = '" + kljuc + "'";
+        List<Prodavac> sviProdavaci = broker.uzmiSve(param, uslov);
         System.out.println("KLASA PRIJAVIPRODAVCASO: " + sviProdavaci);
         
         for (Prodavac p : sviProdavaci) {

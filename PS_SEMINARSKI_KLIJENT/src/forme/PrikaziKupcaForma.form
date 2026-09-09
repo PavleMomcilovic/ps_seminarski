@@ -36,6 +36,10 @@
                       <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                       <Component id="txtImePrezime" max="32767" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jScrollPane1" min="-2" pref="375" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -44,9 +48,11 @@
                               <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                               <Component id="btnPromeniKupca" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="1" min="-2" pref="375" max="-2" attributes="0"/>
                           <Component id="btnPretraziKupca" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnObrisiKupca" alignment="1" min="-2" pref="165" max="-2" attributes="0"/>
+                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="btnPrikaziKupca" alignment="1" max="32767" attributes="0"/>
+                              <Component id="btnObrisiKupca" alignment="1" pref="165" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
@@ -69,9 +75,11 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btnPretraziKupca" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="18" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="275" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Component id="btnPrikaziKupca" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnObrisiKupca" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -112,7 +120,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnObrisiKupca">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Obrisi izabranog kupca"/>
+        <Property name="text" type="java.lang.String" value="Obriši izabranog kupca"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnNazad">
@@ -129,7 +137,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Muzicko obrazovanje:"/>
+        <Property name="text" type="java.lang.String" value="Muzičko obrazovanje:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbMuzickoObrazovanje">
@@ -149,7 +157,12 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziKupca">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pretrazi kupce"/>
+        <Property name="text" type="java.lang.String" value="Pretraži kupce"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnPrikaziKupca">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Prika&#x17e;i izabranog kupca"/>
       </Properties>
     </Component>
   </SubComponents>

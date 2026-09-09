@@ -97,7 +97,7 @@ public class RacunKontroler {
             public java.awt.Component getListCellRendererComponent(javax.swing.JList<?> list, Object value,
                     int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-                setText(value != null ? value.toString() : "Svi nacini placanja");
+                setText(value != null ? value.toString() : "Svi načini plaćanja");
                 return this;
             }
         });
@@ -131,7 +131,7 @@ public class RacunKontroler {
                 kriterijum.setDatumIzdavanja(LocalDate.parse(datum));
             } catch (DateTimeParseException ex) {
                 JOptionPane.showMessageDialog(forma, "Datum izdavanja mora biti u formatu GGGG-MM-DD.",
-                        "GRESKA", JOptionPane.ERROR_MESSAGE);
+                        "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -141,7 +141,7 @@ public class RacunKontroler {
             try {
                 kriterijum.setPopust(Float.parseFloat(popust));
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(forma, "Popust mora biti broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(forma, "Popust mora biti broj.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -151,7 +151,7 @@ public class RacunKontroler {
             try {
                 kriterijum.setUkupanIznos(Float.parseFloat(ukupanIznos));
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(forma, "Ukupan iznos mora biti broj.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(forma, "Ukupan iznos mora biti broj.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
@@ -169,8 +169,8 @@ public class RacunKontroler {
             dodajKupceProdavce(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da pretrazi racune: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da pretraži račune: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -201,7 +201,7 @@ public class RacunKontroler {
     private void promeniIzabraniRacun() {
         int redIndeks = forma.getTblRacun().getSelectedRow();
         if (redIndeks < 0) {
-            JOptionPane.showMessageDialog(forma, "Morate izabrati racun za promenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Morate izabrati račun za promenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -226,8 +226,8 @@ public class RacunKontroler {
             dodajKupceProdavce(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu racuna: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu računa: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -273,8 +273,8 @@ public class RacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu kupaca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }
@@ -290,8 +290,8 @@ public class RacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da vrati listu prodavaca: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu prodavaca: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
     }

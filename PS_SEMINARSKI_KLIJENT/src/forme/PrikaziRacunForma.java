@@ -51,6 +51,7 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnPretraziRacun = new javax.swing.JButton();
+        btnPrikaziRacun = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,7 +68,8 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblRacun);
 
-        btnPromeniRacun.setText("Promeni izabrani racun");
+        btnPromeniRacun.setText("Promeni izabrani račun");
+        btnPromeniRacun.addActionListener(this::btnPromeniRacunActionPerformed);
 
         btnNazad.setText("Nazad");
 
@@ -79,7 +81,7 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
 
         jLabel3.setText("Datum izdavanja:");
 
-        jLabel4.setText("Nacin placanja:");
+        jLabel4.setText("Način plaćanja:");
 
         cmbNacinPlacanja.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -89,7 +91,9 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
 
         jLabel6.setText("Ukupan iznos:");
 
-        btnPretraziRacun.setText("Pretrazi racune");
+        btnPretraziRacun.setText("Pretraži račune");
+
+        btnPrikaziRacun.setText("Prikaži izabrani račun");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,10 +103,6 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNazad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPromeniRacun))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -126,7 +126,13 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
                                 .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPretraziRacun)))
+                        .addComponent(btnPretraziRacun))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNazad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnPrikaziRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPromeniRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,11 +158,13 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnPretraziRacun)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(btnPrikaziRacun)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPromeniRacun)
                     .addComponent(btnNazad))
@@ -165,6 +173,10 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnPromeniRacunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniRacunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPromeniRacunActionPerformed
 
     public JButton getBtnNazad() {
         return btnNazad;
@@ -246,11 +258,20 @@ public class PrikaziRacunForma extends javax.swing.JDialog {
         this.txtUkupanIznos = txtUkupanIznos;
     }
 
+    public JButton getBtnPrikaziRacun() {
+        return btnPrikaziRacun;
+    }
+
+    public void setBtnPrikaziRacun(JButton btnPrikaziRacun) {
+        this.btnPrikaziRacun = btnPrikaziRacun;
+    }
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNazad;
     private javax.swing.JButton btnPretraziRacun;
+    private javax.swing.JButton btnPrikaziRacun;
     private javax.swing.JButton btnPromeniRacun;
     private javax.swing.JComboBox<Object> cmbKupac;
     private javax.swing.JComboBox<Object> cmbNacinPlacanja;

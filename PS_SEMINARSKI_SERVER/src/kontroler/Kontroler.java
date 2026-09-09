@@ -11,7 +11,6 @@ import domen.MuzickoObrazovanje;
 import domen.Prodavac;
 import domen.Racun;
 import domen.Smena;
-import domen.StavkaRacuna;
 import java.util.List;
 import operacija.gitara.VratiListuGitaraSO;
 import operacija.kupac.KreirajKupcaSO;
@@ -23,14 +22,11 @@ import operacija.muzickoobr.VratiListuMuzickoObrSO;
 import operacija.prodavac.PrijaviProdavcaSO;
 import operacija.prodavac.VratiListuProdavacaSO;
 import operacija.racuni.KreirajRacunSO;
+import operacija.racuni.ObrisiRacunSO;
 import operacija.racuni.PretraziRacunSO;
 import operacija.racuni.PromeniRacunSO;
 import operacija.racuni.VratiListuRacunaSO;
 import operacija.smena.UbaciSmenuSO;
-import operacija.stavkaracuna.ObrisiStavkuRacunaSO;
-import operacija.stavkaracuna.PromeniStavkuRacunaSO;
-import operacija.stavkaracuna.UbaciStavkuRacunaSO;
-import operacija.stavkaracuna.VratiListuStavkiRacunaSO;
 
 /**
  *
@@ -53,7 +49,7 @@ public class Kontroler {
 
     public Prodavac prijaviProdavca(Prodavac p) throws Exception {
         PrijaviProdavcaSO operacija = new PrijaviProdavcaSO();
-        operacija.izvrsi(p, null);
+        operacija.izvrsi(p, p.getUsername());
         System.out.println("KLASA KONTROLER: " + operacija.getProdavac());
         return operacija.getProdavac();
     }
@@ -61,9 +57,6 @@ public class Kontroler {
     public void ubaci(ApstraktniDomenskiObjekat param) throws Exception {
         if (param instanceof Smena) {
             UbaciSmenuSO operacija = new UbaciSmenuSO();
-            operacija.izvrsi(param, null);
-        } else if (param instanceof StavkaRacuna) {
-            UbaciStavkuRacunaSO operacija = new UbaciStavkuRacunaSO();
             operacija.izvrsi(param, null);
         } else {
             throw new Exception("Nepodrzan tip entiteta za ubacivanje: " + param.getClass().getSimpleName());
@@ -102,9 +95,6 @@ public class Kontroler {
         } else if (param instanceof Kupac) {
             PromeniKupcaSO operacija = new PromeniKupcaSO();
             operacija.izvrsi(param, null);
-        } else if (param instanceof StavkaRacuna) {
-            PromeniStavkuRacunaSO operacija = new PromeniStavkuRacunaSO();
-            operacija.izvrsi(param, null);
         } else {
             throw new Exception("Nepodrzan tip entiteta za izmenu: " + param.getClass().getSimpleName());
         }
@@ -114,8 +104,8 @@ public class Kontroler {
         if (param instanceof Kupac) {
             ObrisiKupcaSO operacija = new ObrisiKupcaSO();
             operacija.izvrsi(param, null);
-        } else if (param instanceof StavkaRacuna) {
-            ObrisiStavkuRacunaSO operacija = new ObrisiStavkuRacunaSO();
+        } else if (param instanceof Racun) {
+            ObrisiRacunSO operacija = new ObrisiRacunSO();
             operacija.izvrsi(param, null);
         } else {
             throw new Exception("Nepodrzan tip entiteta za brisanje: " + param.getClass().getSimpleName());
@@ -141,10 +131,6 @@ public class Kontroler {
             return operacija.getRezultat();
         } else if (param instanceof MuzickoObrazovanje) {
             VratiListuMuzickoObrSO operacija = new VratiListuMuzickoObrSO();
-            operacija.izvrsi(param, null);
-            return operacija.getRezultat();
-        } else if (param instanceof StavkaRacuna) {
-            VratiListuStavkiRacunaSO operacija = new VratiListuStavkiRacunaSO();
             operacija.izvrsi(param, null);
             return operacija.getRezultat();
         }

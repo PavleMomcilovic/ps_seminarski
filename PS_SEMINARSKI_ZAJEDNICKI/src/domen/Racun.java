@@ -219,4 +219,9 @@ public class Racun implements ApstraktniDomenskiObjekat {
 
         return String.join(" AND ", uslovi);
     }
+
+    @Override
+    public String vratiPrazanObjekatZaUbacivanje() {
+        return "NULL,NULL,NULL,NULL,NULL,NULL";
+    }
 }

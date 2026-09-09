@@ -54,7 +54,7 @@ public class UbaciSmenuKontroler {
             JOptionPane.showMessageDialog(forma, "Sistem je zapamtio smenu.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
             forma.dispose();
         } else {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti smenu.", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti smenu.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -63,8 +63,8 @@ public class UbaciSmenuKontroler {
             Komunikacija.getInstanca().posaljiZahtev(Operacija.UBACI_SMENU, smena);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne moze da zapamti smenu: " + ex.getMessage(),
-                    "GRESKA", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti smenu: " + ex.getMessage(),
+                    "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }
     }
