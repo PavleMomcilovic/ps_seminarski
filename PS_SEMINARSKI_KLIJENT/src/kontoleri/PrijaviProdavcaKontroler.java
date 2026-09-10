@@ -54,7 +54,14 @@ public class PrijaviProdavcaKontroler {
 
                 Komunikacija.getInstanca().konekcija();
                 System.out.println("konektovano");
-                Prodavac ulogovani = Komunikacija.getInstanca().login(username, password);
+
+                Prodavac ulogovani;
+                try {
+                    ulogovani = Komunikacija.getInstanca().login(username, password);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(loginForma, "Ne može da se otvori glavna forma i meni.", "GREŠKA", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 System.out.println("ulogovano");
 
                 if (ulogovani == null) {

@@ -39,14 +39,19 @@ public class GlavnaForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnKreirajRacun.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnKreirajRacun.setText("Kreiraj račun");
 
+        btnPretraziRacun.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnPretraziRacun.setText("Pretraži račun");
 
+        btnPretraziKupca.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnPretraziKupca.setText("Pretraži kupca");
 
+        btnKreirajKupca.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnKreirajKupca.setText("Kreiraj kupca");
 
+        btnUbaciSmenu.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnUbaciSmenu.setText("Ubaci smenu");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -54,19 +59,20 @@ public class GlavnaForma extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnUbaciSmenu, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                    .addComponent(btnPretraziKupca, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
-                    .addComponent(btnKreirajKupca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnPretraziRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnKreirajRacun, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 80, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnKreirajKupca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnUbaciSmenu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPretraziKupca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE))
+                    .addComponent(btnPretraziRacun, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
+                    .addComponent(btnKreirajRacun, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 125, Short.MAX_VALUE)
                 .addComponent(btnKreirajRacun)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnPretraziRacun)
@@ -76,7 +82,7 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addComponent(btnPretraziKupca)
                 .addGap(53, 53, 53)
                 .addComponent(btnUbaciSmenu)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 125, Short.MAX_VALUE))
         );
 
         pack();

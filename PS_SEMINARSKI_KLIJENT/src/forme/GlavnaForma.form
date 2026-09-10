@@ -24,22 +24,24 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnUbaciSmenu" pref="470" max="32767" attributes="0"/>
-                  <Component id="btnPretraziKupca" pref="470" max="32767" attributes="0"/>
-                  <Component id="btnKreirajKupca" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnPretraziRacun" alignment="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnKreirajKupca" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnUbaciSmenu" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnPretraziKupca" alignment="0" pref="958" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="btnPretraziRacun" alignment="0" pref="960" max="32767" attributes="0"/>
                   <Component id="btnKreirajRacun" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
               <Component id="btnKreirajRacun" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnPretraziRacun" min="-2" max="-2" attributes="0"/>
@@ -49,7 +51,7 @@
               <Component id="btnPretraziKupca" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
               <Component id="btnUbaciSmenu" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="125" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -57,26 +59,41 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btnKreirajRacun">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="36" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Kreiraj ra&#x10d;un"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziRacun">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="36" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pretra&#x17e;i ra&#x10d;un"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnPretraziKupca">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="36" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Pretra&#x17e;i kupca"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnKreirajKupca">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="36" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Kreiraj kupca"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnUbaciSmenu">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="36" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ubaci smenu"/>
       </Properties>
     </Component>

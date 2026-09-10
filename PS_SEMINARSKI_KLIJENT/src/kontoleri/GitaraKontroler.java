@@ -98,7 +98,7 @@ public class GitaraKontroler {
                         "USPEH", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe gitare po zadatim kriterijumima: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe gitare po zadatim kriterijumima",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -152,7 +152,7 @@ public class GitaraKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu gitara: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu gitara",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }

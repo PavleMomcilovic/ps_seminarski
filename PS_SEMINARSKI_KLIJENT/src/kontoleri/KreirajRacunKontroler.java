@@ -96,8 +96,9 @@ public class KreirajRacunKontroler {
             try {
                 racun = (Racun) Komunikacija.getInstanca().posaljiZahtev(Operacija.KREIRAJ_RACUN, noviRacun);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira račun: " + ex.getMessage(),
+                JOptionPane.showMessageDialog(forma, "Sistem ne može da kreira račun",
                         "GREŠKA", JOptionPane.ERROR_MESSAGE);
+                return;
             }
             JOptionPane.showMessageDialog(forma, "Sistem je kreirao račun", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -117,7 +118,7 @@ public class KreirajRacunKontroler {
             racun = (Racun) rezultat;
             JOptionPane.showMessageDialog(forma, "Sistem je našao račun", "USPEH", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račun: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račun",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             onemoguciIzmenu();
             return;
@@ -370,7 +371,7 @@ public class KreirajRacunKontroler {
             JOptionPane.showMessageDialog(forma, "Sistem je obrisao račun.", "USPEH", JOptionPane.INFORMATION_MESSAGE);
             forma.dispose();
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše račun: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da obriše račun",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -583,7 +584,7 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja prodavaca: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja prodavaca",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -598,7 +599,7 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja kupaca: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja kupaca",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -613,7 +614,7 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja gitara: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja gitara",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -646,7 +647,7 @@ public class KreirajRacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja muzičkih obrazovanja: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Greška prilikom učitavanja muzičkih obrazovanja",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -657,7 +658,7 @@ public class KreirajRacunKontroler {
             Komunikacija.getInstanca().posaljiZahtev(Operacija.PROMENI_RACUN, racun);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti račun: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti račun",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }

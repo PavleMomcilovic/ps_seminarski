@@ -40,14 +40,18 @@ public class Komunikacija {
         }
     }
     
-    public Prodavac login(String username, String password) {
+    public Prodavac login(String username, String password) throws Exception {
+        if (soket == null || soket.isClosed() || posiljalac == null || primalac == null) {
+            throw new Exception("Nema aktivne konekcije sa serverom.");
+        }
+
         Prodavac p = new Prodavac();
         p.setUsername(username);
         p.setPassword(password);
-        
+
         Zahtev zahtev = new Zahtev(Operacija.PRIJAVI_PRODAVCA, p);
         posiljalac.posalji(zahtev);
-        
+
         Odgovor odgovor = (Odgovor) primalac.primi();
         p = (Prodavac) odgovor.getOdgovor();
         return p;

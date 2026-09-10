@@ -109,7 +109,7 @@ public class KupacKontroler {
                         "USPEH", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe kupce po zadatim kriterijumima: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe kupce po zadatim kriterijumima",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -184,7 +184,7 @@ public class KupacKontroler {
             dodajMuzickaObrazovanja(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -217,7 +217,7 @@ public class KupacKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu muzičkih obrazovanja: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu muzičkih obrazovanja",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }

@@ -175,7 +175,7 @@ public class RacunKontroler {
                         "USPEH", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račune po zadatim kriterijumima: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da nađe račune po zadatim kriterijumima",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -231,7 +231,7 @@ public class RacunKontroler {
             dodajKupceProdavce(lista);
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu računa: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu računa",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -278,7 +278,7 @@ public class RacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu kupaca",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }
@@ -295,7 +295,7 @@ public class RacunKontroler {
             }
             return lista;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu prodavaca: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da vrati listu prodavaca",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return new ArrayList<>();
         }

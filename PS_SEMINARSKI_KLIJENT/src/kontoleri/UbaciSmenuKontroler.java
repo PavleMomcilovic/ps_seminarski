@@ -63,7 +63,7 @@ public class UbaciSmenuKontroler {
             Komunikacija.getInstanca().posaljiZahtev(Operacija.UBACI_SMENU, smena);
             return true;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti smenu: " + ex.getMessage(),
+            JOptionPane.showMessageDialog(forma, "Sistem ne može da zapamti smenu",
                     "GREŠKA", JOptionPane.ERROR_MESSAGE);
             return false;
         }
